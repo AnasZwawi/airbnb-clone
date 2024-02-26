@@ -26,6 +26,7 @@ model User {
 model Home {
   id          String  @id @default(uuid())
   title       String?
+  category    String?
   description String?
   guests      String?
   bedrooms    String?
@@ -33,6 +34,10 @@ model Home {
   country     String?
   photo       String?
   price       Int?
+
+  addedCategory    Boolean @default(false)
+  addedDeskription Boolean @default(false)
+  addedLocation    Boolean @default(false)
 
   createdAT DateTime @default(now())
   User      User?    @relation(fields: [userId], references: [id])

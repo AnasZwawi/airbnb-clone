@@ -21,6 +21,27 @@ export async function createAirbnbHome({userId} : {userId : string}){
     })
 
     return redirect(`/create/${data.id}/structure`);
+  }else if(!data.addedCategory && !data.addedDeskription && !data.addedLocation){
+    return redirect(`/create/${data.id}/structure`)
+  }else if(data.addedCategory && !data.addedDeskription){
+    return redirect(`/create/${data.id}/description`)
   }
+}
 
+export async function createCategoryPage(formData: FormData){
+  
+  const category = formData.get('category') as string;
+  const homeId = formData.get('id') as string;
+
+  const data = await prisma.home.update({
+    where: {
+      id: homeId,
+    },
+    data: {
+      category: category,
+      addedCategory: true,
+    }
+  });
+
+  return redirect(`/create/${homeId}/description`)
 }
