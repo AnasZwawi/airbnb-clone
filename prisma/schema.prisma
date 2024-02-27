@@ -36,7 +36,7 @@ model Home {
   price       Int?
 
   addedCategory    Boolean @default(false)
-  addedDeskription Boolean @default(false)
+  addedDescription Boolean @default(false)
   addedLocation    Boolean @default(false)
 
   createdAT DateTime @default(now())

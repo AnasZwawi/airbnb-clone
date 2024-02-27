@@ -27,8 +27,8 @@ export const UserNav = async () => {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger>
-        <div className="hover:shadow-md rounded-full border p-2 lg:px-4 lg:py-2 flex items-center gap-x-3">
+      <DropdownMenuTrigger className="outline-none">
+        <div className="hover:shadow-md rounded-full border p-2 lg:px-4 lg:py-2 flex items-center gap-x-3 ">
           <MenuIcon className="w-6 h-6 lg:w-5 lg:h-5" />
           <img
             src={

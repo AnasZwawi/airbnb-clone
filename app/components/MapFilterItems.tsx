@@ -31,7 +31,7 @@ export const MapFilterItems = () => {
             search == item.name
               ? "border-b-2 border-black pb-2 flex-shrink-0"
               : "opacity-70 flex-shrink-0",
-            "flex flex-col  mx-auto gap-x-3 items-center"
+            "flex flex-col hover:opacity-100 hover:border-b-2 hover:border-gray-300 focus:border-black mx-auto gap-x-3 items-center transition-opacity "
           )}
         >
           <div className="relative w-6 h-7">
