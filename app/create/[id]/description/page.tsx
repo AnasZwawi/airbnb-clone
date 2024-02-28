@@ -47,13 +47,13 @@ function page({ params }: { params: { id: string } }) {
           </div>
           <div className="flex flex-col gap-y-2">
             <Label>Image</Label>
-            <Input type="file" accept=".jpg,.png,.jpeg" className="cursor-pointer" name="image" required />
+            <Input type="file" accept=".jpg,.png,.jpeg,.webp" className="cursor-pointer" name="image" required />
           </div>
           <Card>
             <CardHeader className="flex flex-col gap-y-5">
               <div className="flex flex-col lg:flex-row gap-y-3 items-start justify-between">
                 <div className="flex flex-col">
-                  <h3 className="underline">Guests</h3>
+                  <h3 className="underline font-semibold text-lg">Guests</h3>
                   <p className="text-muted-foreground text-sm">
                     How many guests do you want?
                   </p>
@@ -62,7 +62,7 @@ function page({ params }: { params: { id: string } }) {
               </div>
               <div className="flex flex-col lg:flex-row gap-y-3 items-start justify-between">
                 <div className="flex flex-col">
-                  <h3 className="underline">Rooms</h3>
+                  <h3 className="underline font-semibold text-lg">Rooms</h3>
                   <p className="text-muted-foreground text-sm">
                     How many rooms do you have?
                   </p>
@@ -71,7 +71,7 @@ function page({ params }: { params: { id: string } }) {
               </div>
               <div className="flex flex-col lg:flex-row gap-y-3 items-start justify-between">
                 <div className="flex flex-col">
-                  <h3 className="underline">Bathrooms</h3>
+                  <h3 className="underline font-semibold text-lg">Bathrooms</h3>
                   <p className="text-muted-foreground text-sm">
                     How many bathrooms do you have?
                   </p>
