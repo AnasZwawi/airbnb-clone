@@ -1,17 +1,17 @@
-'use client'
-import { Button } from '@/components/ui/button'
-import { Loader2 } from 'lucide-react'
-import React from 'react'
-import { useFormStatus } from 'react-dom'
+"use client";
+import { Button } from "@/components/ui/button";
+import { Heart, Loader2 } from "lucide-react";
+import React from "react";
+import { useFormStatus } from "react-dom";
 
 export const SubmitButton = () => {
-  const { pending } = useFormStatus() 
+  const { pending } = useFormStatus();
   return (
     <div>
       {pending ? (
         <Button type="submit" disabled size="lg">
-          <Loader2 className="mr-2 h-4 w-4 animate-spin"/>
-          Please Wait          
+          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+          Please Wait
         </Button>
       ) : (
         <Button size="lg" type="submit">
@@ -19,5 +19,59 @@ export const SubmitButton = () => {
         </Button>
       )}
     </div>
-  )
+  );
+};
+
+export function AddToFavoriteButton() {
+  const { pending } = useFormStatus();
+  return (
+    <>
+      {pending ? (
+        <Button
+          className="bg-primary-foreground"
+          disabled
+          variant={"outline"}
+          size="icon"
+        >
+          <Loader2 className="h-4 w-4 animate-spin text-primary" />
+        </Button>
+      ) : (
+        <Button
+          variant={"outline"}
+          size="icon"
+          className="bg-primary-foreground"
+          type="submit"
+        >
+          <Heart className="w-4 h-4" />
+        </Button>
+      )}
+    </>
+  );
+}
+
+export function DeleteFromFavoriteButton() {
+  const { pending } = useFormStatus();
+  return (
+    <>
+      {pending ? (
+        <Button
+          className="bg-primary-foreground"
+          disabled
+          variant={"outline"}
+          size="icon"
+        >
+          <Loader2 className="h-4 w-4 animate-spin text-primary" />
+        </Button>
+      ) : (
+        <Button
+          variant={"outline"}
+          size="icon"
+          className="bg-primary-foreground"
+          type="submit"
+        >
+          <Heart className="w-4 h-4 text-primary" fill="#E21C49" />
+        </Button>
+      )}
+    </>
+  );
 }

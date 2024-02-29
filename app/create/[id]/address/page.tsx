@@ -59,7 +59,7 @@ const page = ({ params }: { params: { id: string } }) => {
                   {getAllCountries().map((item) => (
                     <SelectItem key={item.value} value={item.value}>
                       <div className="flex flex-row gap-x-2">
-                        {flagemojiToPNG(item.flag)}{" "}
+                        <p>{flagemojiToPNG(item.flag)}</p>
                         <p className="text-md font-medium">{item.label}</p>
                       </div>
                     </SelectItem>
