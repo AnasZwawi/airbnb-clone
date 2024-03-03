@@ -73,7 +73,7 @@ export const ListingCard = ({
         )}
       </div>
 
-      <Link href="/">
+      <Link href={`/home/${homeId}`}>
         <h3 className="pt-2 font-medium flex gap-x-2 items-center">
           <p>
             {flagemojiToPNG(country?.flag as string)}
