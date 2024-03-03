@@ -45,7 +45,7 @@ async function getData(homeId: string) {
   return data;
 }
 
-async function page({ params }: { params: { id: string } }) {
+async function HomeId({ params }: { params: { id: string } }) {
   const data = await getData(params.id);
   const { getCountryByValue } = useCountries();
   const country = getCountryByValue(data?.country as string);
@@ -154,4 +154,4 @@ async function page({ params }: { params: { id: string } }) {
   );
 }
 
-export default page;
+export default HomeId;

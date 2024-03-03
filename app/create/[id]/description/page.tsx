@@ -7,7 +7,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import React from "react";
 
-function page({ params }: { params: { id: string } }) {
+function Description({ params }: { params: { id: string } }) {
   return (
     <>
       <div className="w-[80%] lg:w-3/5 mx-auto">
@@ -87,4 +87,4 @@ function page({ params }: { params: { id: string } }) {
   );
 }
 
-export default page;
+export default Description;

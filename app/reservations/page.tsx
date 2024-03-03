@@ -31,7 +31,7 @@ async function getData(userId: string) {
   return data;
 }
 
-const page = async () => {
+const Reservation = async () => {
   const { getUser } = getKindeServerSession();
   const user = await getUser();
   if (!user) return redirect("/");
@@ -65,4 +65,4 @@ const page = async () => {
   );
 };
 
-export default page;
+export default Reservation;

@@ -16,7 +16,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { CreationBottomBar } from "@/app/components/CreationBottomBar";
 import { createLocation } from "@/app/actions";
 
-const page = ({ params }: { params: { id: string } }) => {
+const Address = ({ params }: { params: { id: string } }) => {
   const { getAllCountries } = useCountries();
   const [locationValue, setLocationValue] = useState("");
 
@@ -76,4 +76,4 @@ const page = ({ params }: { params: { id: string } }) => {
   );
 };
 
-export default page;
+export default Address;

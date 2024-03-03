@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import React from 'react'
 
-function page({params} : {params : {id: string}}) {
+function Structure({params} : {params : {id: string}}) {
   return (
     <>
       <div className='w-[80%] lg:w-3/5  mx-auto'>
@@ -23,4 +23,4 @@ function page({params} : {params : {id: string}}) {
   )
 }
 
-export default page
+export default Structure
