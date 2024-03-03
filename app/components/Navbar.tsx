@@ -4,10 +4,11 @@ import React from "react";
 import DesktipLogo from "@/public/airbnb-desktop.png";
 import MobileLogo from "@/public/airbnb-mobile.webp";
 import { UserNav } from "./UserNav";
+import { SearchComponent } from "./SearchComponent";
 
 export const Navbar = () => {
   return (
-    <nav className="w-full border-b">
+    <nav className="w-full border-b sticky top-0 bg-white bg-opacity-85 backdrop-blur-md z-50">
       <div className="flex items-center justify-between container mx-auto px-5 lg:px-10 py-5">
         <Link href={"/"}>
           <Image
@@ -21,9 +22,9 @@ export const Navbar = () => {
             alt="mobile logo"
           />
         </Link>
-        <div className="rounded-full border px-5 py-2">
-          <h1>Hello from the search</h1>
-        </div>
+        
+        <SearchComponent/>
+
         <UserNav/>
       </div>
     </nav>

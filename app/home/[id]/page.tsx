@@ -6,6 +6,11 @@ import { Separator } from "@/components/ui/separator";
 import { CategoryShowcase } from "@/app/components/CategoryShowcase";
 import { HomeMap } from "@/app/components/HomeMap";
 import { SelectCalendar } from "@/app/components/SelectCalendar";
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { createReservation } from "@/app/actions";
+import { ReservationSubmit } from "@/app/components/SubmitButton";
 
 async function getData(homeId: string) {
   const data = await prisma.home.findUnique({
@@ -29,6 +34,11 @@ async function getData(homeId: string) {
           firstname: true,
         },
       },
+      Reservation: {
+        where: {
+          homeId: homeId
+        }
+      }
     },
   });
 
@@ -58,10 +68,14 @@ async function page({ params }: { params: { id: string } }) {
     day: "2-digit",
   });
 
+  // fetching the user id from kinde auth
+  const {getUser} = getKindeServerSession();
+  const user = await getUser()
+
   return (
-    <div className="w-[75%] mx-auto mt-10">
-      <div className="flex justify-between items-center mb-4">
-        <h1 className="font-medium text-2xl mb-5">{data?.title}</h1>
+    <div className="w-[85%] lg:w-[75%] mx-auto mt-10">
+      <div className="flex flex-col lg:flex-row justify-between gap-y-4 lg:items-center mb-5">
+        <h1 className="font-medium text-3xl lg:text-2xl">{data?.title}</h1>
         <div className="flex items-center">
           <img
             src={
@@ -71,7 +85,7 @@ async function page({ params }: { params: { id: string } }) {
             alt="User Profile image"
             className="w-11 h-11 rounded-full"
           />
-          <div className="flex flex-col ml-4">
+          <div className="flex flex-col ml-2 lg:ml-4">
             <h3 className="font-medium">Hosted by {data?.User?.firstname}</h3>
             <p className="text-sm text-muted-foreground">
               Hosted since{" "}
@@ -83,7 +97,7 @@ async function page({ params }: { params: { id: string } }) {
         </div>
       </div>
 
-      <div className="relative h-[550px]">
+      <div className="relative h-[350px] lg:h-[550px]">
         <Image
           alt="Image of Home"
           src={`https://jxvqpjydezilbytxarzd.supabase.co/storage/v1/object/public/images/${data?.photo}`}
@@ -91,8 +105,8 @@ async function page({ params }: { params: { id: string } }) {
           className="rounded-lg h-full object-cover w-full"
         />
       </div>
-      <div className="flex justify-between gap-x-2 mt-8">
-        <div className="w-2/3">
+      <div className="flex flex-col gap-y-8 lg:flex-row justify-between gap-x-2 mt-8">
+        <div className="w-full lg:w-2/3">
           <h3 className="font-medium text-xl flex items-center gap-x-2">
             <p>{flagemojiToPNG(country?.flag as string)}</p> {country?.label}
           </h3>
@@ -114,7 +128,27 @@ async function page({ params }: { params: { id: string } }) {
 
           <HomeMap locationValue={country?.value as string} />
         </div>
-        <SelectCalendar/>
+        <form action={createReservation} className="flex flex-col items-center">
+          <input
+            type="hidden"
+            name="userId"
+            value={user?.id}
+          />
+          <input
+            type="hidden"
+            name="homeId"
+            value={params.id}
+          />
+          <SelectCalendar reservations={data?.Reservation} />
+
+          {user?.id ? (
+            <ReservationSubmit/>
+          ):(
+            <Button className="w-full">
+              <Link href={"/api/auth/login"}>Make a Reservation</Link>
+            </Button>
+          )}
+        </form>
       </div>
     </div>
   );

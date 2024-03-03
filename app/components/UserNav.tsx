@@ -39,35 +39,35 @@ export const UserNav = async () => {
           />
         </div>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-[200px]">
+      <DropdownMenuContent align="end" className="w-[250px] shadow-md">
         {user ? (
           <>
             <DropdownMenuItem>
               <form action={createHome} className="w-full">
-                <button type="submit" className="w-full text-left">
+                <button type="submit" className="w-full text-left text-[17px] p-1">
                   Airbnb your Home
                 </button>
               </form>
             </DropdownMenuItem>
-            <DropdownMenuSeparator/>
+            <DropdownMenuSeparator className="bg-gray-200"/>
             <DropdownMenuItem>
-              <Link href='/my-homes' className="w-full">
+              <Link href='/my-homes' className="w-full text-[17px] p-1">
                 My Listings
               </Link>
             </DropdownMenuItem>
             <DropdownMenuItem>
-              <Link href='/favorites' className="w-full">
+              <Link href='/favorites' className="w-full text-[17px] p-1">
                 My Favorites
               </Link>
             </DropdownMenuItem>
             <DropdownMenuItem>
-              <Link href='/reservations' className="w-full">
+              <Link href='/reservations' className="w-full text-[17px] p-1">
                 My Reservations
               </Link>
             </DropdownMenuItem>
-            <DropdownMenuSeparator/>
+            <DropdownMenuSeparator className="bg-gray-200 h-[1px]"/>
             <DropdownMenuItem>
-              <LogoutLink className="w-full"> Log out </LogoutLink>
+              <LogoutLink className="w-full text-[17px] p-1"> Log out </LogoutLink>
             </DropdownMenuItem>
           </>
         ) : (
