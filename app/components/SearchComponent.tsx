@@ -56,10 +56,10 @@ export const SearchComponent = () => {
       <Dialog>
         <DialogTrigger asChild>
           <div className="rounded-full py-2 px-5 border flex items-center cursor-pointer">
-            <div className="flex h-full divide-x font-medium text-gray-700">
-              <p className="px-4">Anywhere</p>
-              <p className="px-4">Any Week</p>
-              <p className="px-4">Any Guests</p>
+            <div className="flex h-full divide-x font-medium text-sm sm:text-[16px] text-gray-700">
+              <p className="px-2 sm:px-4">Anywhere</p>
+              <p className="px-2 sm:px-4">Any Week</p>
+              <p className="px-2 sm:px-4">Any Guests</p>
             </div>
 
             <Search className="bg-primary text-white p-1 h-8 w-8 rounded-full" />

@@ -73,10 +73,10 @@ export const UserNav = async () => {
         ) : (
           <>
             <DropdownMenuItem>
-              <RegisterLink className="w-full"> Register </RegisterLink>
+              <RegisterLink className="w-full text-[17px] p-1"> Register </RegisterLink>
             </DropdownMenuItem>
             <DropdownMenuItem>
-              <LoginLink className="w-full"> Login </LoginLink>
+              <LoginLink className="w-full text-[17px] p-1"> Login </LoginLink>
             </DropdownMenuItem>
           </>
         )}

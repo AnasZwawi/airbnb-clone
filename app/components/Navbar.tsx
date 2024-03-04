@@ -8,7 +8,7 @@ import { SearchComponent } from "./SearchComponent";
 
 export const Navbar = () => {
   return (
-    <nav className="w-full border-b sticky top-0 bg-white bg-opacity-85 backdrop-blur-md z-50">
+    <nav className="w-full flex flex-col sm:block border-b sticky top-0 bg-white bg-opacity-90 backdrop-blur-md z-50">
       <div className="flex items-center justify-between container mx-auto px-5 lg:px-10 py-5">
         <Link href={"/"}>
           <Image
@@ -22,10 +22,15 @@ export const Navbar = () => {
             alt="mobile logo"
           />
         </Link>
-        
-        <SearchComponent/>
 
-        <UserNav/>
+        <div className="hidden sm:block">
+          <SearchComponent />
+        </div>
+
+        <UserNav />
+      </div>
+      <div className="block sm:hidden w-fit mx-auto relative bottom-3">
+        <SearchComponent />
       </div>
     </nav>
   );

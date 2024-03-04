@@ -22,7 +22,7 @@ export const MapFilterItems = () => {
     [searchParams]
   );
   return (
-    <div className="flex gap-x-10 mt-5 w-full overflow-x-scroll no-scrollbar">
+    <div className="px-5 flex sticky w-[100%] z-40 bg-white bg-opacity-90 shadow-sm backdrop-blur-md top-[137px] sm:top-[90px] pb-3 pt-3 gap-x-10 left-0 overflow-x-scroll no-scrollbar">
       {categoryItems.map((item) => (
         <Link
           key={item.id}
