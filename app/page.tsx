@@ -89,6 +89,7 @@ export default async function Home({
   return (
     <>
       <MapFilterItems />
+
       <div className="container mx-auto px-5 lg:px-10">
         <Suspense key={searchParams?.filter} fallback={<SkeletonLoading />}>
           <ShowItems searchParams={searchParams} />
