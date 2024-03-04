@@ -74,7 +74,7 @@ export const ListingCard = ({
       </div>
 
       <Link href={`/home/${homeId}`}>
-        <h3 className="pt-2 font-medium flex gap-x-2 items-center">
+        <h3 className="pt-2 font-medium flex text-slate gap-x-2 items-center">
           <p>
             {flagemojiToPNG(country?.flag as string)}
           </p>
@@ -82,12 +82,12 @@ export const ListingCard = ({
           {country?.region}
         </h3>
 
-        <p className="text-muted-foreground text-sm line-clamp-2">
+        <p className="text-gray-500 text-sm line-clamp-2">
           {description}
         </p>
 
-        <p className="pt-2 text-muted-foreground">
-          <span className="font-medium text-black">${price}</span>/Night
+        <p className="pt-2 text-gray-500">
+          <span className="font-medium text-slate">${price}</span>/Night
         </p>
       </Link>
     </div>

@@ -12,7 +12,7 @@ import {
   LogoutLink,
 } from "@kinde-oss/kinde-auth-nextjs/components";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
-import { MenuIcon } from "lucide-react";
+import { MenuIcon, Share } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 import { createAirbnbHome } from "../actions";
@@ -44,24 +44,25 @@ export const UserNav = async () => {
           <>
             <DropdownMenuItem>
               <form action={createHome} className="w-full">
-                <button type="submit" className="w-full text-left text-[17px] p-1">
-                  Airbnb your Home
+                <button type="submit" className="w-full font-medium flex gap-x-2 text-left text-[16px] p-1">
+                  <Share className="w-5 h-5 relative bottom-[2px]"/>
+                  List your Home
                 </button>
               </form>
             </DropdownMenuItem>
             <DropdownMenuSeparator className="bg-gray-200"/>
             <DropdownMenuItem>
-              <Link href='/my-homes' className="w-full text-[17px] p-1">
+              <Link href='/my-homes' className="w-full text-[16px] p-1">
                 My Listings
               </Link>
             </DropdownMenuItem>
             <DropdownMenuItem>
-              <Link href='/favorites' className="w-full text-[17px] p-1">
+              <Link href='/favorites' className="w-full text-[16px] p-1">
                 My Favorites
               </Link>
             </DropdownMenuItem>
             <DropdownMenuItem>
-              <Link href='/reservations' className="w-full text-[17px] p-1">
+              <Link href='/reservations' className="w-full text-[16px] p-1">
                 My Reservations
               </Link>
             </DropdownMenuItem>
@@ -73,10 +74,10 @@ export const UserNav = async () => {
         ) : (
           <>
             <DropdownMenuItem>
-              <RegisterLink className="w-full text-[17px] p-1"> Register </RegisterLink>
+              <RegisterLink className="w-full text-[16px] p-1"> Register </RegisterLink>
             </DropdownMenuItem>
             <DropdownMenuItem>
-              <LoginLink className="w-full text-[17px] p-1"> Login </LoginLink>
+              <LoginLink className="w-full text-[16px] p-1"> Login </LoginLink>
             </DropdownMenuItem>
           </>
         )}

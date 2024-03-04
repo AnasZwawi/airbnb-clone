@@ -42,7 +42,7 @@ export function AddToFavoriteButton() {
           className="bg-primary-foreground"
           type="submit"
         >
-          <Heart className="w-4 h-4" />
+          <Heart className="w-4 h-4" color="#30363d" />
         </Button>
       )}
     </>
@@ -69,7 +69,7 @@ export function DeleteFromFavoriteButton() {
           className="bg-primary-foreground"
           type="submit"
         >
-          <Heart className="w-4 h-4 text-primary" fill="#E21C49" />
+          <Heart className="w-4 h-4 text-primary" color="#30363d" fill="#30363d" />
         </Button>
       )}
     </>

@@ -55,14 +55,14 @@ export const SearchComponent = () => {
     <div>
       <Dialog>
         <DialogTrigger asChild>
-          <div className=" mx-6 rounded-full py-[5px] px-3 border flex justify-between items-center cursor-pointer">
+          <div className=" mx-5 mt-2 rounded-full py-[5px] px-3 border flex justify-between items-center cursor-pointer">
             <div className="flex h-full divide-x font-medium text-sm sm:text-[16px] text-gray-700">
               <p className="px-2 sm:px-4">Anywhere</p>
               <p className="px-2 sm:px-4">Any Week</p>
               <p className="px-2 sm:px-4">Any Guests</p>
             </div>
 
-            <Search className="bg-primary text-white p-1 h-8 w-8 rounded-full" />
+            <Search className="bg-slate-700 text-white p-1 h-8 w-8 rounded-full" />
           </div>
         </DialogTrigger>
         <DialogContent className="rounded-lg sm:max-w-[425px]">
