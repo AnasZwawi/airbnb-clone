@@ -3,8 +3,8 @@ import { redirect } from "next/navigation";
 import prisma from "./lib/db";
 import { supabase } from "./lib/supabase";
 import { revalidatePath } from "next/cache";
-import jimp from 'jimp';
-import fs from 'fs';
+import sharp from 'sharp';
+
 
 export async function createAirbnbHome({ userId }: { userId: string }) {
   const data = await prisma.home.findFirst({
@@ -69,15 +69,17 @@ export async function createCategoryPage(formData: FormData) {
   return redirect(`/create/${homeId}/description`);
 }
 
-async function resizeImage(imageBuffer: Buffer, outputFormat: string = 'jpeg'): Promise<Buffer> {
+async function compressImage(imageBuffer: Buffer): Promise<Buffer> {
   try {
-    const image = await jimp.read(imageBuffer);
-    const resizedImage = await image.resize(1000, jimp.AUTO).quality(80).getBufferAsync(outputFormat);
-    return resizedImage;
+      const compressedImageBuffer = await sharp(imageBuffer)
+          .resize({ width: 1000, height: 1000 })
+          .webp({ quality: 80 })
+          .toBuffer();
+      return compressedImageBuffer;
   } catch (error) {
-    console.error("Error resizing image:", error);
-    throw error; // Throw error to handle it in the calling function
-  }
+      console.error("Error compressing image:", error);
+      throw error;
+  } 
 }
 
 export async function createDescription(formData: FormData) {
@@ -93,46 +95,47 @@ export async function createDescription(formData: FormData) {
 
   // Process and upload each image
   const uploadPromises: Promise<string | null>[] = imageFilesArray.map(async (imageFile) => {
-    // Resize image
-    try {
-      const arrayBuffer = await imageFile.arrayBuffer();
-      const buffer = Buffer.from(arrayBuffer);
-      const resizedImage = await resizeImage(buffer);
+      try {
+          // Read image file as buffer
+          const imageBuffer = await imageFile.arrayBuffer();
+          const buffer = Buffer.from(imageBuffer);
 
-      // Upload resized image to storage
-      const { data: imageData } = await supabase.storage
-        .from("images")
-        .upload(`${new Date().toISOString()}-${imageFile.name}`, resizedImage, {
-          cacheControl: "2592000",
-          contentType: "image/png", // Adjust content type as needed
-        });
+          // Compress image
+          const compressedImageBuffer = await compressImage(buffer);
 
-      // Return image path or null if upload failed
-      return imageData?.path || null;
-    } catch (error) {
-      console.error("Error processing image:", error);
-      return null; // Return null for failed uploads
-    }
+          // Upload compressed image to storage
+          const { data: imageData } = await supabase.storage
+              .from("images")
+              .upload(`${new Date().toISOString()}-${imageFile.name}`, compressedImageBuffer, {
+                  cacheControl: "2592000",
+                  contentType: `image/webp`,
+              });
+
+          return imageData?.path || null;
+      } catch (error) {
+          console.error("Error processing image:", error);
+          return null;
+      }
   });
 
-  const photoPaths = await Promise.all(uploadPromises); // Collect photo paths
+  const photoPaths: (string | null)[] = await Promise.all(uploadPromises); // Collect photo paths
 
   const data = await prisma.home.update({
-    where: {
-      id: homeId,
-    },
-    data: {
-      title: title,
-      description: description,
-      price: Number(price),
-      bedrooms: roomNumber,
-      bathrooms: bathroomNumber,
-      guests: guestNumber,
-      photos: {
-        set: photoPaths.filter(path => path !== null) as string[], // Remove null values
+      where: {
+          id: homeId,
       },
-      addedDescription: true,
-    },
+      data: {
+          title: title,
+          description: description,
+          price: Number(price),
+          bedrooms: roomNumber,
+          bathrooms: bathroomNumber,
+          guests: guestNumber,
+          photos: {
+              set: photoPaths.filter(path => path !== null) as string[], // Remove null values
+          },
+          addedDescription: true,
+      },
   });
   return redirect(`/create/${homeId}/address`);
 }
