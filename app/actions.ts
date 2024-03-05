@@ -72,7 +72,7 @@ export async function createCategoryPage(formData: FormData) {
 async function compressImage(imageBuffer: Buffer): Promise<Buffer> {
   try {
       const compressedImageBuffer = await sharp(imageBuffer)
-          .resize({ width: 1000, height: 1000 })
+          .resize({ width: 600})
           .webp({ quality: 80 })
           .toBuffer();
       return compressedImageBuffer;
