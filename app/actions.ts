@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import prisma from "./lib/db";
 import { supabase } from "./lib/supabase";
 import { revalidatePath } from "next/cache";
+import sharp from 'sharp';
 
 export async function createAirbnbHome({ userId }: { userId: string }) {
   const data = await prisma.home.findFirst({
@@ -78,14 +79,21 @@ export async function createDescription(formData: FormData) {
   const roomNumber = formData.get("room") as string;
   const bathroomNumber = formData.get("bathroom") as string;
 
-  const uploadPromises: Promise<any>[] = imageFilesArray.map(async (imageFile) => {
+  const compressedImagePromises = imageFilesArray.map(async (imageFile) => {
+    const compressedImageBuffer = await compressImage(imageFile);
+    return compressedImageBuffer;
+  });
+
+  // Upload compressed images to storage
+  const uploadPromises: Promise<any>[] = compressedImagePromises.map(async (compressedImageBuffer, index) => {
+    const compressedImage = Buffer.from(await compressedImageBuffer);
     const { data: imageData } = await supabase.storage
       .from("images")
-      .upload(`${new Date().toISOString()}-${imageFile.name}`, imageFile, {
+      .upload(`${new Date().toISOString()}-${index}.jpg`, compressedImage, { // Use a specific format for compressed images
         cacheControl: "2592000",
-        contentType: "image/png",
+        contentType: "image/jpeg", // Use JPEG format for compressed images
       });
-    return imageData?.path; // Instead of returning the whole imageData, return just the path
+    return imageData?.path;
   });
 
   const photoPaths = await Promise.all(uploadPromises); // Collect photo paths
@@ -102,7 +110,7 @@ export async function createDescription(formData: FormData) {
       bathrooms: bathroomNumber,
       guests: guestNumber,
       photos: {
-        set: photoPaths, // Set the array of photo paths directly
+        set: photoPaths,
       },
       addedDescription: true,
     },
@@ -110,7 +118,28 @@ export async function createDescription(formData: FormData) {
   return redirect(`/create/${homeId}/address`);
 }
 
+type ImageFormat = keyof sharp.FormatEnum | sharp.AvailableFormatInfo;
 
+async function compressImage(imageFile: File, outputFormat: ImageFormat = 'jpeg'): Promise<Buffer> {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = async () => {
+      try {
+        const imageBuffer = await sharp(Buffer.from(reader.result as ArrayBuffer))
+          .resize({ width: 1000, height: 1000 }) // Set desired dimensions for compressed images
+          .toFormat(outputFormat, { quality: 80 }) // Specify the output format and quality
+          .toBuffer(); // Convert to buffer
+        resolve(imageBuffer);
+      } catch (error) {
+        reject(error);
+      }
+    };
+    reader.onerror = (error) => {
+      reject(error);
+    };
+    reader.readAsArrayBuffer(imageFile);
+  });
+}
 
 export async function createLocation(formData: FormData) {
   const homeId = formData.get("homeId") as string;
