@@ -1,7 +1,4 @@
-
-
-
-
+'use client'
 
 import { createDescription } from "@/app/actions";
 import { Counter } from "@/app/components/Counter";
