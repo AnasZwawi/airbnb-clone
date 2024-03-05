@@ -92,7 +92,6 @@ function Description({ params }: { params: { id: string } }) {
   };
   
 
-  // Function to handle form submission
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -107,14 +106,18 @@ function Description({ params }: { params: { id: string } }) {
 
     // Prepare form data with compressed images
     const formData = new FormData(form);
-    
+    // Remove the original image files if necessary
+    formData.delete("image");
+
+    // Append the compressed images with a different key
     compressedFiles.forEach((file, index) => {
-      formData.append(`image${index}`, file);
+      formData.append(`compressedImage${index}`, file);
     });
 
-    // Call createDescription function with compressed images
+    // Call createDescription function with form data containing compressed images
     await createDescription(formData);
 };
+
 
 
   return (
