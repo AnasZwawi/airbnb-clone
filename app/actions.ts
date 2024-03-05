@@ -3,8 +3,8 @@ import { redirect } from "next/navigation";
 import prisma from "./lib/db";
 import { supabase } from "./lib/supabase";
 import { revalidatePath } from "next/cache";
+import jimp from 'jimp';
 import fs from 'fs';
-import sharp from 'sharp';
 
 export async function createAirbnbHome({ userId }: { userId: string }) {
   const data = await prisma.home.findFirst({
@@ -69,12 +69,11 @@ export async function createCategoryPage(formData: FormData) {
   return redirect(`/create/${homeId}/description`);
 }
 
-async function resizeImage(imageBuffer: Buffer, outputPath: string): Promise<void> {
+async function resizeImage(imageBuffer: Buffer, outputFormat: string = 'jpeg'): Promise<Buffer> {
   try {
-    await sharp(imageBuffer)
-      .resize({ width: 1000, withoutEnlargement: true }) // Resize width to 1000px without enlarging smaller images
-      .jpeg({ quality: 80 }) // Convert to JPEG format with specified quality
-      .toFile(outputPath);
+    const image = await jimp.read(imageBuffer);
+    const resizedImage = await image.resize(1000, jimp.AUTO).quality(80).getBufferAsync(outputFormat);
+    return resizedImage;
   } catch (error) {
     console.error("Error resizing image:", error);
     throw error; // Throw error to handle it in the calling function
@@ -94,24 +93,18 @@ export async function createDescription(formData: FormData) {
 
   // Process and upload each image
   const uploadPromises: Promise<string | null>[] = imageFilesArray.map(async (imageFile) => {
-    // Create a temporary path for the resized image
-    const tempImagePath = `temp/${imageFile.name}`;
-    const resizedImagePath = `resized/${imageFile.name}`;
-
-    // Read the image file as a buffer
-    const imageBuffer = await imageFile.arrayBuffer();
-    const buffer = Buffer.from(imageBuffer);
-
     // Resize image
     try {
-      await resizeImage(buffer, tempImagePath);
+      const arrayBuffer = await imageFile.arrayBuffer();
+      const buffer = Buffer.from(arrayBuffer);
+      const resizedImage = await resizeImage(buffer);
 
       // Upload resized image to storage
       const { data: imageData } = await supabase.storage
         .from("images")
-        .upload(`${new Date().toISOString()}-${imageFile.name}`, fs.createReadStream(tempImagePath), {
+        .upload(`${new Date().toISOString()}-${imageFile.name}`, resizedImage, {
           cacheControl: "2592000",
-          contentType: "image/jpeg", // Adjust content type as needed
+          contentType: "image/png", // Adjust content type as needed
         });
 
       // Return image path or null if upload failed
@@ -119,16 +112,11 @@ export async function createDescription(formData: FormData) {
     } catch (error) {
       console.error("Error processing image:", error);
       return null; // Return null for failed uploads
-    } finally {
-      // Cleanup temporary images
-      fs.unlinkSync(tempImagePath);
     }
   });
 
-  // Collect photo paths
-  const photoPaths = await Promise.all(uploadPromises);
+  const photoPaths = await Promise.all(uploadPromises); // Collect photo paths
 
-  // Update home data in the database
   const data = await prisma.home.update({
     where: {
       id: homeId,
@@ -146,8 +134,7 @@ export async function createDescription(formData: FormData) {
       addedDescription: true,
     },
   });
-
-  return data;
+  return redirect(`/create/${homeId}/address`);
 }
 
 /* export async function createDescription(formData: FormData) {
