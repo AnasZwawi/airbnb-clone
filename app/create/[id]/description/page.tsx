@@ -5,6 +5,7 @@ import { Card, CardHeader } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { truncate } from "fs/promises";
 import React from "react";
 
 function Description({ params }: { params: { id: string } }) {
@@ -47,7 +48,7 @@ function Description({ params }: { params: { id: string } }) {
           </div>
           <div className="flex flex-col gap-y-2">
             <Label>Image</Label>
-            <Input type="file" accept=".jpg,.png,.jpeg,.webp" className="cursor-pointer" name="image" required />
+            <Input type="file" multiple={true} accept=".jpg,.png,.jpeg,.webp" className="cursor-pointer" name="image" required />
           </div>
           <Card>
             <CardHeader className="flex flex-col gap-y-5">
