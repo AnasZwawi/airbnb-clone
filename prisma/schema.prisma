@@ -34,7 +34,7 @@ model Home {
   bedrooms         String?
   bathrooms        String?
   country          String?
-  photo            String[]
+  photos            String[]
   price            Int?
   Favorite         Favorite[]
   addedCategory    Boolean       @default(false)

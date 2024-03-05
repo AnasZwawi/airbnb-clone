@@ -73,18 +73,30 @@ export async function createDescription(formData: FormData) {
   const title = formData.get("title") as string;
   const description = formData.get("description") as string;
   const price = formData.get("price");
-  const imageFile = formData.get("image") as File;
+  const imageFilesArray = formData.getAll("image") as File[];
 
   const guestNumber = formData.get("guest") as string;
   const roomNumber = formData.get("room") as string;
   const bathroomNumber = formData.get("bathroom") as string;
 
-  const { data: imageData } = await supabase.storage
-    .from("images")
-    .upload(`${new Date().toISOString()}-${imageFile.name}`, imageFile, {
-      cacheControl: "2592000",
-      contentType: "image/png",
-    });
+  // Create a new FileList object using DataTransfer
+  const dataTransfer = new DataTransfer();
+  imageFilesArray.forEach(file => {
+    dataTransfer.items.add(file);
+  });
+  const imageFiles: FileList = dataTransfer.files;
+
+  const uploadPromises: Promise<any>[] = Array.from(imageFiles).map(async (imageFile) => {
+    const { data: imageData } = await supabase.storage
+      .from("images")
+      .upload(`${new Date().toISOString()}-${imageFile.name}`, imageFile, {
+        cacheControl: "2592000",
+        contentType: "image/png",
+      });
+    return imageData?.path; // Instead of returning the whole imageData, return just the path
+  });
+
+  const photoPaths = await Promise.all(uploadPromises); // Collect photo paths
 
   const data = await prisma.home.update({
     where: {
@@ -97,12 +109,16 @@ export async function createDescription(formData: FormData) {
       bedrooms: roomNumber,
       bathrooms: bathroomNumber,
       guests: guestNumber,
-      photo: imageData?.path,
+      photos: {
+        set: photoPaths, // Set the array of photo paths directly
+      },
       addedDescription: true,
     },
   });
   return redirect(`/create/${homeId}/address`);
 }
+
+
 
 export async function createLocation(formData: FormData) {
   const homeId = formData.get("homeId") as string;
