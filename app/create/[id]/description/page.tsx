@@ -1,5 +1,4 @@
 'use client'
-
 import { createDescription } from "@/app/actions";
 import { Counter } from "@/app/components/Counter";
 import { CreationBottomBar } from "@/app/components/CreationBottomBar";
@@ -108,7 +107,7 @@ function Description({ params }: { params: { id: string } }) {
 
     // Prepare form data with compressed images
     const formData = new FormData(form);
-    formData.delete("image"); // Remove original image files
+    
     compressedFiles.forEach((file, index) => {
       formData.append(`image${index}`, file);
     });
