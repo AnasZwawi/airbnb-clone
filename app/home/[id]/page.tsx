@@ -20,7 +20,7 @@ async function getData(homeId: string) {
       id: homeId,
     },
     select: {
-      photo: true,
+      photos: true,
       description: true,
       guests: true,
       bedrooms: true,
@@ -106,7 +106,7 @@ async function HomeId({ params }: { params: { id: string } }) {
       <div className="relative h-[350px] lg:h-[550px]">
         <Image
           alt="Image of Home"
-          src={`https://jxvqpjydezilbytxarzd.supabase.co/storage/v1/object/public/images/${data?.photo}`}
+          src={`https://jxvqpjydezilbytxarzd.supabase.co/storage/v1/object/public/images/${data?.photos[0]}`}
           fill
           className="rounded-lg h-full object-cover w-full"
         />

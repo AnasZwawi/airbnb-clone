@@ -15,7 +15,7 @@ async function getData(userId: string) {
     select: {
       Home: {
         select: {
-          photo: true,
+          photos: true,
           id: true,
           Favorite: true,
           price: true,
@@ -48,7 +48,7 @@ const Favorite = async () => {
               location={item.Home?.country as string}
               pathName="/favorites"
               homeId={item.Home?.id as string}
-              imagePath={item.Home?.photo as string}
+              imagePath={item.Home?.photos[0] as string}
               price={item.Home?.price as number}
               userId={user.id}
               favoriteId={item.Home?.Favorite[0].id as string}

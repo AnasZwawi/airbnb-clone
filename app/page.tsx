@@ -31,7 +31,7 @@ async function getData({
         country: searchParams.country ?? undefined,
       },
       select: {
-        photo: true,
+        photos: true,
         id: true,
         price: true,
         description: true,
@@ -57,7 +57,7 @@ async function getData({
         bathrooms: searchParams.bathroom ?? undefined,
       },
       select: {
-        photo: true,
+        photos: true,
         id: true,
         price: true,
         description: true,
@@ -126,7 +126,7 @@ async function ShowItems({
           {data.map((item) => (
             <ListingCard
               key={item.id}
-              imagePath={item.photo as string}
+              imagePath={item.photos[0] as string}
               description={item.description as string}
               price={item.price as number}
               location={item.country as string}

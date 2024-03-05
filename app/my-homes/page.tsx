@@ -18,7 +18,7 @@ async function getData(userId: string) {
     select: {
       id: true,
       country: true,
-      photo: true,
+      photos: true,
       description: true,
       price: true,
       Favorite: {
@@ -55,7 +55,7 @@ async function MyHomes() {
           {data.map((item) => (
             <ListingCard
               key={item.id}
-              imagePath={item.photo as string}
+              imagePath={item.photos[0] as string}
               homeId={item.id}
               price={item.price as number}
               description={item.description as string}
