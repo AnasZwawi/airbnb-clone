@@ -69,7 +69,6 @@ export async function createCategoryPage(formData: FormData) {
 
 export async function createDescription(formData: FormData) {
   const homeId = formData.get("homeId") as string;
-
   const title = formData.get("title") as string;
   const description = formData.get("description") as string;
   const price = formData.get("price");
@@ -79,14 +78,7 @@ export async function createDescription(formData: FormData) {
   const roomNumber = formData.get("room") as string;
   const bathroomNumber = formData.get("bathroom") as string;
 
-  // Create a new FileList object using DataTransfer
-  const dataTransfer = new DataTransfer();
-  imageFilesArray.forEach(file => {
-    dataTransfer.items.add(file);
-  });
-  const imageFiles: FileList = dataTransfer.files;
-
-  const uploadPromises: Promise<any>[] = Array.from(imageFiles).map(async (imageFile) => {
+  const uploadPromises: Promise<any>[] = imageFilesArray.map(async (imageFile) => {
     const { data: imageData } = await supabase.storage
       .from("images")
       .upload(`${new Date().toISOString()}-${imageFile.name}`, imageFile, {
