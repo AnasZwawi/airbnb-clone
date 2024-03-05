@@ -39,8 +39,8 @@ function Description({ params }: { params: { id: string } }) {
           const ctx = canvas.getContext("2d");
   
           // Resize the image to a max width and max height
-          const maxWidth = 1000;
-          const maxHeight = 1000;
+          const maxWidth = 600;
+          const maxHeight = 600;
           const compressionQuality = 0.8; // (0 to 1)
   
           let width = img.width;
