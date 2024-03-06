@@ -152,13 +152,12 @@ function Description({ params }: { params: { id: string } }) {
     });
 
     // Submit form data
+    setCompressing(false)
     await createDescription(formData);
   };
 
   return (
     <div>
-
-
       <div className="w-[80%] lg:w-3/5 mx-auto">
         <h2 className="text-3xl font-semibold tracking-tighter transition-colors">
           Please describe you home as good as you can!
