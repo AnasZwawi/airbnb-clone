@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import prisma from "@/app/lib/db";
 import Image from "next/image";
 import { useCountries } from "@/app/lib/getCountries";
@@ -50,17 +50,10 @@ async function getData(homeId: string) {
 }
 
 async function HomeId({ params }: { params: { id: string } }) {
+
   const data = await getData(params.id);
   const { getCountryByValue } = useCountries();
   const country = getCountryByValue(data?.country as string);
-
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1
-  };
 
   //Just some function to show flag as png
   const flagemojiToPNG = (flag: string) => {
@@ -83,6 +76,13 @@ async function HomeId({ params }: { params: { id: string } }) {
   // fetching the user id from kinde auth
   const { getUser } = getKindeServerSession();
   const user = await getUser();
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1
+  };
 
   return (
     <div className="w-[85%] lg:w-[75%] mx-auto mt-10">
@@ -112,7 +112,6 @@ async function HomeId({ params }: { params: { id: string } }) {
           </div>
         </div>
       </div>
-
       {data && (
         <div className="relative">
           <Slider {...settings}>
@@ -120,7 +119,7 @@ async function HomeId({ params }: { params: { id: string } }) {
               <div key={index}>
                 <Image
                   alt={`Image ${index}`}
-                  src={photo}
+                  src={`https://jxvqpjydezilbytxarzd.supabase.co/storage/v1/object/public/images/${photo}`}
                   fill
                   className="rounded-lg h-full object-cover w-full"
                 />
