@@ -92,7 +92,7 @@ function Description({ params }: { params: { id: string } }) {
 export default Description;
  */
 
-'use client'
+"use client";
 import { useState } from "react";
 import { createDescription } from "@/app/actions";
 import { Counter } from "@/app/components/Counter";
@@ -102,14 +102,20 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import imageCompression from "browser-image-compression";
+import { Loader2 } from "lucide-react";
 
 function Description({ params }: { params: { id: string } }) {
+  const [compressing, setCompressing] = useState(false);
   const [imageFiles, setImageFiles] = useState<File[]>([]);
 
-  const handleImageChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImageChange = async (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     if (event.target.files) {
       const selectedFiles = Array.from(event.target.files);
-      const compressedImages = await Promise.all(selectedFiles.map(compressImage));
+      const compressedImages = await Promise.all(
+        selectedFiles.map(compressImage)
+      );
       setImageFiles(compressedImages);
     }
   };
@@ -118,11 +124,16 @@ function Description({ params }: { params: { id: string } }) {
     try {
       const options = {
         maxSizeMB: 1, // Maximum file size in megabytes
-        maxWidthOrHeight: 1000, // Maximum width or height
+        maxWidthOrHeight: 700, // Maximum width or height
+        fileType: "image/webp", // optional, fileType override e.g., 'image/jpeg', 'image/png' (default: file.type)
+        initialQuality: 0.8,
         useWebWorker: true, // Use Web Worker for compression
       };
       const compressedImage = await imageCompression(imageFile, options);
-      return new File([compressedImage], imageFile.name, { type: compressedImage.type });
+      setCompressing(true);
+      return new File([compressedImage], imageFile.name, {
+        type: compressedImage.type,
+      });
     } catch (error) {
       console.error("Error compressing image:", error);
       throw error;
@@ -144,7 +155,16 @@ function Description({ params }: { params: { id: string } }) {
   };
 
   return (
-    <>
+    <div aria-disabled={compressing}>
+      {compressing && (
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-md bg-white shadow-sm flex gap-x-2 items-center">
+          <Loader2 className="h-5 w-5 animate-spin" />
+          <h4 className="text-xl py-9 px-11 text-primary">
+            Uploading images please wait...
+          </h4>
+        </div>
+      )}
+
       <div className="w-[80%] lg:w-3/5 mx-auto">
         <h2 className="text-3xl font-semibold tracking-tighter transition-colors">
           Please describe you home as good as you can!
@@ -155,15 +175,30 @@ function Description({ params }: { params: { id: string } }) {
         <div className="mx-auto w-[80%] lg:w-3/5 mt-10 flex flex-col gap-y-5 mb-36">
           <div className="flex flex-col gap-y-2">
             <Label>Title</Label>
-            <Input name="title" type="text" required placeholder="Short and simple..." />
+            <Input
+              name="title"
+              type="text"
+              required
+              placeholder="Short and simple..."
+            />
           </div>
           <div className="flex flex-col gap-y-2">
             <Label>Description</Label>
-            <Textarea name="description" required placeholder="Please describe your home..." />
+            <Textarea
+              name="description"
+              required
+              placeholder="Please describe your home..."
+            />
           </div>
           <div className="flex flex-col gap-y-2">
             <Label>Price</Label>
-            <Input type="number" name="price" required placeholder="Price per night in TND" min={10} />
+            <Input
+              type="number"
+              name="price"
+              required
+              placeholder="Price per night in TND"
+              min={10}
+            />
           </div>
           <div className="flex flex-col gap-y-2">
             <Label>Image</Label>
@@ -182,21 +217,27 @@ function Description({ params }: { params: { id: string } }) {
               <div className="flex flex-col lg:flex-row gap-y-3 items-start justify-between">
                 <div className="flex flex-col">
                   <h3 className="underline font-semibold text-lg">Guests</h3>
-                  <p className="text-muted-foreground text-sm">How many guests do you want?</p>
+                  <p className="text-muted-foreground text-sm">
+                    How many guests do you want?
+                  </p>
                 </div>
                 <Counter name="guest" />
               </div>
               <div className="flex flex-col lg:flex-row gap-y-3 items-start justify-between">
                 <div className="flex flex-col">
                   <h3 className="underline font-semibold text-lg">Rooms</h3>
-                  <p className="text-muted-foreground text-sm">How many rooms do you have?</p>
+                  <p className="text-muted-foreground text-sm">
+                    How many rooms do you have?
+                  </p>
                 </div>
                 <Counter name="room" />
               </div>
               <div className="flex flex-col lg:flex-row gap-y-3 items-start justify-between">
                 <div className="flex flex-col">
                   <h3 className="underline font-semibold text-lg">Bathrooms</h3>
-                  <p className="text-muted-foreground text-sm">How many bathrooms do you have?</p>
+                  <p className="text-muted-foreground text-sm">
+                    How many bathrooms do you have?
+                  </p>
                 </div>
                 <Counter name="bathroom" />
               </div>
@@ -205,7 +246,7 @@ function Description({ params }: { params: { id: string } }) {
         </div>
         <CreationBottomBar />
       </form>
-    </>
+    </div>
   );
 }
 
