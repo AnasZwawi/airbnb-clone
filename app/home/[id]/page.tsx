@@ -110,9 +110,15 @@ async function HomeId({ params }: { params: { id: string } }) {
           fill
           className="rounded-lg h-full object-cover w-full"
         />
-        <div className="mt-2 w-[150px] h-[75px]">
+        <Image
+          alt="Image of Home"
+          src={`https://jxvqpjydezilbytxarzd.supabase.co/storage/v1/object/public/images/${data?.photos[1]}`}
+          fill
+          className="rounded-lg h-full object-cover w-full"
+        />
+        {/* <div className="mt-2 w-full h-fit">
           {data?.photos.map((photo) => (
-            <button className="w-full">
+            <button className=" w-[150px] h-[75px]">
               <Image
                 alt="Image of Home"
                 src={`https://jxvqpjydezilbytxarzd.supabase.co/storage/v1/object/public/images/${photo}`}
@@ -121,7 +127,7 @@ async function HomeId({ params }: { params: { id: string } }) {
               />
             </button>
           ))}
-        </div>
+        </div> */}
       </div>
       <div className="flex flex-col gap-y-8 lg:flex-row justify-between gap-x-2 mt-5">
         <div className="w-full lg:w-2/3">
