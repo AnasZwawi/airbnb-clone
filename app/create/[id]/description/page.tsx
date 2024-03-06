@@ -142,7 +142,7 @@ function Description({ params }: { params: { id: string } }) {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
+  
     // Prepare form data
     setCompressing(true);
     const formData = new FormData(event.currentTarget);
@@ -150,10 +150,30 @@ function Description({ params }: { params: { id: string } }) {
     imageFiles.forEach((imageFile) => {
       formData.append("image", imageFile);
     });
-
-    // Submit form data
-    setCompressing(false)
-    await createDescription(formData);
+  
+    try {
+      // Perform image compression
+      const compressedImages = await Promise.all(
+        imageFiles.map(compressImage)
+      );
+  
+      // Replace original image files with compressed ones in formData
+      formData.delete("image");
+      compressedImages.forEach((compressedImage) => {
+        formData.append("image", compressedImage);
+      });
+  
+      // Submit form data
+      await createDescription(formData);
+  
+      // Reset compressing state
+      setCompressing(false);
+    } catch (error) {
+      console.error("Error compressing images:", error);
+      // Handle error
+      // Reset compressing state
+      setCompressing(false);
+    }
   };
 
   return (
