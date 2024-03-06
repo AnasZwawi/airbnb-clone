@@ -157,16 +157,7 @@ function Description({ params }: { params: { id: string } }) {
 
   return (
     <div>
-      {compressing && (
-        <div className="z-49 absolute top-0 left-0 h-[100vh] w-[100vw] bg-slate-400 bg-opacity-60 flex items-center justify-center">
-          <div className="absolute z-50 bottom-[250px] left-1/2 transform -translate-x-1/2 rounded-md bg-white shadow-md border border-primary flex gap-x-2 items-center py-9 px-11">
-            <Loader2 className="h-7 w-7 animate-spin" />
-            <h4 className="text-xl text-primary">
-              Uploading images please wait...
-            </h4>
-          </div>
-        </div>
-      )}
+
 
       <div className="w-[80%] lg:w-3/5 mx-auto">
         <h2 className="text-3xl font-semibold tracking-tighter transition-colors">
