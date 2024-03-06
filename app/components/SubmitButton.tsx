@@ -4,25 +4,27 @@ import { Heart, Loader2 } from "lucide-react";
 import React from "react";
 import { useFormStatus } from "react-dom";
 
-export const SubmitButton = ({ compressing = false }: { compressing?: boolean }) => {
+export const SubmitButton = ({
+  compressing = false,
+}: {
+  compressing?: boolean;
+}) => {
   const { pending } = useFormStatus();
   return (
     <div>
       {pending ? (
-        <Button type="submit" disabled size="lg">
-          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-          Please Wait
-        </Button>
-      ) : (
-        <Button size="lg" type="submit">
-          Next
-        </Button>
-      )}
-      {compressing ? (
-        <Button type="submit" disabled size="lg">
-          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-          Please Wait
-        </Button>
+        <>
+          {compressing ? (
+            <Button type="submit" disabled size="lg">
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              Please Wait
+            </Button>
+          ) : (
+            <Button size="lg" type="submit">
+              Next
+            </Button>
+          )}
+        </>
       ) : (
         <Button size="lg" type="submit">
           Next
@@ -79,7 +81,11 @@ export function DeleteFromFavoriteButton() {
           className="bg-primary-foreground"
           type="submit"
         >
-          <Heart className="w-4 h-4 text-primary" color="#30363d" fill="#30363d" />
+          <Heart
+            className="w-4 h-4 text-primary"
+            color="#30363d"
+            fill="#30363d"
+          />
         </Button>
       )}
     </>
@@ -91,18 +97,12 @@ export function ReservationSubmit() {
   return (
     <>
       {pending ? (
-        <Button
-          className="w-full"
-          disabled
-        >
+        <Button className="w-full" disabled>
           <Loader2 className="h-4 w-4 animate-spin mr-2" />
           Please wait...
         </Button>
       ) : (
-        <Button
-          className="w-full"
-          type="submit"
-        >
+        <Button className="w-full" type="submit">
           Make a Reservation!
         </Button>
       )}
