@@ -1,3 +1,4 @@
+"use client"
 import React, { useState } from "react";
 import prisma from "@/app/lib/db";
 import Image from "next/image";
