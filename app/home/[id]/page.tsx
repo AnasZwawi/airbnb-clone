@@ -1,5 +1,4 @@
-"use client"
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import prisma from "@/app/lib/db";
 import Image from "next/image";
 import { useCountries } from "@/app/lib/getCountries";
@@ -54,15 +53,6 @@ async function HomeId({ params }: { params: { id: string } }) {
   const country = getCountryByValue(data?.country as string);
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentSlide((prevSlide) =>
-        prevSlide === data?.photos.length as number - 1 ? 0 : prevSlide + 1
-      );
-    }, 5000); // Change slides every 5 seconds
-    return () => clearInterval(interval);
-  }, [data?.photos.length]);
-
   const flagemojiToPNG = (flag: string) => {
     var countryCode = Array.from(flag, (codeUnit: any) =>
       codeUnit.codePointAt()
@@ -82,6 +72,18 @@ async function HomeId({ params }: { params: { id: string } }) {
 
   const { getUser } = getKindeServerSession();
   const user = await getUser();
+
+  const nextSlide = () => {
+    setCurrentSlide((prevSlide) =>
+      prevSlide === data?.photos.length as number - 1 ? 0 : prevSlide + 1
+    );
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prevSlide) =>
+      prevSlide === 0 ? data?.photos.length as number - 1 : prevSlide - 1
+    );
+  };
 
   return (
     <div className="w-[85%] lg:w-[75%] mx-auto mt-10">
@@ -112,25 +114,20 @@ async function HomeId({ params }: { params: { id: string } }) {
         </div>
       </div>
 
-      <div className="relative h-[350px] lg:h-[550px] overflow-hidden">
-        <div
-          className="flex"
-          style={{
-            transform: `translateX(-${currentSlide * 100}%)`,
-            transition: "transform 0.5s ease-in-out",
-            width: `${data?.photos.length as number * 100}%`,
-          }}
-        >
-          {data?.photos.map((photo, index) => (
-            <div key={index} className="w-full h-full flex-shrink-0">
-              <Image
-                alt={`Image ${index}`}
-                src={`https://jxvqpjydezilbytxarzd.supabase.co/storage/v1/object/public/images/${photo}`}
-                fill
-                className="rounded-lg h-full object-cover w-full"
-              />
-            </div>
-          ))}
+      <div className="relative h-[350px] lg:h-[550px]">
+        <div className="relative w-full">
+          <button onClick={prevSlide} className="absolute top-1/2 left-0 transform -translate-y-1/2 bg-gray-900 text-white px-4 py-2 rounded-md z-10">
+            Previous
+          </button>
+          <button onClick={nextSlide} className="absolute top-1/2 right-0 transform -translate-y-1/2 bg-gray-900 text-white px-4 py-2 rounded-md z-10">
+            Next
+          </button>
+          <Image
+            alt="Image of Home"
+            src={`https://jxvqpjydezilbytxarzd.supabase.co/storage/v1/object/public/images/${data?.photos[currentSlide]}`}
+            fill
+            className="rounded-lg h-full object-cover w-full"
+          />
         </div>
       </div>
       <div className="flex flex-col gap-y-8 lg:flex-row justify-between gap-x-2 mt-5">
