@@ -69,7 +69,7 @@ export async function createCategoryPage(formData: FormData) {
   return redirect(`/create/${homeId}/description`);
 }
 
-async function compressImage(imageBuffer: Buffer): Promise<Buffer> {
+/* async function compressImage(imageBuffer: Buffer): Promise<Buffer> {
   try {
       const compressedImageBuffer = await sharp(imageBuffer)
           .resize({ width: 600})
@@ -138,9 +138,9 @@ export async function createDescription(formData: FormData) {
       },
   });
   return redirect(`/create/${homeId}/address`);
-}
+} */
 
-/* export async function createDescription(formData: FormData) {
+export async function createDescription(formData: FormData) {
   const homeId = formData.get("homeId") as string;
   const title = formData.get("title") as string;
   const description = formData.get("description") as string;
@@ -184,7 +184,7 @@ export async function createDescription(formData: FormData) {
   });
   return redirect(`/create/${homeId}/address`);
 }
- */
+
 export async function createLocation(formData: FormData) {
   const homeId = formData.get("homeId") as string;
   const countryValue = formData.get("countryValue") as string;
