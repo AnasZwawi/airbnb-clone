@@ -12,20 +12,11 @@ export const SubmitButton = ({
   const { pending } = useFormStatus();
   return (
     <div>
-      {pending ? (
-        <>
-          {compressing ? (
-            <Button type="submit" disabled size="lg">
-              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-              Please Wait
-            </Button>
-          ) : (
-            <Button type="submit" disabled size="lg">
-              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-              Please Wait
-            </Button>
-          )}
-        </>
+      {(pending || compressing) ? (
+        <Button type="submit" disabled size="lg">
+          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+          Please Wait
+        </Button>
       ) : (
         <Button size="lg" type="submit">
           Next
