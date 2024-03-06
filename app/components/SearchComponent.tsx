@@ -48,7 +48,7 @@ export const SearchComponent = () => {
         </Button>
       );
     } else if (step === 2) {
-      return <SubmitButton />;
+      return <SubmitButton compressing={false}/>;
     }
   }
   return (

@@ -104,6 +104,7 @@ import { Textarea } from "@/components/ui/textarea";
 import imageCompression from "browser-image-compression";
 import { Loader2 } from "lucide-react";
 
+
 function Description({ params }: { params: { id: string } }) {
   const [compressing, setCompressing] = useState(false);
   const [imageFiles, setImageFiles] = useState<File[]>([]);
