@@ -131,7 +131,6 @@ function Description({ params }: { params: { id: string } }) {
         useWebWorker: true, // Use Web Worker for compression
       };
       const compressedImage = await imageCompression(imageFile, options);
-      setCompressing(true);
       return new File([compressedImage], imageFile.name, {
         type: compressedImage.type,
       });
@@ -145,6 +144,7 @@ function Description({ params }: { params: { id: string } }) {
     event.preventDefault();
 
     // Prepare form data
+    setCompressing(true);
     const formData = new FormData(event.currentTarget);
     formData.delete("image"); // Remove original image files
     imageFiles.forEach((imageFile) => {
