@@ -124,10 +124,10 @@ function Description({ params }: { params: { id: string } }) {
   const compressImage = async (imageFile: File): Promise<File> => {
     try {
       const options = {
-        maxSizeMB: 1, // Maximum file size in megabytes
-        maxWidthOrHeight: 700, // Maximum width or height
-        fileType: "image/webp", // optional, fileType override e.g., 'image/jpeg', 'image/png' (default: file.type)
-        initialQuality: 0.8,
+        maxSizeMB: 0.5, // Maximum file size in megabytes
+        maxWidthOrHeight: 800, // Maximum width or height
+        fileType: "image/jpeg", // optional, fileType override e.g., 'image/jpeg', 'image/png' (default: file.type)
+        initialQuality: 0.9,
         useWebWorker: true, // Use Web Worker for compression
       };
       const compressedImage = await imageCompression(imageFile, options);
