@@ -112,7 +112,10 @@ async function HomeId({ params }: { params: { id: string } }) {
         />
       </div>
       <div className="mt-2 w-full h-fit">
-        <h1 className="text-3xl">{data?.photos}</h1>
+        {data?.photos.map((photo: string)=>(
+          <h1 className="text-3xl">{photo}</h1>
+        ))}
+        
       </div>
       <div className="flex flex-col gap-y-8 lg:flex-row justify-between gap-x-2 mt-5">
         <div className="w-full lg:w-2/3">
