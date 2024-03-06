@@ -8,7 +8,7 @@ export const SubmitButton = ({compressing}:{compressing: boolean}) => {
   const { pending } = useFormStatus();
   return (
     <div>
-      {pending && compressing ? (
+      {(pending && compressing) ? (
         <Button type="submit" disabled size="lg">
           <Loader2 className="mr-2 h-4 w-4 animate-spin" />
           Please Wait
