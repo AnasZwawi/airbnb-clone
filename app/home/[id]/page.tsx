@@ -76,13 +76,13 @@ async function HomeId({ params }: { params: { id: string } }) {
 
   const nextSlide = () => {
     setCurrentSlide((prevSlide) =>
-      prevSlide === data?.photos.length as number - 1 ? 0 : prevSlide + 1
+      prevSlide === (data?.photos?.length || 0) - 1 ? 0 : prevSlide + 1
     );
   };
 
   const prevSlide = () => {
     setCurrentSlide((prevSlide) =>
-      prevSlide === 0 ? data?.photos.length as number - 1 : prevSlide - 1
+      prevSlide === 0 ? (data?.photos?.length || 0) - 1 : prevSlide - 1
     );
   };
 
@@ -180,7 +180,6 @@ async function HomeId({ params }: { params: { id: string } }) {
 }
 
 export default HomeId;
-
 
 /* import React from "react";
 import prisma from "@/app/lib/db";
