@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import prisma from "@/app/lib/db";
 import Image from "next/image";
 import { useCountries } from "@/app/lib/getCountries";
@@ -12,7 +12,9 @@ import Link from "next/link";
 import { createReservation } from "@/app/actions";
 import { ReservationSubmit } from "@/app/components/SubmitButton";
 import { unstable_noStore as noStore } from "next/cache";
-
+import Slider from "react-slick"
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 async function getData(homeId: string) {
   noStore();
   const data = await prisma.home.findUnique({
@@ -51,6 +53,14 @@ async function HomeId({ params }: { params: { id: string } }) {
   const data = await getData(params.id);
   const { getCountryByValue } = useCountries();
   const country = getCountryByValue(data?.country as string);
+
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1
+  };
 
   //Just some function to show flag as png
   const flagemojiToPNG = (flag: string) => {
@@ -103,14 +113,22 @@ async function HomeId({ params }: { params: { id: string } }) {
         </div>
       </div>
 
-      <div className="relative h-[350px] lg:h-[550px]">
-        <Image
-          alt="Image of Home"
-          src={`https://jxvqpjydezilbytxarzd.supabase.co/storage/v1/object/public/images/${data?.photos[0]}`}
-          fill
-          className="rounded-lg h-full object-cover w-full"
-        />
-      </div>
+      {data && (
+        <div className="relative">
+          <Slider {...settings}>
+            {data.photos.map((photo, index) => (
+              <div key={index}>
+                <Image
+                  alt={`Image ${index}`}
+                  src={photo}
+                  fill
+                  className="rounded-lg h-full object-cover w-full"
+                />
+              </div>
+            ))}
+          </Slider>
+        </div>
+      )}
       <div className="flex flex-col gap-y-8 lg:flex-row justify-between gap-x-2 mt-5">
         <div className="w-full lg:w-2/3">
           <h3 className="font-medium text-xl flex items-center gap-x-2">
