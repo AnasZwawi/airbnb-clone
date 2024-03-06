@@ -4,11 +4,11 @@ import { Heart, Loader2 } from "lucide-react";
 import React from "react";
 import { useFormStatus } from "react-dom";
 
-export const SubmitButton = () => {
+export const SubmitButton = ({compressing}:{compressing: boolean}) => {
   const { pending } = useFormStatus();
   return (
     <div>
-      {pending ? (
+      {pending && compressing ? (
         <Button type="submit" disabled size="lg">
           <Loader2 className="mr-2 h-4 w-4 animate-spin" />
           Please Wait

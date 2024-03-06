@@ -155,13 +155,15 @@ function Description({ params }: { params: { id: string } }) {
   };
 
   return (
-    <div aria-disabled={compressing}>
+    <div>
       {compressing && (
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-md bg-white shadow-sm flex gap-x-2 items-center">
-          <Loader2 className="h-5 w-5 animate-spin" />
-          <h4 className="text-xl py-9 px-11 text-primary">
-            Uploading images please wait...
-          </h4>
+        <div className="h-[100vh] w-[100vw] bg-slate-400 bg-opacity-60 flex items-center justify-center">
+          <div className="absolute z-50 bottom-[250px] left-1/2 transform -translate-x-1/2 rounded-md bg-white shadow-md border border-primary flex gap-x-2 items-center py-9 px-11">
+            <Loader2 className="h-7 w-7 animate-spin" />
+            <h4 className="text-xl text-primary">
+              Uploading images please wait...
+            </h4>
+          </div>
         </div>
       )}
 
@@ -244,7 +246,7 @@ function Description({ params }: { params: { id: string } }) {
             </CardHeader>
           </Card>
         </div>
-        <CreationBottomBar />
+        <CreationBottomBar compressing={compressing}/>
       </form>
     </div>
   );
