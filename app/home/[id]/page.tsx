@@ -111,11 +111,16 @@ async function HomeId({ params }: { params: { id: string } }) {
           className="rounded-lg h-full object-cover w-full"
         />
       </div>
-      <div className="mt-2 w-full h-fit">
+      <div className="flex gap-x-4 mt-2 mx-auto h-fit overflow-x-scroll no-scrollbar">
         {data?.photos.map((photo: string, index: number) => (
-          <h1 key={index} className="text-3xl">
-            {photo}
-          </h1>
+          <button key={index} className="w-[150px] h-[75px] rounded-md ">
+            <Image
+              alt="Image of Home"
+              src={`https://jxvqpjydezilbytxarzd.supabase.co/storage/v1/object/public/images/${photo}`}
+              fill
+              className="rounded-md h-full object-cover w-full"
+            />
+          </button>
         ))}
       </div>
       <div className="flex flex-col gap-y-8 lg:flex-row justify-between gap-x-2 mt-5">
