@@ -8,8 +8,19 @@ const loading = () => {
         <Skeleton className="h-8 w-3/4 lg:w-1/3" />
         <Skeleton className="h-8 w-3/4 lg:w-1/3" />
       </div>
-
-      <Skeleton className="w-full h-[350px] lg:h-[550px] mt-5" />
+      <div className="flex gap-2 h-[550px] md:h-[450px]">
+        <Skeleton className="w:full lg:w-1/2 h-full" />
+        <div className="flex gap-2 w:full lg:w-1/2 h-full">
+          <div className="flex gap-2">
+            <Skeleton className="w-full h-[350px] lg:h-[550px] mt-5" />
+            <Skeleton className="w-full h-[350px] lg:h-[550px] mt-5" />
+          </div>
+          <div className="flex gap-2 w:full lg:w-1/2 h-full">
+            <Skeleton className="w-full h-[350px] lg:h-[550px] mt-5" />
+            <Skeleton className="w-full h-[350px] lg:h-[550px] mt-5" />
+          </div>
+        </div>
+      </div>
 
       <div className="mt-8 flex justify-between gap-x-24">
         <div className="w-2/3">
