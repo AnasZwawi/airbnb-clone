@@ -32,7 +32,7 @@ export function AddToFavoriteButton() {
     <>
       {pending ? (
         <Button
-          className="bg-primary-foreground"
+          className=""
           disabled
           variant={"outline"}
           size="icon"
@@ -43,7 +43,7 @@ export function AddToFavoriteButton() {
         <Button
           variant={"outline"}
           size="icon"
-          className="bg-primary-foreground"
+          className=""
           type="submit"
         >
           <Heart className="w-4 h-4" color="#dc2626" fill="#dc2626"/>
