@@ -32,7 +32,7 @@ export function AddToFavoriteButton() {
     <>
       {pending ? (
         <button
-          className="bg-opacity-0"
+          className="bg-opacity-0 p-2"
           disabled
           
           
@@ -41,9 +41,7 @@ export function AddToFavoriteButton() {
         </button>
       ) : (
         <button
-          
-       
-          className="bg-opacity-0"
+          className="bg-opacity-0 p-2"
           type="submit"
         >
           <Heart className="w-6 h-6" color="#FFF" fill="#dc2626"/>
@@ -59,7 +57,7 @@ export function DeleteFromFavoriteButton() {
     <>
       {pending ? (
         <button
-          className="bg-white bg-opacity-0"
+          className="bg-white bg-opacity-0 p-2"
           disabled
           
          
@@ -68,10 +66,8 @@ export function DeleteFromFavoriteButton() {
         </button>
       ) : (
         <button
-
-          
           type="submit"
-          className="bg-white bg-opacity-0"
+          className="bg-white bg-opacity-0 p-2"
         >
           <Heart
             className="w-6 h-6 text-white"
