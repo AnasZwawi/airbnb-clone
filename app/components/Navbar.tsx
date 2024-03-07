@@ -1,4 +1,3 @@
-'use client'
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -6,17 +5,11 @@ import DesktipLogo from "@/public/tuniloge.png";
 import MobileLogo from "@/public/tuniloge.png";
 import { UserNav } from "./UserNav";
 import { SearchComponent } from "./SearchComponent";
-import { useSearchParams, usePathname} from "next/navigation";
-
-import { cn } from "@/lib/utils";
 
 export const Navbar = () => {
-  
- /*  {pathname == path ? '"w-[85%]" : "container"}
-  `flex items-center justify-between mx-auto px-5 lg:px-10 py-3  ` */
   return (
     <nav className="w-full flex flex-col sm:block border-b sticky top-0 bg-white bg-opacity-90 backdrop-blur-md z-50">
-      <div className={cn("flex items-center justify-between mx-auto px-5 lg:px-10 py-3")}>
+      <div className="flex items-center justify-between container mx-auto px-5 lg:px-10 py-3">
         <Link href={"/"}>
           <Image
             src={DesktipLogo}
