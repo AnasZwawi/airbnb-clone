@@ -15,7 +15,7 @@ export const SelectCategory = () => {
             onClick={() => {
               setSelectedCategory(item.name);
             }}
-            className={selectedCategory === item.name ? "animate-ping border-primary" : ""}
+            className={selectedCategory === item.name ? "animate-[ping_1s_ease-in-out] border-primary" : ""}
           >
             <CardHeader>
               <Image
