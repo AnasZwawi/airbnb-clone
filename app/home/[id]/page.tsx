@@ -136,10 +136,10 @@ async function HomeId({ params }: { params: { id: string } }) {
               className="w-8 h-8 md:w-11 md:h-11 rounded-full"
             />
             <div className="flex flex-col ml-2 lg:ml-3">
-              <h3 className="font-medium leading-4 md:leading-tight text-[15px]">
+              <h3 className="font-medium text-[15px]">
                 Hosted by {data?.User?.firstname}
               </h3>
-              <p className="text-[13px] text-gray-700">
+              <p className="text-[13px] text-gray-800">
                 Hosted since{" "}
                 {formatter.format(
                   Date.parse(data?.createdAT as unknown as string)
@@ -152,7 +152,7 @@ async function HomeId({ params }: { params: { id: string } }) {
 
           <Separator className="my-7 bg-gray-800" />
 
-          <p className="text-gray-700">{data?.description}</p>
+          <p className="text-gray-800">{data?.description}</p>
 
           <Separator className="my-7 bg-gray-800" />
 
