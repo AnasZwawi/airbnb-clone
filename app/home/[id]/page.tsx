@@ -107,8 +107,8 @@ async function HomeId({ params }: { params: { id: string } }) {
           </div>
         </div>
       </div>
-      <div className="flex gap-2 rounded-lg">
-        <div className="relative flex flex-col items-center justify-center w-1/2 h-[350px] lg:h-[450px]">
+      <div className="flex gap-2 rounded-lg  h-[350px] lg:h-[450px]">
+        <div className="relative w-1/2 h-full">
           <Image
             alt="Image of Home"
             src={`https://jxvqpjydezilbytxarzd.supabase.co/storage/v1/object/public/images/${data?.photos[0]}`}
@@ -116,7 +116,7 @@ async function HomeId({ params }: { params: { id: string } }) {
             className="rounded-lg h-full object-cover w-full"
           />
         </div>
-        <div className="grid grid-cols-2 row-auto gap-2">
+        <div className="w-1/2 h-full grid grid-cols-2 row-auto gap-2">
           {data?.photos.slice(1, 5).map((photo: string, index: number) => (
             <div
               key={index}
