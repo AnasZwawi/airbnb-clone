@@ -7,7 +7,7 @@ import Image from "next/image";
 export const SelectCategory = () => {
   const [selectedCategory, setSelectedCategory] = useState<string | undefined>(undefined);
   return (
-    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-12 mt-10 w-[80%] lg:w-3/5 mx-auto mb-36">
+    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-9 mt-10 w-[80%] lg:w-3/5 mx-auto mb-36">
       <input type="hidden" name="category" value={selectedCategory as string} />
       {categoryItems.map((item) => (
         <div key={item.id} className="cursor-pointer">
@@ -15,7 +15,7 @@ export const SelectCategory = () => {
             onClick={() => {
               setSelectedCategory(item.name);
             }}
-            className={selectedCategory === item.name ? "border-primary" : ""}
+            className={selectedCategory === item.name ? "animate-ping border-primary" : ""}
           >
             <CardHeader>
               <Image
