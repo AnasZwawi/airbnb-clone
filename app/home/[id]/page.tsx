@@ -1,4 +1,3 @@
-"use client"
 import React, { useState } from "react";
 import prisma from "@/app/lib/db";
 import Image from "next/image";
@@ -51,8 +50,6 @@ async function getData(homeId: string) {
 
 async function HomeId({ params }: { params: { id: string } }) {
   const data = await getData(params.id);
-  const [startTime, setStartTime] = useState<number>();
-  const [endTime, setEndTime] = useState<number>();
   const { getCountryByValue } = useCountries();
   const country = getCountryByValue(data?.country as string);
 
@@ -68,8 +65,8 @@ async function HomeId({ params }: { params: { id: string } }) {
   const { getUser } = getKindeServerSession();
   const user = await getUser();
 
-  setStartTime(data?.createdAT.getTime() ?? new Date().getTime());
-  setEndTime(new Date().getTime());
+  let startTime = data?.createdAT.getTime() ?? new Date().getTime();
+  let endTime = new Date().getTime();
   
 
   return (
