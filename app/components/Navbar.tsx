@@ -1,3 +1,4 @@
+'use client'
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -6,14 +7,13 @@ import MobileLogo from "@/public/tuniloge.png";
 import { UserNav } from "./UserNav";
 import { SearchComponent } from "./SearchComponent";
 import { usePathname} from "next/navigation";
-import { useRouter } from "next/router";
+
 import { cn } from "@/lib/utils";
 
-export const Navbar = () => {
-  const router = useRouter();
-  const { id } = router.query;
+export const Navbar = ({ params }: { params: { id: string } }) => {
+  
   const pathname = usePathname();
-  const path = `/home/${id}`
+  const path = `/home/${params.id}`
  /*  {pathname == path ? '"w-[85%]" : "container"}
   `flex items-center justify-between mx-auto px-5 lg:px-10 py-3  ` */
   return (
