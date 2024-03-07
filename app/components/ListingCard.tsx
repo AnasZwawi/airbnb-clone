@@ -50,7 +50,7 @@ export const ListingCard = ({
           src={`https://jxvqpjydezilbytxarzd.supabase.co/storage/v1/object/public/images/${imagePath}`}
           alt="image of house"
           fill
-          className="rounded-lg h-full object-cover mb-3"
+          className="rounded-xl h-full object-cover mb-3"
         />
         {userId && (
           <div className="z-10 absolute top-2 right-2">
