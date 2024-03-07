@@ -147,7 +147,10 @@ async function HomeId({ params }: { params: { id: string } }) {
               {data?.bathrooms} Bathrooms
             </p>
           </div>
+          <p className="font-medium">
           {startTime !== undefined ? (Math.round((endTime as number - startTime as number)/(1000*3600*24)) <20 ? 'New' : '' ) : ''}
+          </p>
+          
           <Separator className="my-7" />
 
           <CategoryShowcase categoryName={data?.category as string} />
