@@ -12,7 +12,7 @@ import Link from "next/link";
 import { createReservation } from "@/app/actions";
 import { ReservationSubmit } from "@/app/components/SubmitButton";
 import { unstable_noStore as noStore } from "next/cache";
-import { Star } from "lucide-react";
+import { Dot, Star } from "lucide-react";
 
 async function getData(homeId: string) {
   noStore();
@@ -121,7 +121,7 @@ async function HomeId({ params }: { params: { id: string } }) {
         </div>
       </div>
 
-      <div className="flex flex-col gap-y-8 lg:flex-row justify-between gap-x-2 mt-5">
+      <div className="flex flex-col gap-y-8 lg:flex-row justify-between gap-x-2 mt-6">
         <div className="w-full lg:w-2/3 leading-none">
           <h3 className="font-semibold text-black text-xl tracking-tighter flex items-center gap-x-2">
             {country?.label}
@@ -129,13 +129,13 @@ async function HomeId({ params }: { params: { id: string } }) {
 
           <div className="w-full flex font-medium text-sm sm:mx-0 gap-x-2 items-center">
             <p className="">{data?.guests} Guests</p>
-            <p>.</p>
+            <Dot/>
             <p className="">{data?.bedrooms} Bedrooms</p>
-            <p>.</p>
+            <Dot/>
             <p className="">{data?.bathrooms} Bathrooms</p>
           </div>
-          <p className="font-medium">
-            <Star fill="black"/>
+          <p className="mt-1 font-medium flex items-center gap-x-1">
+            <Star fill="black" className="w-4 h-4"/>
             {startTime !== undefined
               ? Math.round(
                   (((endTime as number) - startTime) as number) /
