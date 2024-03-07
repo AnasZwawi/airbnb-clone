@@ -102,11 +102,21 @@ async function HomeId({ params }: { params: { id: string } }) {
           </div>
         </div>
       </div>
-      <div className="flex items-center" >
-        
+      <div className="flex items-center">
+        <div className="relative flex flex-col items-center justify-center w-[100%] h-[350px] lg:h-[550px]">
+          <Image
+            alt="Image of Home"
+            src={`https://jxvqpjydezilbytxarzd.supabase.co/storage/v1/object/public/images/${data?.photos[0]}`}
+            fill
+            className="rounded-lg h-full object-cover w-full"
+          />
+        </div>
         <div className="flex flex-col bottom-[20px] gap-y-3 my-auto h-fit w-fit overflow-x-scroll no-scrollbar scroll-smooth">
           {data?.photos.map((photo: string, index: number) => (
-            <div key={index} className="w-[100px] h-[61px] lg:w-[125px] lg:h-[75px]  rounded-md ">
+            <div
+              key={index}
+              className="w-[100px] h-[61px] lg:w-[125px] lg:h-[75px]  rounded-md "
+            >
               <Image
                 alt="Image of Home"
                 src={`https://jxvqpjydezilbytxarzd.supabase.co/storage/v1/object/public/images/${photo}`}
@@ -114,14 +124,6 @@ async function HomeId({ params }: { params: { id: string } }) {
               />
             </div>
           ))}
-        </div>
-        <div className="relative flex flex-col items-center justify-center h-[350px] lg:h-[550px]">
-          <Image
-            alt="Image of Home"
-            src={`https://jxvqpjydezilbytxarzd.supabase.co/storage/v1/object/public/images/${data?.photos[0]}`}
-            fill
-            className="rounded-lg h-full object-cover w-full"
-          />
         </div>
       </div>
 
