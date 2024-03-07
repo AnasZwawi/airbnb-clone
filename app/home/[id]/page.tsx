@@ -15,7 +15,7 @@ import { unstable_noStore as noStore } from "next/cache";
 
 async function getData(homeId: string) {
   noStore();
-  
+
   const data = await prisma.home.findUnique({
     where: {
       id: homeId,
@@ -67,7 +67,6 @@ async function HomeId({ params }: { params: { id: string } }) {
 
   let startTime = data?.createdAT.getTime() ?? new Date().getTime();
   let endTime = new Date().getTime();
-  
 
   return (
     <div className="w-[85%] max-w-[1320px] lg:w-[75%] mx-auto mt-5">
@@ -105,49 +104,46 @@ async function HomeId({ params }: { params: { id: string } }) {
             fill
             className="h-full object-cover w-full"
           />
-          <div className="absolute top-0 left-0 w-full h-full z-20 hover:bg-black hover:bg-opacity-20 "/>
+          <div className="absolute top-0 left-0 w-full h-full z-20 hover:bg-black hover:bg-opacity-20 " />
         </div>
         <div className="w:full lg:w-1/2 h-full grid grid-cols-2 grid-rows-2 row-auto gap-2">
           {data?.photos.slice(1, 5).map((photo: string, index: number) => (
-            <div
-              key={index}
-              className="relative w-full h-full cursor-pointer"
-            >
+            <div key={index} className="relative w-full h-full cursor-pointer">
               <Image
                 alt="Image of Home"
                 src={`https://jxvqpjydezilbytxarzd.supabase.co/storage/v1/object/public/images/${photo}`}
                 className="h-full object-cover w-full"
               />
-              <div className="absolute top-0 left-0 w-full h-full z-20 hover:bg-black hover:bg-opacity-20 "/>
+              <div className="absolute top-0 left-0 w-full h-full z-20 hover:bg-black hover:bg-opacity-20 " />
             </div>
           ))}
-          
         </div>
       </div>
 
       <div className="flex flex-col gap-y-8 lg:flex-row justify-between gap-x-2 mt-5">
-        <div className="w-full lg:w-2/3">
-          <h3 className="font-semibold text-black text-2xl flex items-center gap-x-2">
+        <div className="w-full lg:w-2/3 leading-none">
+          <h3 className="font-semibold text-black text-xl tracking-tighter flex items-center gap-x-2">
             {country?.label}
           </h3>
 
-          <div className="w-full flex font-medium sm:mx-0 mt-1 gap-x-2 items-center">
-            <p className="">
-              {data?.guests} Guests
-            </p>
+          <div className="w-full flex font-medium text-sm sm:mx-0 gap-x-2 items-center">
+            <p className="">{data?.guests} Guests</p>
             <p>.</p>
-            <p className="">
-              {data?.bedrooms} Bedrooms
-            </p>
+            <p className="">{data?.bedrooms} Bedrooms</p>
             <p>.</p>
-            <p className="">
-              {data?.bathrooms} Bathrooms
-            </p>
+            <p className="">{data?.bathrooms} Bathrooms</p>
           </div>
           <p className="font-medium">
-          {startTime !== undefined ? (Math.round((endTime as number - startTime as number)/(1000*3600*24)) <20 ? 'New' : '' ) : ''}
+            {startTime !== undefined
+              ? Math.round(
+                  (((endTime as number) - startTime) as number) /
+                    (1000 * 3600 * 24)
+                ) < 20
+                ? "New"
+                : ""
+              : ""}
           </p>
-          
+
           <Separator className="my-7" />
 
           <CategoryShowcase categoryName={data?.category as string} />
@@ -158,10 +154,11 @@ async function HomeId({ params }: { params: { id: string } }) {
 
           <Separator className="my-7" />
 
-          <h2 className="text-lg font-bold pt-4 pb-3">Where is the accommodation located</h2>
+          <h2 className="text-lg font-bold pt-4 pb-3">
+            Where is the accommodation located
+          </h2>
 
           <HomeMap locationValue={country?.value as string} />
-          
         </div>
         <form action={createReservation} className="flex flex-col items-center">
           <input type="hidden" name="userId" value={user?.id} />
