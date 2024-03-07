@@ -137,7 +137,7 @@ async function HomeId({ params }: { params: { id: string } }) {
 
       <div className="flex flex-col gap-y-8 lg:flex-row justify-between gap-x-2 mt-5">
         <div className="w-full lg:w-2/3">
-          <h3 className="font-bold text-xl flex text-black items-center gap-x-2">
+          <h3 className="font-semibold text-xl flex items-center gap-x-2">
             {country?.label}
           </h3>
 
