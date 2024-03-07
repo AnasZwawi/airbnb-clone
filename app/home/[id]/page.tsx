@@ -12,12 +12,7 @@ import Link from "next/link";
 import { createReservation } from "@/app/actions";
 import { ReservationSubmit } from "@/app/components/SubmitButton";
 import { unstable_noStore as noStore } from "next/cache";
-import { Gallery } from "react-gallery-grid";
-interface SizeType {
-  width: number;
-  height: number;
-  url: string;
-}
+
 async function getData(homeId: string) {
   noStore();
   const data = await prisma.home.findUnique({
@@ -137,7 +132,7 @@ async function HomeId({ params }: { params: { id: string } }) {
 
       <div className="flex flex-col gap-y-8 lg:flex-row justify-between gap-x-2 mt-5">
         <div className="w-full lg:w-2/3">
-          <h3 className="font-semibold text-xl flex items-center gap-x-2">
+          <h3 className="font-semibold text-accent text-xl flex items-center gap-x-2">
             {country?.label}
           </h3>
 
