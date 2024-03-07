@@ -102,7 +102,7 @@ async function HomeId({ params }: { params: { id: string } }) {
           </div>
         </div>
       </div>
-      <div >
+      <div className="flex items-center" >
         <div className="relative flex flex-col items-center justify-center h-[350px] lg:h-[550px]">
           <Image
             alt="Image of Home"
