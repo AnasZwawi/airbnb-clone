@@ -107,7 +107,7 @@ async function HomeId({ params }: { params: { id: string } }) {
           </div>
         </div>
       </div>
-      <div className="flex gap-2 rounded-lg  h-[350px] lg:h-[450px]">
+      <div className="flex gap-2 overflow-hidden rounded-lg  h-[350px] lg:h-[450px]">
         <div className="relative w-1/2 h-full">
           <Image
             alt="Image of Home"
