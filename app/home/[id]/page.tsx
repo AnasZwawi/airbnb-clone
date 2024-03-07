@@ -127,14 +127,14 @@ async function HomeId({ params }: { params: { id: string } }) {
             {country?.label}
           </h3>
 
-          <div className="w-full flex font-medium text-sm sm:mx-0 gap-x-2 items-center">
+          <div className="w-full flex font-medium text-sm sm:mx-0 gap-x-1 items-center">
             <p className="">{data?.guests} Guests</p>
             <Dot/>
             <p className="">{data?.bedrooms} Bedrooms</p>
             <Dot/>
             <p className="">{data?.bathrooms} Bathrooms</p>
           </div>
-          <p className="mt-1 font-medium flex items-center gap-x-1">
+          <p className="mt-1 font-semibold flex items-center gap-x-1">
             <Star fill="black" className="w-4 h-4"/>
             {startTime !== undefined
               ? Math.round(
