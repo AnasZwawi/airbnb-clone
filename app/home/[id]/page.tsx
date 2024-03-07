@@ -125,7 +125,7 @@ async function HomeId({ params }: { params: { id: string } }) {
               : ""}
           </p>
 
-          <Separator className="my-7 bg-gray-600" />
+          <Separator className="my-7 bg-gray-400" />
           <div className="flex items-center">
             <img
               src={
@@ -147,14 +147,12 @@ async function HomeId({ params }: { params: { id: string } }) {
               </p>
             </div>
           </div>
-          <Separator className="my-7 bg-gray-600" />
+          <Separator className="my-7 bg-gray-400" />
           <CategoryShowcase categoryName={data?.category as string} />
 
-          <Separator className="my-7 bg-gray-600" />
+          <Separator className="my-7 bg-gray-400" />
 
           <p className="text-gray-800">{data?.description}</p>
-
-          <Separator className="my-7 bg-gray-600" />
 
           <h2 className="text-lg font-bold pt-4 pb-3">
             Where is the accommodation located
