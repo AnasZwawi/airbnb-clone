@@ -102,7 +102,7 @@ async function HomeId({ params }: { params: { id: string } }) {
           </div>
         </div>
       </div>
-      <div className="flex-col lg:flex-row items-center">
+      <div className="flex flex-col lg:flex-row items-center">
         <div className="relative flex flex-col items-center justify-center w-[100%] h-[350px] lg:h-[550px]">
           <Image
             alt="Image of Home"
@@ -111,7 +111,7 @@ async function HomeId({ params }: { params: { id: string } }) {
             className="rounded-lg h-full object-cover w-full"
           />
         </div>
-        <div className="flex lg:flex-col flex-row lg:mx-2 gap-x-2 lg:gap-y-3 mx-auto lg:my-auto h-fit w-fit overflow-x-scroll no-scrollbar scroll-smooth">
+        <div className="flex lg:flex-col flex-row mt-1 lg:mx-2 gap-x-2 lg:gap-y-3 mx-auto lg:my-auto h-fit w-fit overflow-x-scroll no-scrollbar scroll-smooth">
           {data?.photos.map((photo: string, index: number) => (
             <div
               key={index}
