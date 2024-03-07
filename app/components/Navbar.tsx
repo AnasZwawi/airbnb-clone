@@ -6,14 +6,16 @@ import DesktipLogo from "@/public/tuniloge.png";
 import MobileLogo from "@/public/tuniloge.png";
 import { UserNav } from "./UserNav";
 import { SearchComponent } from "./SearchComponent";
-import { usePathname} from "next/navigation";
+import { useSearchParams, usePathname} from "next/navigation";
 
 import { cn } from "@/lib/utils";
 
-export const Navbar = ({ params }: { params: { id: string } }) => {
+export const Navbar = () => {
   
   const pathname = usePathname();
-  const path = `/home/${params.id}`
+  const search = useSearchParams()
+  const id = search.get("id")
+  const path = `/home/${id}`
  /*  {pathname == path ? '"w-[85%]" : "container"}
   `flex items-center justify-between mx-auto px-5 lg:px-10 py-3  ` */
   return (
