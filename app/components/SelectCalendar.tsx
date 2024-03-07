@@ -42,9 +42,11 @@ export const SelectCalendar = ({
         value={state[0].endDate.toISOString()}
       />
       <DateRange
+        months={2}
         date={new Date()}
         showDateDisplay={false}
         rangeColors={["#000"]}
+        color="blue"
         ranges={state}
         onChange={(item) => setState([item.selection] as any)}
         minDate={new Date()}
