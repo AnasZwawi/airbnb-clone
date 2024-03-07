@@ -111,7 +111,7 @@ async function HomeId({ params }: { params: { id: string } }) {
             className="rounded-lg h-full object-cover w-full"
           />
         </div>
-        <div className="flex flex-row lg:flex-col lg:mx-2 gap-x-2 lg:gap-y-3 sm:mx-auto lg:my-auto h-fit w-fit overflow-x-scroll no-scrollbar scroll-smooth">
+        <div className="flex lg:flex-col flex-row lg:mx-2 gap-x-2 lg:gap-y-3 mx-auto lg:my-auto h-fit w-fit overflow-x-scroll no-scrollbar scroll-smooth">
           {data?.photos.map((photo: string, index: number) => (
             <div
               key={index}
