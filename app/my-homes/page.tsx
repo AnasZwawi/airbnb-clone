@@ -51,7 +51,7 @@ async function MyHomes() {
           description="You can list one for free"
         />
       ) : (
-        <div className="grid lg:grid-cols-4 sm:grid-cols-2 md:grid-cols-3 gap-8 mt-8">
+        <div className="grid lg:grid-cols-4 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-8">
           {data.map((item) => (
             <ListingCard
               key={item.id}
