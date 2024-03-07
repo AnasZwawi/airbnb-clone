@@ -65,9 +65,9 @@ async function HomeId({ params }: { params: { id: string } }) {
   const user = await getUser();
 
   return (
-    <div className="w-[85%] max-w-[1320px] lg:w-[75%] mx-auto leading-tight mt-5">
+    <div className="w-[85%] max-w-[1320px] lg:w-[75%] mx-auto mt-5">
       <div className="flex flex-col lg:flex-row justify-between gap-y-4 lg:items-center mb-4">
-        <h1 className="font-semibold text-black text-3xl lg:text-2xl">
+        <h1 className="font-semibold text-black text-[32px] tracking-tight lg:text-2xl">
           {data?.title}
         </h1>
         <div className="flex items-center">
@@ -126,18 +126,20 @@ async function HomeId({ params }: { params: { id: string } }) {
             {country?.label}
           </h3>
 
-          <div className="w-fit flex mx-auto sm:mx-0 mt-3 gap-x-2 text-gray-600 items-center">
-            <p className="px-2 md:px-3 py-2 rounded-md border border-slate-400">
+          <div className="w-full flex sm:mx-0 mt-3 gap-x-2 text-gray-800 items-center">
+            <p className="">
               {data?.guests} Guests
             </p>
-            <p className="px-2 md:px-3 py-2 rounded-md border border-slate-400">
+            <p>.</p>
+            <p className="">
               {data?.bedrooms} Bedrooms
             </p>
-            <p className="px-2 md:px-3 py-2 rounded-md border border-slate-400">
+            <p>.</p>
+            <p className="">
               {data?.bathrooms} Bathrooms
             </p>
           </div>
-
+          <p>{data?.createdAT.getDay()}</p>
           <Separator className="my-7" />
 
           <CategoryShowcase categoryName={data?.category as string} />
