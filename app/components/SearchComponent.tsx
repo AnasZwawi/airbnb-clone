@@ -62,7 +62,7 @@ export const SearchComponent = () => {
               <p className="px-2 sm:px-4">Any Guests</p>
             </div>
 
-            <Search className="bg-slate-700 text-white p-1 h-8 w-8 rounded-full" />
+            <Search className="bg-primary text-white p-1 h-8 w-8 rounded-full" />
           </div>
         </DialogTrigger>
         <DialogContent className="rounded-lg sm:max-w-[425px]">
