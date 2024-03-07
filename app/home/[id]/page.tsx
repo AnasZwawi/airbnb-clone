@@ -116,11 +116,11 @@ async function HomeId({ params }: { params: { id: string } }) {
             className="rounded-lg h-full object-cover w-full"
           />
         </div>
-        <div className="grid grid-cols-2 row-auto gap-2 mt-1 lg:mx-2 gap-x-2 lg:gap-y-3 mx-auto lg:my-auto h-fit w-fit overflow-x-scroll no-scrollbar scroll-smooth">
+        <div className="grid grid-cols-2 row-auto gap-2">
           {data?.photos.slice(1, 5).map((photo: string, index: number) => (
             <div
               key={index}
-              className="w-[100px] h-[61px] lg:w-[125px] lg:h-[75px] rounded-md "
+              className="w-full h-full "
             >
               <Image
                 alt="Image of Home"
