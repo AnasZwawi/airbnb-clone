@@ -12,6 +12,7 @@ import Link from "next/link";
 import { createReservation } from "@/app/actions";
 import { ReservationSubmit } from "@/app/components/SubmitButton";
 import { unstable_noStore as noStore } from "next/cache";
+import { Star } from "lucide-react";
 
 async function getData(homeId: string) {
   noStore();
@@ -134,6 +135,7 @@ async function HomeId({ params }: { params: { id: string } }) {
             <p className="">{data?.bathrooms} Bathrooms</p>
           </div>
           <p className="font-medium">
+            <Star fill="black"/>
             {startTime !== undefined
               ? Math.round(
                   (((endTime as number) - startTime) as number) /
