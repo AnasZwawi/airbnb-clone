@@ -82,7 +82,7 @@ async function HomeId({ params }: { params: { id: string } }) {
   return (
     <div className="w-[85%] max-w-[1320px] lg:w-[75%] mx-auto mt-5">
       <div className="flex flex-col lg:flex-row justify-between gap-y-4 lg:items-center mb-5">
-        <h1 className="font-semibold text-3xl lg:text-3xl">
+        <h1 className="font-bold text-3xl lg:text-3xl">
           {data?.title}
         </h1>
         <div className="flex items-center">
