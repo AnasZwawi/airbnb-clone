@@ -82,7 +82,7 @@ async function HomeId({ params }: { params: { id: string } }) {
   return (
     <div className="w-[85%] max-w-[1320px] lg:w-[75%] mx-auto mt-5">
       <div className="flex flex-col lg:flex-row justify-between gap-y-4 lg:items-center mb-5">
-        <h1 className="font-medium text-3xl text-primary lg:text-3xl">
+        <h1 className="font-semibold text-3xl lg:text-3xl">
           {data?.title}
         </h1>
         <div className="flex items-center">
@@ -137,8 +137,8 @@ async function HomeId({ params }: { params: { id: string } }) {
 
       <div className="flex flex-col gap-y-8 lg:flex-row justify-between gap-x-2 mt-5">
         <div className="w-full lg:w-2/3">
-          <h3 className="font-medium text-xl flex items-center gap-x-2">
-            <p>{flagemojiToPNG(country?.flag as string)}</p> {country?.label}
+          <h3 className="font-semibold text-xl flex text-black items-center gap-x-2">
+            {country?.label}
           </h3>
 
           <div className="w-fit flex mx-auto sm:mx-0 mt-3 gap-x-2 text-gray-600 items-center">
