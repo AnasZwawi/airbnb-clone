@@ -115,6 +115,7 @@ async function HomeId({ params }: { params: { id: string } }) {
             fill
             className="h-full object-cover w-full"
           />
+          <div className="absolute top-0 left-0 w-full h-full z-20 hover:bg-black hover:bg-opacity-20 "/>
         </div>
         <div className="w-1/2 h-full grid grid-cols-2 grid-rows-2 row-auto gap-2">
           {data?.photos.slice(1, 5).map((photo: string, index: number) => (
@@ -127,7 +128,7 @@ async function HomeId({ params }: { params: { id: string } }) {
                 src={`https://jxvqpjydezilbytxarzd.supabase.co/storage/v1/object/public/images/${photo}`}
                 className="h-full object-cover w-full"
               />
-              <div className="absolute top-0 left-0 w-full h-full z-20 hover:bg-black hover:bg-opacity-35 "/>
+              <div className="absolute top-0 left-0 w-full h-full z-20 hover:bg-black hover:bg-opacity-20 "/>
             </div>
           ))}
           
