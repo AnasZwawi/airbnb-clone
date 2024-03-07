@@ -59,19 +59,19 @@ export function DeleteFromFavoriteButton() {
     <>
       {pending ? (
         <Button
-          className="bg-opacity-0"
+          className="bg-white bg-opacity-0"
           disabled
-          variant={"outline"}
+          
           size="icon"
         >
-          <Loader2 className="h-4 w-4 animate-spin text-primary" />
+          <Loader2 className="h-5 w-5 animate-spin text-primary" />
         </Button>
       ) : (
         <Button
-          variant={"outline"}
+          
           size="icon"
           type="submit"
-          className="bg-opacity-0"
+          className="bg-white bg-opacity-0 p-0"
         >
           <Heart
             className="w-4 h-4 text-white"
@@ -90,7 +90,7 @@ export function ReservationSubmit() {
     <>
       {pending ? (
         <Button className="w-full" disabled>
-          <Loader2 className="h-4 w-4 animate-spin mr-2" />
+          <Loader2 className="h-5 w-5 animate-spin mr-2" />
           Please wait...
         </Button>
       ) : (
