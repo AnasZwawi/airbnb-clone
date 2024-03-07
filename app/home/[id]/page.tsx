@@ -1,4 +1,5 @@
-import React from "react";
+"use client"
+import React, { useState } from "react";
 import prisma from "@/app/lib/db";
 import Image from "next/image";
 import { useCountries } from "@/app/lib/getCountries";
@@ -15,6 +16,7 @@ import { unstable_noStore as noStore } from "next/cache";
 
 async function getData(homeId: string) {
   noStore();
+  
   const data = await prisma.home.findUnique({
     where: {
       id: homeId,
@@ -49,6 +51,8 @@ async function getData(homeId: string) {
 
 async function HomeId({ params }: { params: { id: string } }) {
   const data = await getData(params.id);
+  const [startTime, setStartTime] = useState<number>();
+  const [endTime, setEndTime] = useState<number>();
   const { getCountryByValue } = useCountries();
   const country = getCountryByValue(data?.country as string);
 
@@ -63,6 +67,10 @@ async function HomeId({ params }: { params: { id: string } }) {
   // fetching the user id from kinde auth
   const { getUser } = getKindeServerSession();
   const user = await getUser();
+
+  setStartTime(data?.createdAT.getTime() ?? new Date().getTime());
+  setEndTime(new Date().getTime());
+  
 
   return (
     <div className="w-[85%] max-w-[1320px] lg:w-[75%] mx-auto mt-5">
@@ -122,11 +130,11 @@ async function HomeId({ params }: { params: { id: string } }) {
 
       <div className="flex flex-col gap-y-8 lg:flex-row justify-between gap-x-2 mt-5">
         <div className="w-full lg:w-2/3">
-          <h3 className="font-semibold text-black text-xl flex items-center gap-x-2">
+          <h3 className="font-semibold text-black text-2xl flex items-center gap-x-2">
             {country?.label}
           </h3>
 
-          <div className="w-full flex sm:mx-0 mt-3 gap-x-2  items-center">
+          <div className="w-full flex font-medium sm:mx-0 mt-1 gap-x-2 items-center">
             <p className="">
               {data?.guests} Guests
             </p>
@@ -139,7 +147,7 @@ async function HomeId({ params }: { params: { id: string } }) {
               {data?.bathrooms} Bathrooms
             </p>
           </div>
-          <p>{data?.createdAT.getDay()}</p>
+          {startTime !== undefined ? (Math.round((endTime as number - startTime as number)/(1000*3600*24)) <20 ? 'New' : '' ) : ''}
           <Separator className="my-7" />
 
           <CategoryShowcase categoryName={data?.category as string} />
