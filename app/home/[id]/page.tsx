@@ -126,7 +126,7 @@ async function HomeId({ params }: { params: { id: string } }) {
             {country?.label}
           </h3>
 
-          <div className="w-full flex sm:mx-0 mt-3 gap-x-2 text-gray-800 items-center">
+          <div className="w-full flex sm:mx-0 mt-3 gap-x-2  items-center">
             <p className="">
               {data?.guests} Guests
             </p>
