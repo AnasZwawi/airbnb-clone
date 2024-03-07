@@ -124,9 +124,8 @@ async function HomeId({ params }: { params: { id: string } }) {
             >
               <Image
                 alt="Image of Home"
-                fill
                 src={`https://jxvqpjydezilbytxarzd.supabase.co/storage/v1/object/public/images/${photo}`}
-                className="h-full w-full"
+                className="h-full object-cover w-full"
               />
             </div>
           ))}
