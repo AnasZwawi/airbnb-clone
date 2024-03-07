@@ -107,8 +107,8 @@ async function HomeId({ params }: { params: { id: string } }) {
           </div>
         </div>
       </div>
-      <div className="flex flex-col md:flex-row gap-2 overflow-hidden rounded-xl  h-[350px] lg:h-[450px]">
-        <div className="relative w-1/2 h-full cursor-pointer">
+      <div className="flex flex-col md:flex-row gap-2 overflow-hidden rounded-xl h-[650px] lg:h-[450px]">
+        <div className="relative w:full lg:w-1/2 h-full cursor-pointer">
           <Image
             alt="Image of Home"
             src={`https://jxvqpjydezilbytxarzd.supabase.co/storage/v1/object/public/images/${data?.photos[0]}`}
@@ -117,7 +117,7 @@ async function HomeId({ params }: { params: { id: string } }) {
           />
           <div className="absolute top-0 left-0 w-full h-full z-20 hover:bg-black hover:bg-opacity-20 "/>
         </div>
-        <div className="w-1/2 h-full grid grid-cols-2 grid-rows-2 row-auto gap-2">
+        <div className="w:full lg:w-1/2 h-full grid grid-cols-2 grid-rows-2 row-auto gap-2">
           {data?.photos.slice(1, 5).map((photo: string, index: number) => (
             <div
               key={index}
