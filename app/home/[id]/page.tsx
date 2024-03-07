@@ -102,26 +102,28 @@ async function HomeId({ params }: { params: { id: string } }) {
           </div>
         </div>
       </div>
+      <div className="relative">
+        <div className="relative flex flex-col items-center justify-center h-[350px] lg:h-[550px]">
+          <Image
+            alt="Image of Home"
+            src={`https://jxvqpjydezilbytxarzd.supabase.co/storage/v1/object/public/images/${data?.photos[0]}`}
+            fill
+            className="rounded-lg h-full object-cover w-full"
+          />
+        </div>
+        <div className="flex absolute bottom-[20px] gap-x-4 mx-auto h-fit w-fit overflow-x-scroll no-scrollbar scroll-smooth">
+          {data?.photos.map((photo: string, index: number) => (
+            <div key={index} className="w-[125px] h-[75px] rounded-md ">
+              <Image
+                alt="Image of Home"
+                src={`https://jxvqpjydezilbytxarzd.supabase.co/storage/v1/object/public/images/${photo}`}
+                className="rounded-md w-[150px] h-[75px]"
+              />
+            </div>
+          ))}
+        </div>
+      </div>
 
-      <div className="relative flex flex-col items-center justify-center h-[350px] lg:h-[550px]">
-        <Image
-          alt="Image of Home"
-          src={`https://jxvqpjydezilbytxarzd.supabase.co/storage/v1/object/public/images/${data?.photos[0]}`}
-          fill
-          className="rounded-lg h-full object-cover w-full"
-        />
-      </div>
-      <div className="flex gap-x-4 mt-2 mx-auto h-fit w-fit overflow-x-scroll no-scrollbar scroll-smooth">
-        {data?.photos.map((photo: string, index: number) => (
-          <div key={index} className="w-[125px] h-[75px] rounded-md ">
-            <Image
-              alt="Image of Home"
-              src={`https://jxvqpjydezilbytxarzd.supabase.co/storage/v1/object/public/images/${photo}`}
-              className="rounded-md w-[150px] h-[75px]"
-            />
-          </div>
-        ))}
-      </div>
       <div className="flex flex-col gap-y-8 lg:flex-row justify-between gap-x-2 mt-5">
         <div className="w-full lg:w-2/3">
           <h3 className="font-medium text-xl flex items-center gap-x-2">
