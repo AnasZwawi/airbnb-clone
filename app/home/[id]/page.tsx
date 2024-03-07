@@ -113,7 +113,7 @@ async function HomeId({ params }: { params: { id: string } }) {
             alt="Image of Home"
             src={`https://jxvqpjydezilbytxarzd.supabase.co/storage/v1/object/public/images/${data?.photos[0]}`}
             fill
-            className="rounded-lg h-full object-cover w-full"
+            className="h-full object-cover w-full"
           />
         </div>
         <div className="w-1/2 h-full grid grid-cols-2 row-auto gap-2">
@@ -125,7 +125,7 @@ async function HomeId({ params }: { params: { id: string } }) {
               <Image
                 alt="Image of Home"
                 src={`https://jxvqpjydezilbytxarzd.supabase.co/storage/v1/object/public/images/${photo}`}
-                className="rounded-md h-full w-full"
+                className="h-full w-full"
               />
             </div>
           ))}
