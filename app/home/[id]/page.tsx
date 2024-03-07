@@ -53,16 +53,6 @@ async function HomeId({ params }: { params: { id: string } }) {
   const country = getCountryByValue(data?.country as string);
 
   //Just some function to show flag as png
-  const flagemojiToPNG = (flag: string) => {
-    var countryCode = Array.from(flag, (codeUnit: any) =>
-      codeUnit.codePointAt()
-    )
-      .map((char) => String.fromCharCode(char - 127397).toLowerCase())
-      .join("");
-    return (
-      <img src={`https://flagcdn.com/24x18/${countryCode}.png`} alt="flag" />
-    );
-  };
 
   const formatter = new Intl.DateTimeFormat("en-GB", {
     year: "numeric",
@@ -75,9 +65,9 @@ async function HomeId({ params }: { params: { id: string } }) {
   const user = await getUser();
 
   return (
-    <div className="w-[85%] max-w-[1320px] lg:w-[75%] mx-auto mt-5">
-      <div className="flex flex-col lg:flex-row justify-between gap-y-4 lg:items-center mb-5">
-        <h1 className="font-bold text-3xl lg:text-2xl">
+    <div className="w-[85%] max-w-[1320px] lg:w-[75%] mx-auto leading-tight mt-5">
+      <div className="flex flex-col lg:flex-row justify-between gap-y-4 lg:items-center mb-4">
+        <h1 className="font-semibold text-black text-3xl lg:text-2xl">
           {data?.title}
         </h1>
         <div className="flex items-center">
