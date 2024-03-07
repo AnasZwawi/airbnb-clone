@@ -127,7 +127,7 @@ async function HomeId({ params }: { params: { id: string } }) {
                 src={`https://jxvqpjydezilbytxarzd.supabase.co/storage/v1/object/public/images/${photo}`}
                 className="h-full object-cover w-full"
               />
-              <div className="w-full h-full hover:bg-black bg:bg-opacity-35 "/>
+              <div className="w-full h-full z-20 hover:bg-black bg:bg-opacity-35 "/>
             </div>
           ))}
           
