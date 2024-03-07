@@ -34,19 +34,19 @@ export function AddToFavoriteButton() {
         <button
           className="bg-opacity-0"
           disabled
-          variant={"outline"}
-          size="icon"
+          
+          
         >
-          <Loader2 className="h-4 w-4 animate-spin text-primary" />
+          <Loader2 className="h-5 w-5 animate-spin text-primary" />
         </button>
       ) : (
         <button
-          variant={"outline"}
-          size="icon"
+          
+       
           className="bg-opacity-0"
           type="submit"
         >
-          <Heart className="w-4 h-4" color="#FFF" fill="#dc2626"/>
+          <Heart className="w-6 h-6" color="#FFF" fill="#dc2626"/>
         </button>
       )}
     </>
@@ -62,19 +62,19 @@ export function DeleteFromFavoriteButton() {
           className="bg-white bg-opacity-0"
           disabled
           
-          size="icon"
+         
         >
-          <Loader2 className="h-5 w-5 animate-spin text-primary" />
+          <Loader2 className="h-6 w-6 animate-spin text-primary" />
         </button>
       ) : (
         <button
 
-          size="icon"
+          
           type="submit"
           className="bg-white bg-opacity-0"
         >
           <Heart
-            className="w-4 h-4 text-white"
+            className="w-6 h-6 text-white"
             color="#FFF"
             fill="#00000054"
           />
