@@ -75,27 +75,6 @@ async function HomeId({ params }: { params: { id: string } }) {
         <h1 className="font-semibold text-black text-[32px] tracking-tight lg:text-2xl">
           {data?.title}
         </h1>
-        <div className="flex items-center">
-          <img
-            src={
-              data?.User?.profileImage ??
-              "https://cdn-icons-png.flaticon.com/512/149/149071.png"
-            }
-            alt="User Profile image"
-            className="w-8 h-8 md:w-11 md:h-11 rounded-full"
-          />
-          <div className="flex flex-col ml-2 lg:ml-3">
-            <h3 className="font-medium leading-4 md:leading-tight text-[15px]">
-              Hosted by {data?.User?.firstname}
-            </h3>
-            <p className="text-[13px] text-gray-600">
-              Hosted since{" "}
-              {formatter.format(
-                Date.parse(data?.createdAT as unknown as string)
-              )}
-            </p>
-          </div>
-        </div>
       </div>
       <div className="flex flex-col md:flex-row gap-y-2 lg:gap-2 overflow-hidden rounded-xl h-[550px] md:h-[450px]">
         <div className="relative w:full lg:w-1/2 h-full cursor-pointer">
@@ -127,15 +106,15 @@ async function HomeId({ params }: { params: { id: string } }) {
             {country?.label}
           </h3>
 
-          <div className="w-full flex font-medium text-sm sm:mx-0 gap-x-1 items-center">
+          <div className="w-full flex font-medium text-sm sm:mx-0 items-center">
             <p className="">{data?.guests} Guests</p>
-            <Dot/>
+            <Dot />
             <p className="">{data?.bedrooms} Bedrooms</p>
-            <Dot/>
+            <Dot />
             <p className="">{data?.bathrooms} Bathrooms</p>
           </div>
           <p className="mt-1 font-semibold flex items-center gap-x-1">
-            <Star fill="black" className="w-4 h-4"/>
+            <Star fill="black" className="w-4 h-4" />
             {startTime !== undefined
               ? Math.round(
                   (((endTime as number) - startTime) as number) /
@@ -146,15 +125,36 @@ async function HomeId({ params }: { params: { id: string } }) {
               : ""}
           </p>
 
-          <Separator className="my-7" />
-
+          <Separator className="my-7 text-gray-800" />
+          <div className="flex items-center">
+            <img
+              src={
+                data?.User?.profileImage ??
+                "https://cdn-icons-png.flaticon.com/512/149/149071.png"
+              }
+              alt="User Profile image"
+              className="w-8 h-8 md:w-11 md:h-11 rounded-full"
+            />
+            <div className="flex flex-col ml-2 lg:ml-3">
+              <h3 className="font-medium leading-4 md:leading-tight text-[15px]">
+                Hosted by {data?.User?.firstname}
+              </h3>
+              <p className="text-[13px] text-gray-700">
+                Hosted since{" "}
+                {formatter.format(
+                  Date.parse(data?.createdAT as unknown as string)
+                )}
+              </p>
+            </div>
+          </div>
+          <Separator className="my-7 text-gray-800" />
           <CategoryShowcase categoryName={data?.category as string} />
 
-          <Separator className="my-7" />
+          <Separator className="my-7 text-gray-800" />
 
-          <p className="text-gray-600">{data?.description}</p>
+          <p className="text-gray-700">{data?.description}</p>
 
-          <Separator className="my-7" />
+          <Separator className="my-7 text-gray-800" />
 
           <h2 className="text-lg font-bold pt-4 pb-3">
             Where is the accommodation located
