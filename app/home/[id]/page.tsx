@@ -120,14 +120,14 @@ async function HomeId({ params }: { params: { id: string } }) {
           {data?.photos.slice(1, 5).map((photo: string, index: number) => (
             <div
               key={index}
-              className="w-full h-full "
+              className="relative w-full h-full "
             >
               <Image
                 alt="Image of Home"
                 src={`https://jxvqpjydezilbytxarzd.supabase.co/storage/v1/object/public/images/${photo}`}
                 className="h-full object-cover w-full"
               />
-              <div className="w-full h-full z-20 hover:bg-black bg:bg-opacity-35 "/>
+              <div className="absolute top-0 left-0 w-full h-full z-20 hover:bg-black bg:bg-opacity-35 "/>
             </div>
           ))}
           
