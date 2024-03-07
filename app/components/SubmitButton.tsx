@@ -46,7 +46,7 @@ export function AddToFavoriteButton() {
           className="bg-primary-foreground"
           type="submit"
         >
-          <Heart className="w-4 h-4" color="#30363d" />
+          <Heart className="w-4 h-4" color="#dc2626" fill="#dc2626"/>
         </Button>
       )}
     </>
@@ -59,7 +59,7 @@ export function DeleteFromFavoriteButton() {
     <>
       {pending ? (
         <Button
-          className="bg-primary-foreground"
+          className=""
           disabled
           variant={"outline"}
           size="icon"
@@ -70,13 +70,12 @@ export function DeleteFromFavoriteButton() {
         <Button
           variant={"outline"}
           size="icon"
-          className="bg-primary-foreground"
           type="submit"
         >
           <Heart
             className="w-4 h-4 text-primary"
-            color="#30363d"
-            fill="#30363d"
+            color="#dc2626"
+            fill="#dc2626"
           />
         </Button>
       )}
