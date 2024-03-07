@@ -78,15 +78,6 @@ async function HomeId({ params }: { params: { id: string } }) {
   // fetching the user id from kinde auth
   const { getUser } = getKindeServerSession();
   const user = await getUser();
-  const images: SizeType[] = [];
-
-  data?.photos.map((photo: string, index: number) => {
-    images[
-      index
-    ].url = `https://jxvqpjydezilbytxarzd.supabase.co/storage/v1/object/public/images/${photo}`;
-    images[index].width = 500;
-    images[index].height = 300;
-  });
 
   return (
     <div className="w-[85%] lg:w-[75%] mx-auto mt-10">
@@ -117,7 +108,7 @@ async function HomeId({ params }: { params: { id: string } }) {
         </div>
       </div>
       <div className="flex flex-col lg:flex-row items-center">
-        <div className="relative flex flex-col items-center justify-center w-1/2 h-[350px] lg:h-[550px]">
+        <div className="relative flex flex-col items-center justify-center w-1/2 h-[350px] lg:h-[450px]">
           <Image
             alt="Image of Home"
             src={`https://jxvqpjydezilbytxarzd.supabase.co/storage/v1/object/public/images/${data?.photos[0]}`}
@@ -126,19 +117,10 @@ async function HomeId({ params }: { params: { id: string } }) {
           />
         </div>
         <div className="flex lg:flex-col flex-row mt-1 lg:mx-2 gap-x-2 lg:gap-y-3 mx-auto lg:my-auto h-fit w-fit overflow-x-scroll no-scrollbar scroll-smooth">
-          <Gallery
-            items={images}
-            itemRenderer={({ item, size }) => (
-              <img src={item.url} width={size.width} height={size.height} />
-            )}
-            rowHeightRange={{ min: 200, max: 350 }}
-            gap={8}
-            preserveAspectRatio={true}
-          />
-          {/* {data?.photos.map((photo: string, index: number) => (
+          {data?.photos.slice(0, 5).map((photo: string, index: number) => (
             <div
               key={index}
-              className="w-[100px] h-[61px] lg:w-[125px] lg:h-[75px]  rounded-md "
+              className="w-[100px] h-[61px] lg:w-[125px] lg:h-[75px] rounded-md "
             >
               <Image
                 alt="Image of Home"
@@ -146,7 +128,7 @@ async function HomeId({ params }: { params: { id: string } }) {
                 className="rounded-md h-full w-full"
               />
             </div>
-          ))} */}
+          ))}
         </div>
       </div>
 
