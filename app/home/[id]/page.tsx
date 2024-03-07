@@ -164,9 +164,8 @@ async function HomeId({ params }: { params: { id: string } }) {
           <Separator className="my-7" />
 
           <h2 className="text-lg pt-4 pb-3">Where is the accommodation located</h2>
-          <div className="max-h-[500px]">
-            <HomeMap locationValue={country?.value as string} />
-          </div>
+
+          <HomeMap locationValue={country?.value as string} />
           
         </div>
         <form action={createReservation} className="flex flex-col items-center">

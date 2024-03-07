@@ -17,7 +17,7 @@ function Map({ locationValue }: { locationValue: string }) {
   return (
     <MapContainer
       scrollWheelZoom={false}
-      className="rounded-lg h-[50vh] relative z-0"
+      className="rounded-lg h-[50vh] max-h-[500px] relative z-0"
       center={latlang ?? [52.505, -0.09]}
       zoom={8}
     >
