@@ -26,10 +26,14 @@ export const SubmitButton = ({
   );
 };
 
-export function AddToFavoriteButton() {
+interface P{
+  classn?: string;
+}
+
+export const AddToFavoriteButton:React.FC<P> = ({classn = 'w-6 h-6'}) => {
   const { pending } = useFormStatus();
   return (
-    <>
+    <>  
       {pending ? (
         <button
           className="bg-opacity-0 p-2"
@@ -44,14 +48,14 @@ export function AddToFavoriteButton() {
           className="bg-opacity-0 p-2"
           type="submit"
         >
-          <Heart className="w-6 h-6" color="#FFF" fill="#dc2626"/>
+          <Heart className={classn} color="#FFF" fill="#dc2626"/>
         </button>
       )}
     </>
   );
 }
 
-export function DeleteFromFavoriteButton() {
+export const DeleteFromFavoriteButton = ({classn = 'w-6 h-6'}) => {
   const { pending } = useFormStatus();
   return (
     <>
@@ -59,7 +63,6 @@ export function DeleteFromFavoriteButton() {
         <button
           className="bg-white bg-opacity-0 p-2"
           disabled
-          
          
         >
           <Loader2 className="h-6 w-6 animate-spin text-primary" />
@@ -70,7 +73,7 @@ export function DeleteFromFavoriteButton() {
           className="bg-white bg-opacity-0 p-2"
         >
           <Heart
-            className="w-6 h-6 text-white"
+            className={classn+ "text-white"}
             color="#FFF"
             fill="#00000054"
           />

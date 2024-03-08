@@ -70,7 +70,7 @@ export const ListingCard = ({
           {description}
         </p>
 
-        <p className="pt-[6px] text-black text-[15px] font-medium tracking-tighter">
+        <p className="pt-[6px] text-black text-[15px] font-m tracking-tighter">
           <span className="font-semibold">${price}</span> per night
         </p>
       </Link>

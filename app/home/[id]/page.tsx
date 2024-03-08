@@ -114,7 +114,7 @@ async function HomeId({ params }: { params: { id: string } }) {
         </h1>
         <div>
           <>
-            {user.id &&
+            {user.id &&  (    
               (homeData?.Favorite.length as number > 0 ? (
                 <form action={deleteFromFavorite}>
                   <input
@@ -128,7 +128,7 @@ async function HomeId({ params }: { params: { id: string } }) {
                     name="pathName"
                     value={"/home/" + params.id as string}
                   />
-                  <DeleteFromFavoriteButton />
+                  <DeleteFromFavoriteButton classn="w-4 h-4"/>
                 </form>
               ) : (
                 <form action={addToFavorite}>
@@ -139,11 +139,11 @@ async function HomeId({ params }: { params: { id: string } }) {
                     name="pathName"
                     value={"/home/" + params.id}
                   />
-                  <AddToFavoriteButton />
+                  <AddToFavoriteButton classn="h-4 w-4"/>
                 </form>
-              ))}
+              )))}
           </>
-          <p>Save</p>
+          <p className="font-medium text-md">Save</p>
         </div>
       </div>
       <div className="flex flex-col md:flex-row gap-y-2 lg:gap-2 overflow-hidden rounded-xl h-[550px] md:h-[450px]">
