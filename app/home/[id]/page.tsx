@@ -188,7 +188,7 @@ async function HomeId({ params }: { params: { id: string } }) {
               alt="User Profile image"
               className="w-8 h-8 md:w-11 md:h-11 rounded-full"
             />
-            <div className="flex flex-col ml-2 lg:ml-3">
+            <div className="flex flex-col ml-2 lg:ml-3 leading-snug">
               <h3 className="font-medium text-[15px]">
                 Hosted by {data?.User?.firstname}
               </h3>
