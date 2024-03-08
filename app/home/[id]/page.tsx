@@ -23,14 +23,11 @@ import { unstable_noStore as noStore } from "next/cache";
 import { Dot, Star } from "lucide-react";
 import { redirect } from "next/navigation";
 
-async function getUserData(userId: string) {
-  noStore();
-  const userData = await prisma.home.findMany({
+async function getHome(userId: string, homeId: string) {
+  noStore()
+  const data = await prisma.home.findUnique({
     where: {
-      userId: userId,
-      addedCategory: true,
-      addedDescription: true,
-      addedLocation: true,
+      id: homeId,
     },
     select: {
       id: true,
@@ -44,11 +41,8 @@ async function getUserData(userId: string) {
         },
       },
     },
-    orderBy: {
-      createdAT: "desc",
-    },
   });
-  return userData;
+  return data;
 }
 
 async function getData(homeId: string) {
@@ -107,7 +101,7 @@ async function HomeId({ params }: { params: { id: string } }) {
   if (!user) {
     return redirect("/");
   }
-  const userData = await getUserData(user.id);
+  const homeData = await getHome(user.id,params.id)
 
   let startTime = data?.createdAT.getTime() ?? new Date().getTime();
   let endTime = new Date().getTime();
@@ -121,12 +115,12 @@ async function HomeId({ params }: { params: { id: string } }) {
         <div>
           <>
             {user.id &&
-              (userData[0]?.Favorite ? (
+              (homeData?.Favorite.length as number > 0 ? (
                 <form action={deleteFromFavorite}>
                   <input
                     type="hidden"
                     name="favoriteId"
-                    value={userData[0].Favorite[0].id as string}
+                    value={homeData?.Favorite[0].id as string}
                   />
                   <input type="hidden" name="userId" value={user.id as string} />
                   <input
@@ -139,11 +133,11 @@ async function HomeId({ params }: { params: { id: string } }) {
               ) : (
                 <form action={addToFavorite}>
                   <input type="hidden" name="homeId" value={params.id as string} />
-                  <input type="hidden" name="userId" value={user.id as string} />
+                  <input type="hidden" name="userId" value={user.id } />
                   <input
                     type="hidden"
                     name="pathName"
-                    value={"/home/" + params.id as string}
+                    value={"/home/" + params.id}
                   />
                   <AddToFavoriteButton />
                 </form>
