@@ -226,8 +226,8 @@ async function HomeId({ params }: { params: { id: string } }) {
 
           <Separator className="my-7" />
 
-          <h2 className="text-lg font-bold pt-4 pb-3">
-            Where is the accommodation located
+          <h2 className="font-semibold text-black text-2xl tracking-tighter py-4">
+            font-semibold text-black text-2xl tracking-tighter
           </h2>
 
           <HomeMap locationValue={country?.value as string} />
