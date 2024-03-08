@@ -9,10 +9,39 @@ import { SelectCalendar } from "@/app/components/SelectCalendar";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { createReservation } from "@/app/actions";
-import { ReservationSubmit } from "@/app/components/SubmitButton";
+import { addToFavorite, createReservation, deleteFromFavorite } from "@/app/actions";
+import { AddToFavoriteButton, DeleteFromFavoriteButton, ReservationSubmit } from "@/app/components/SubmitButton";
 import { unstable_noStore as noStore } from "next/cache";
 import { Dot, Star } from "lucide-react";
+import { redirect } from "next/navigation";
+
+async function getUserData(userId: string) {
+  noStore()
+  const userData = await prisma.home.findMany({
+    where: {
+      userId: userId,
+      addedCategory: true,
+      addedDescription: true,
+      addedLocation: true,
+    },
+    select: {
+      id: true,
+      country: true,
+      photos: true,
+      description: true,
+      price: true,
+      Favorite: {
+        where: {
+          userId: userId,
+        },
+      },
+    },
+    orderBy: {
+      createdAT: "desc",
+    },
+  });
+  return userData;
+}
 
 async function getData(homeId: string) {
   noStore();
@@ -22,6 +51,7 @@ async function getData(homeId: string) {
       id: homeId,
     },
     select: {
+      Favorite: true,
       photos: true,
       description: true,
       guests: true,
@@ -36,6 +66,7 @@ async function getData(homeId: string) {
         select: {
           profileImage: true,
           firstname: true,
+          id: true
         },
       },
       Reservation: {
@@ -65,6 +96,11 @@ async function HomeId({ params }: { params: { id: string } }) {
   // fetching the user id from kinde auth
   const { getUser } = getKindeServerSession();
   const user = await getUser();
+  if (!user) {
+    return redirect("/");
+  }
+  const userData = await getUserData(user.id);
+  
 
   let startTime = data?.createdAT.getTime() ?? new Date().getTime();
   let endTime = new Date().getTime();
@@ -75,6 +111,23 @@ async function HomeId({ params }: { params: { id: string } }) {
         <h1 className="font-semibold text-black text-[32px] tracking-tight lg:text-2xl">
           {data?.title}
         </h1>
+        <div>
+          {data?.Favorite ? (
+              <form action={deleteFromFavorite}>
+                <input type="hidden" name="favoriteId" value={data?.Favorite[0].id}/>
+                <input type="hidden" name="userId" value={user.id}/>
+                <input type="hidden" name="pathName" value={'/home/'+params.id}/>
+                <DeleteFromFavoriteButton/>
+              </form>
+            ):(
+              <form action={addToFavorite}>
+                <input type="hidden" name="homeId" value={params.id}/>
+                <input type="hidden" name="userId" value={user.id}/>
+                <input type="hidden" name="pathName" value={'/home/'+params.id}/>
+                <AddToFavoriteButton />
+              </form>
+            )}
+        </div>
       </div>
       <div className="flex flex-col md:flex-row gap-y-2 lg:gap-2 overflow-hidden rounded-xl h-[550px] md:h-[450px]">
         <div className="relative w:full lg:w-1/2 h-full cursor-pointer">
