@@ -112,7 +112,7 @@ async function HomeId({ params }: { params: { id: string } }) {
         <h1 className="font-semibold text-black text-[32px] tracking-tight lg:text-2xl">
           {data?.title}
         </h1>
-        <div>
+        <div className="flex items-center">
           <>
             {user.id &&  (    
               (homeData?.Favorite.length as number > 0 ? (
@@ -128,7 +128,7 @@ async function HomeId({ params }: { params: { id: string } }) {
                     name="pathName"
                     value={"/home/" + params.id as string}
                   />
-                  <DeleteFromFavoriteButton classn="w-4 h-4"/>
+                  <DeleteFromFavoriteButton classn="w-5 h-5"/>
                 </form>
               ) : (
                 <form action={addToFavorite}>
@@ -139,7 +139,7 @@ async function HomeId({ params }: { params: { id: string } }) {
                     name="pathName"
                     value={"/home/" + params.id}
                   />
-                  <AddToFavoriteButton classn="h-4 w-4"/>
+                  <AddToFavoriteButton classn="h-5 w-5"/>
                 </form>
               )))}
           </>
@@ -172,7 +172,7 @@ async function HomeId({ params }: { params: { id: string } }) {
 
       <div className="flex flex-col gap-y-8 lg:flex-row justify-between gap-x-2 mt-6">
         <div className="w-full lg:w-2/3 leading-none">
-          <h3 className="font-semibold text-black text-xl tracking-tighter flex items-center gap-x-2">
+          <h3 className="font-semibold text-black text-2xl tracking-tighter flex items-center gap-x-2">
             {country?.label}
           </h3>
 
