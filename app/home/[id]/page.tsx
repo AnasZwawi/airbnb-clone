@@ -20,7 +20,7 @@ import {
   ReservationSubmit,
 } from "@/app/components/SubmitButton";
 import { unstable_noStore as noStore } from "next/cache";
-import { Dot, Star } from "lucide-react";
+import { Dot, Images, Star } from "lucide-react";
 import { redirect } from "next/navigation";
 
 async function getHome(userId: string, homeId: string) {
@@ -146,7 +146,7 @@ async function HomeId({ params }: { params: { id: string } }) {
           <p className="font-medium text-md">Save</p>
         </div>
       </div>
-      <div className="flex flex-col md:flex-row gap-y-2 lg:gap-2 overflow-hidden rounded-xl h-[550px] md:h-[450px]">
+      <div className="relative flex flex-col md:flex-row gap-y-2 lg:gap-2 overflow-hidden rounded-xl h-[550px] md:h-[450px]">
         <div className="relative w:full lg:w-1/2 h-full cursor-pointer">
           <Image
             alt="Image of Home"
@@ -167,6 +167,10 @@ async function HomeId({ params }: { params: { id: string } }) {
               <div className="absolute top-0 left-0 w-full h-full z-20 hover:bg-black hover:bg-opacity-20 " />
             </div>
           ))}
+        </div>
+        <div className="absolute right-5 bottom-5 flex items-center gap-x-1 px-2 py-1 bg-white border border-1 rounded-md">
+          <Images/>
+          <p>Show all photos</p>
         </div>
       </div>
 
@@ -227,7 +231,7 @@ async function HomeId({ params }: { params: { id: string } }) {
           <Separator className="my-7" />
 
           <h2 className="font-semibold text-black text-2xl tracking-tighter py-4">
-            font-semibold text-black text-2xl tracking-tighter
+            Where you’ll be
           </h2>
 
           <HomeMap locationValue={country?.value as string} />
