@@ -9,14 +9,22 @@ import { SelectCalendar } from "@/app/components/SelectCalendar";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { addToFavorite, createReservation, deleteFromFavorite } from "@/app/actions";
-import { AddToFavoriteButton, DeleteFromFavoriteButton, ReservationSubmit } from "@/app/components/SubmitButton";
+import {
+  addToFavorite,
+  createReservation,
+  deleteFromFavorite,
+} from "@/app/actions";
+import {
+  AddToFavoriteButton,
+  DeleteFromFavoriteButton,
+  ReservationSubmit,
+} from "@/app/components/SubmitButton";
 import { unstable_noStore as noStore } from "next/cache";
 import { Dot, Star } from "lucide-react";
 import { redirect } from "next/navigation";
 
 async function getUserData(userId: string) {
-  noStore()
+  noStore();
   const userData = await prisma.home.findMany({
     where: {
       userId: userId,
@@ -66,7 +74,7 @@ async function getData(homeId: string) {
         select: {
           profileImage: true,
           firstname: true,
-          id: true
+          id: true,
         },
       },
       Reservation: {
@@ -100,7 +108,6 @@ async function HomeId({ params }: { params: { id: string } }) {
     return redirect("/");
   }
   const userData = await getUserData(user.id);
-  
 
   let startTime = data?.createdAT.getTime() ?? new Date().getTime();
   let endTime = new Date().getTime();
@@ -113,23 +120,36 @@ async function HomeId({ params }: { params: { id: string } }) {
         </h1>
         <div>
           <>
-          {data?.Favorite ? (
-              <form action={deleteFromFavorite}>
-                <input type="hidden" name="favoriteId" value={userData[0].Favorite[0].id}/>
-                <input type="hidden" name="userId" value={user.id}/>
-                <input type="hidden" name="pathName" value={'/home/'+params.id}/>
-                <DeleteFromFavoriteButton/>
-              </form>
-            ):(
-              <form action={addToFavorite}>
-                <input type="hidden" name="homeId" value={params.id}/>
-                <input type="hidden" name="userId" value={user.id}/>
-                <input type="hidden" name="pathName" value={'/home/'+params.id}/>
-                <AddToFavoriteButton />
-              </form>
-            )}
-            </>
-            <p>Save</p>
+            {user.id &&
+              (userData[0]?.Favorite ? (
+                <form action={deleteFromFavorite}>
+                  <input
+                    type="hidden"
+                    name="favoriteId"
+                    value={userData[0].Favorite[0].id as string}
+                  />
+                  <input type="hidden" name="userId" value={user.id as string} />
+                  <input
+                    type="hidden"
+                    name="pathName"
+                    value={"/home/" + params.id as string}
+                  />
+                  <DeleteFromFavoriteButton />
+                </form>
+              ) : (
+                <form action={addToFavorite}>
+                  <input type="hidden" name="homeId" value={params.id as string} />
+                  <input type="hidden" name="userId" value={user.id as string} />
+                  <input
+                    type="hidden"
+                    name="pathName"
+                    value={"/home/" + params.id as string}
+                  />
+                  <AddToFavoriteButton />
+                </form>
+              ))}
+          </>
+          <p>Save</p>
         </div>
       </div>
       <div className="flex flex-col md:flex-row gap-y-2 lg:gap-2 overflow-hidden rounded-xl h-[550px] md:h-[450px]">
@@ -210,7 +230,7 @@ async function HomeId({ params }: { params: { id: string } }) {
 
           <p className="text-gray-800">{data?.description}</p>
 
-          <Separator className="my-7"/>
+          <Separator className="my-7" />
 
           <h2 className="text-lg font-bold pt-4 pb-3">
             Where is the accommodation located
