@@ -143,7 +143,7 @@ async function HomeId({ params }: { params: { id: string } }) {
                 </form>
               )))}
           </>
-          <p className="font-semibold text-sm tracking-tighter underline-offset-1">Save</p>
+          <p className="font-semibold text-md tracking-tighter underline">Save</p>
         </div>
       </div>
       <div className="relative flex flex-col md:flex-row gap-y-2 lg:gap-2 overflow-hidden rounded-xl h-[550px] md:h-[450px]">
