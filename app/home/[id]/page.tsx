@@ -112,9 +112,10 @@ async function HomeId({ params }: { params: { id: string } }) {
           {data?.title}
         </h1>
         <div>
+          <>
           {data?.Favorite ? (
               <form action={deleteFromFavorite}>
-                <input type="hidden" name="favoriteId" value={data?.Favorite[0].id}/>
+                <input type="hidden" name="favoriteId" value={userData[0].Favorite[0].id}/>
                 <input type="hidden" name="userId" value={user.id}/>
                 <input type="hidden" name="pathName" value={'/home/'+params.id}/>
                 <DeleteFromFavoriteButton/>
@@ -127,6 +128,8 @@ async function HomeId({ params }: { params: { id: string } }) {
                 <AddToFavoriteButton />
               </form>
             )}
+            </>
+            <p>Save</p>
         </div>
       </div>
       <div className="flex flex-col md:flex-row gap-y-2 lg:gap-2 overflow-hidden rounded-xl h-[550px] md:h-[450px]">
