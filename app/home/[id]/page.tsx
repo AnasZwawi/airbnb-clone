@@ -48,7 +48,8 @@ async function HomeId({ params }: { params: { id: string } }) {
         const data = await res.json();
         setHome(data);
       };
-  
+      console.log("from: getHome"+data)
+      console.log("from: getHome"+homeData)
       getHome();
     }
     
@@ -61,7 +62,8 @@ async function HomeId({ params }: { params: { id: string } }) {
         const data = await res.json();
         setData(data);
       };
-  
+      console.log("from: getData"+data)
+      console.log("from: getData"+homeData)
       getData();
     }
     
@@ -81,8 +83,7 @@ async function HomeId({ params }: { params: { id: string } }) {
   
   let startTime = data?.createdAT.getTime() ?? new Date().getTime();
   let endTime = new Date().getTime(); */
-  console.log(data)
-  console.log(homeData)
+
   return (
     <div className="w-[85%] max-w-[1320px] lg:w-[75%] mx-auto mt-5">
       <div className="flex flex-col lg:flex-row justify-between gap-y-4 lg:items-center mb-4">
