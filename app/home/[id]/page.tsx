@@ -54,7 +54,7 @@ async function HomeId({ params }: { params: { id: string } }) {
 
   useEffect(() => {
     const getData = async () => {
-      const res = await fetch("/api/getHome");
+      const res = await fetch("/api/getData");
       const data = await res.json();
       setData(data);
     };
