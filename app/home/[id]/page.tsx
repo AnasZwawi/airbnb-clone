@@ -42,30 +42,48 @@ async function HomeId({ params }: { params: { id: string } }) {
   }, []);
   
   useEffect(() => {
-    if(user && params.id){
-      const getHome = async () => {
-        const res = await fetch("../../api/getHome?"+ new URLSearchParams({userId: user.id, homeId: params.id}));
-        const data = await res.json();
-        setHome(data.data);
-      };
-      console.log("from: getHome")
-      getHome();
-    }
+    useEffect(() => {
+      if (user && params.id) {
+        const getHome = async () => {
+          try {
+            const res = await fetch(`/api/getHome?${new URLSearchParams({ userId: user.id, homeId: params.id })}`);
+            if (!res.ok) {
+              throw new Error('Failed to fetch home data');
+            }
+            const data = await res.json();
+            setHome(data.data);
+          } catch (error) {
+            console.error('Error fetching home data:', error);
+          }
+        };
+        console.log("from: getHome")
+        getHome();
+      }
+    }, [user, params.id]);
     
-  }, [user, params.id]);
+  }, []);
 
   useEffect(() => {
-    if(params.id){
-      const getData = async () => {
-        const res = await fetch("../../api/getData?"+ new URLSearchParams({homeId: params.id}));
-        const data = await res.json();
-        setData(data.data);
-      };
-      console.log("from: getData"+data.data)
-      getData();
-    }
     
-  }, [params.id]);
+    useEffect(() => {
+      if (user && params.id) {
+        const getData = async () => {
+          try {
+            const res = await fetch(`/api/getHome?${new URLSearchParams({ homeId: params.id })}`);
+            if (!res.ok) {
+              throw new Error('Failed to fetch home data');
+            }
+            const data = await res.json();
+            setData(data.data);
+          } catch (error) {
+            console.error('Error fetching home data:', error);
+          }
+        };
+        console.log("from: getHome")
+        getData();
+      }
+    }, []);
+  }, []);
 
   const { getCountryByValue } = useCountries();
   const country = getCountryByValue(data?.country as string);
