@@ -42,23 +42,29 @@ async function HomeId({ params }: { params: { id: string } }) {
   }, []);
   
   useEffect(() => {
-    const getHome = async () => {
-      const res = await fetch("../../api/getHome?"+ new URLSearchParams({userId: user.id, homeId: params.id}));
-      const data = await res.json();
-      setHome(data);
-    };
-
-    getHome();
+    if(user && params.id){
+      const getHome = async () => {
+        const res = await fetch("../../api/getHome?"+ new URLSearchParams({userId: user.id, homeId: params.id}));
+        const data = await res.json();
+        setHome(data);
+      };
+  
+      getHome();
+    }
+    
   }, [user, params.id]);
 
   useEffect(() => {
-    const getData = async () => {
-      const res = await fetch("../../api/getData?"+ new URLSearchParams({homeId: params.id}));
-      const data = await res.json();
-      setData(data);
-    };
-
-    getData();
+    if(params.id){
+      const getData = async () => {
+        const res = await fetch("../../api/getData?"+ new URLSearchParams({homeId: params.id}));
+        const data = await res.json();
+        setData(data);
+      };
+  
+      getData();
+    }
+    
   }, [params.id]);
 
   const { getCountryByValue } = useCountries();
