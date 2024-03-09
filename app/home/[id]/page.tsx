@@ -83,6 +83,10 @@ async function getData(homeId: string) {
   return data;
 }
 
+export function renderGallery(){
+  return <Gallery/>
+}
+
 async function HomeId({ params }: { params: { id: string } }) {
   const data = await getData(params.id);
   const { getCountryByValue } = useCountries();
@@ -105,9 +109,7 @@ async function HomeId({ params }: { params: { id: string } }) {
   let startTime = data?.createdAT.getTime() ?? new Date().getTime();
   let endTime = new Date().getTime();
 
-  function renderGallery(){
-    return <Gallery/>
-  }
+  
 
   return (
     <div className="w-[85%] max-w-[1320px] lg:w-[75%] mx-auto mt-5">
