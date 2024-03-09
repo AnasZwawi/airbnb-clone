@@ -145,7 +145,7 @@ async function HomeId({ params }: { params: { id: string } }) {
         </div>
       </div>
       <div className="relative flex flex-col md:flex-row gap-y-2 lg:gap-2 overflow-hidden rounded-xl h-[550px] md:h-[450px]">
-        {data.photos[0] && (
+        {data?.photos[0] && (
           <div className="relative w:full lg:w-1/2 h-full cursor-pointer">
             <Image
               alt="Image of Home"
@@ -158,7 +158,7 @@ async function HomeId({ params }: { params: { id: string } }) {
         )}
 
         <div className="w:full lg:w-1/2 h-full grid grid-cols-2 grid-rows-2 row-auto gap-2">
-          {data.photos[0] &&
+          {data?.photos[0] &&
             data?.photos.slice(1, 5).map((photo: string, index: number) => (
               <div
                 key={index}
