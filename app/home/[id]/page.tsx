@@ -58,7 +58,7 @@ async function HomeId({ params }: { params: { id: string } }) {
       console.log("from: getHome")
       getHome();
     }
-  }, [user, params.id]);
+  }, []);
 
 
   useEffect(() => {
@@ -78,7 +78,7 @@ async function HomeId({ params }: { params: { id: string } }) {
       console.log("from: getHome")
       getData();
     }
-  }, [params.id]);
+  }, []);
 
   const { getCountryByValue } = useCountries();
   const country = getCountryByValue(data?.country as string);
