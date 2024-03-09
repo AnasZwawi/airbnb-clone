@@ -44,7 +44,7 @@ async function HomeId({ params }: { params: { id: string } }) {
 
   useEffect(() => {
     const getHome = async () => {
-      const res = await fetch("/api/getHome");
+      const res = await fetch("/api/getHome"+ new URLSearchParams({userId: user.id, homeId: params.id}));
       const data = await res.json();
       setHome(data);
     };
@@ -54,7 +54,7 @@ async function HomeId({ params }: { params: { id: string } }) {
 
   useEffect(() => {
     const getData = async () => {
-      const res = await fetch("/api/getData");
+      const res = await fetch("/api/getData"+ new URLSearchParams({homeId: params.id}));
       const data = await res.json();
       setData(data);
     };
