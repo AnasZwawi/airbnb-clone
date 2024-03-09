@@ -1,6 +1,5 @@
-import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/dist/types/server";
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import HomeId from "./page";
-
 
 
 export default async function RootLayout({ params }: { params: { id: string } }) {
