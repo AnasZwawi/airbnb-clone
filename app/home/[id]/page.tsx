@@ -42,30 +42,28 @@ async function HomeId({ params }: { params: { id: string } }) {
   }, []);
 
   useEffect(() => {
-    useEffect(() => {
-      if (user && params.id) {
-        const getHome = async () => {
-          try {
-            const res = await fetch(
-              `/api/getHome?${new URLSearchParams({
-                userId: user.id,
-                homeId: params.id,
-              })}`
-            );
-            if (!res.ok) {
-              throw new Error("Failed to fetch home data");
-            }
-            const data = await res.json();
-            setHome(data.data);
-          } catch (error) {
-            console.error("Error fetching home data:", error);
+    if (user && params.id) {
+      const getHome = async () => {
+        try {
+          const res = await fetch(
+            `/api/getHome?${new URLSearchParams({
+              userId: user.id,
+              homeId: params.id,
+            })}`
+          );
+          if (!res.ok) {
+            throw new Error("Failed to fetch home data");
           }
-        };
-        console.log("from: getHome");
-        getHome();
-      }
-    }, [user, params.id]);
-  }, []);
+          const data = await res.json();
+          setHome(data.data);
+        } catch (error) {
+          console.error("Error fetching home data:", error);
+        }
+      };
+      console.log("from: getHome");
+      getHome();
+    }
+  }, [user, params.id]);
 
   useEffect(() => {
     if (user && params.id) {
