@@ -40,27 +40,29 @@ async function HomeId({ params }: { params: { id: string } }) {
     };
     getKindeSession();
   }, []);
-
-  useEffect(() => {
-    const getHome = async () => {
-      const res = await fetch("../../api/getHome?"+ new URLSearchParams({userId: user.id, homeId: params.id}));
-      const data = await res.json();
-      setHome(data);
-    };
-
-    getHome();
-  }, []);
-
-  useEffect(() => {
-    const getData = async () => {
-      const res = await fetch("../../api/getData?"+ new URLSearchParams({homeId: params.id}));
-      const data = await res.json();
-      setData(data);
-    };
-
-    getData();
-  }, []);
-
+  if(user){
+    useEffect(() => {
+      const getHome = async () => {
+        const res = await fetch("../../api/getHome?"+ new URLSearchParams({userId: user.id, homeId: params.id}));
+        const data = await res.json();
+        setHome(data);
+      };
+  
+      getHome();
+    }, []);
+  
+    useEffect(() => {
+      const getData = async () => {
+        const res = await fetch("../../api/getData?"+ new URLSearchParams({homeId: params.id}));
+        const data = await res.json();
+        setData(data);
+      };
+  
+      getData();
+    }, []);
+  
+  }
+  
   const { getCountryByValue } = useCountries();
   const country = getCountryByValue(data?.country as string);
 
