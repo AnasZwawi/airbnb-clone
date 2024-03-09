@@ -98,10 +98,8 @@ async function HomeId({ params }: { params: { id: string } }) {
   // fetching the user id from kinde auth
   const { getUser } = getKindeServerSession();
   const user = await getUser();
-  if (!user) {
-    return redirect("/");
-  }
-  const homeData = await getHome(user.id,params.id)
+  
+  const homeData = await getHome(user?.id as string,params.id)
 
   let startTime = data?.createdAT.getTime() ?? new Date().getTime();
   let endTime = new Date().getTime();
@@ -114,7 +112,7 @@ async function HomeId({ params }: { params: { id: string } }) {
         </h1>
         <div className="flex items-center">
           <>
-            {/* {user.id &&  (    
+            {user && user.id &&  (    
               (homeData?.Favorite.length as number > 0 ? (
                 <form action={deleteFromFavorite}>
                   <input
@@ -141,7 +139,7 @@ async function HomeId({ params }: { params: { id: string } }) {
                   />
                   <AddToFavoriteButton classn="h-5 w-5"/>
                 </form>
-              )))} */}
+              )))}
           </>
           <p className="font-semibold text-md tracking-tighter underline">Save</p>
         </div>
