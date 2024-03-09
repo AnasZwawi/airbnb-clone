@@ -46,10 +46,9 @@ async function HomeId({ params }: { params: { id: string } }) {
       const getHome = async () => {
         const res = await fetch("../../api/getHome?"+ new URLSearchParams({userId: user.id, homeId: params.id}));
         const data = await res.json();
-        setHome(data);
+        setHome(data.data);
       };
-      console.log("from: getHome"+data)
-      console.log("from: getHome"+homeData)
+      console.log("from: getHome")
       getHome();
     }
     
@@ -60,10 +59,9 @@ async function HomeId({ params }: { params: { id: string } }) {
       const getData = async () => {
         const res = await fetch("../../api/getData?"+ new URLSearchParams({homeId: params.id}));
         const data = await res.json();
-        setData(data);
+        setData(data.data);
       };
-      console.log("from: getData"+data)
-      console.log("from: getData"+homeData)
+      console.log("from: getData"+data.data)
       getData();
     }
     
