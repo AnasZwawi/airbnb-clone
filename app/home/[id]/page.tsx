@@ -33,7 +33,7 @@ async function HomeId({ params }: { params: { id: string } }) {
   // fetching the user id from our end point
   useEffect(() => {
     const getKindeSession = async () => {
-      const res = await fetch("/api/kindeSession");
+      const res = await fetch("../../api/kindeSession");
       const data = await res.json();
       setUser(data.user);
 			setAuthStatus(data.authenticated);
@@ -44,7 +44,7 @@ async function HomeId({ params }: { params: { id: string } }) {
 
   useEffect(() => {
     const getHome = async () => {
-      const res = await fetch("/api/getHome"+ new URLSearchParams({userId: user.id, homeId: params.id}));
+      const res = await fetch("../../api/getHome"+ new URLSearchParams({userId: user.id, homeId: params.id}));
       const data = await res.json();
       setHome(data);
     };
@@ -54,7 +54,7 @@ async function HomeId({ params }: { params: { id: string } }) {
 
   useEffect(() => {
     const getData = async () => {
-      const res = await fetch("/api/getData"+ new URLSearchParams({homeId: params.id}));
+      const res = await fetch("../../api/getData"+ new URLSearchParams({homeId: params.id}));
       const data = await res.json();
       setData(data);
     };
