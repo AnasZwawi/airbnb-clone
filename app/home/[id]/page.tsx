@@ -105,6 +105,10 @@ async function HomeId({ params }: { params: { id: string } }) {
   let startTime = data?.createdAT.getTime() ?? new Date().getTime();
   let endTime = new Date().getTime();
 
+  function renderGallery(){
+    return <Gallery/>
+  }
+
   return (
     <div className="w-[85%] max-w-[1320px] lg:w-[75%] mx-auto mt-5">
       <div className="flex flex-col lg:flex-row justify-between gap-y-4 lg:items-center mb-4">
@@ -184,7 +188,7 @@ async function HomeId({ params }: { params: { id: string } }) {
         </div>
         <div
           className="absolute cursor-pointer right-5 bottom-5 z-40 flex items-center gap-x-1 px-2 py-1 bg-white border border-1 rounded-md transition-all duration-150 hover:shadow-md hover:scale-105"
-          onClick={() => <Gallery />}
+          onClick={renderGallery}
         >
           <Images />
           <p>Show all photos</p>
