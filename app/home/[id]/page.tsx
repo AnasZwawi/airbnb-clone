@@ -1,5 +1,4 @@
-"use client";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import prisma from "@/app/lib/db";
 import Image from "next/image";
 import { useCountries } from "@/app/lib/getCountries";
@@ -22,72 +21,88 @@ import {
 } from "@/app/components/SubmitButton";
 import { unstable_noStore as noStore } from "next/cache";
 import { Dot, Images, Star } from "lucide-react";
+import { redirect } from "next/navigation";
 
-import { Gallery } from "@/app/components/Gallery";
+async function getHome(userId: string, homeId: string) {
+  noStore();
+  const data = await prisma.home.findUnique({
+    where: {
+      id: homeId,
+    },
+    select: {
+      id: true,
+      country: true,
+      photos: true,
+      description: true,
+      price: true,
+      Favorite: {
+        where: {
+          userId: userId,
+        },
+      },
+    },
+  });
+  return data;
+}
 
-async function fetchData(userId: string, homeId: string) {
-  try {
-    const [homeResponse, dataResponse] = await Promise.all([
-      fetch(`/api/getHome?${new URLSearchParams({ userId, homeId })}`),
-      fetch(`/api/getHome?${new URLSearchParams({ homeId })}`),
-    ]);
+async function getData(homeId: string) {
+  noStore();
 
-    if (!homeResponse.ok || !dataResponse.ok) {
-      throw new Error("Failed to fetch home data");
-    }
+  const data = await prisma.home.findUnique({
+    where: {
+      id: homeId,
+    },
+    select: {
+      Favorite: true,
+      photos: true,
+      description: true,
+      guests: true,
+      bedrooms: true,
+      bathrooms: true,
+      country: true,
+      title: true,
+      category: true,
+      price: true,
+      createdAT: true,
+      User: {
+        select: {
+          profileImage: true,
+          firstname: true,
+          id: true,
+        },
+      },
+      Reservation: {
+        where: {
+          homeId: homeId,
+        },
+      },
+    },
+  });
 
-    const [homeData, data] = await Promise.all([
-      homeResponse.json(),
-      dataResponse.json(),
-    ]);
-    return { homeData: homeData.data, data: data.data };
-  } catch (error) {
-    console.error("Error fetching home data:", error);
-    return { homeData: null, data: null };
-  }
+  return data;
 }
 
 async function HomeId({ params }: { params: { id: string } }) {
-  const [user, setUser] = useState<any>();
-  const [homeData, setHome] = useState<any>();
-  const [data, setData] = useState<any>();
-  const [authStatus, setAuthStatus] = useState(null);
-  // fetching the user id from our end point
-  useEffect(() => {
-    const getKindeSession = async () => {
-      const res = await fetch("../../api/kindeSession");
-      const data = await res.json();
-      setUser(data.user);
-      setAuthStatus(data.authenticated);
-    };
-    getKindeSession();
-  }, []);
-
-  useEffect(() => {
-    if (user && params.id) {
-      const fetchDataAndSetState = async () => {
-        const { homeData, data } = await fetchData(user.id, params.id);
-        setHome(homeData);
-        setData(data);
-      };
-      fetchDataAndSetState();
-    }
-  }, [user, params.id]);
-
+  const data = await getData(params.id);
   const { getCountryByValue } = useCountries();
   const country = getCountryByValue(data?.country as string);
 
   //Just some function to show flag as png
 
-  /* const formatter = new Intl.DateTimeFormat("en-GB", {
+  const formatter = new Intl.DateTimeFormat("en-GB", {
     year: "numeric",
     month: "long",
     day: "2-digit",
   });
 
-  
+  // fetching the user id from kinde auth
+  const { getUser } = getKindeServerSession();
+  const user = await getUser();
+
+  const homeData = await getHome(user?.id as string, params.id);
+
   let startTime = data?.createdAT.getTime() ?? new Date().getTime();
-  let endTime = new Date().getTime(); */
+  let endTime = new Date().getTime();
 
   return (
     <div className="w-[85%] max-w-[1320px] lg:w-[75%] mx-auto mt-5">
@@ -145,33 +160,26 @@ async function HomeId({ params }: { params: { id: string } }) {
         </div>
       </div>
       <div className="relative flex flex-col md:flex-row gap-y-2 lg:gap-2 overflow-hidden rounded-xl h-[550px] md:h-[450px]">
-        {data?.photos[0] && (
-          <div className="relative w:full lg:w-1/2 h-full cursor-pointer">
-            <Image
-              alt="Image of Home"
-              src={`https://jxvqpjydezilbytxarzd.supabase.co/storage/v1/object/public/images/${data?.photos[0]}`}
-              fill
-              className="h-full object-cover w-full"
-            />
-            <div className="absolute top-0 left-0 w-full h-full z-20 hover:bg-black hover:bg-opacity-20 " />
-          </div>
-        )}
-
+        <div className="relative w:full lg:w-1/2 h-full cursor-pointer">
+          <Image
+            alt="Image of Home"
+            src={`https://jxvqpjydezilbytxarzd.supabase.co/storage/v1/object/public/images/${data?.photos[0]}`}
+            fill
+            className="h-full object-cover w-full"
+          />
+          <div className="absolute top-0 left-0 w-full h-full z-20 hover:bg-black hover:bg-opacity-20 " />
+        </div>
         <div className="w:full lg:w-1/2 h-full grid grid-cols-2 grid-rows-2 row-auto gap-2">
-          {data?.photos[0] &&
-            data?.photos.slice(1, 5).map((photo: string, index: number) => (
-              <div
-                key={index}
-                className="relative w-full h-full cursor-pointer"
-              >
-                <Image
-                  alt="Image of Home"
-                  src={`https://jxvqpjydezilbytxarzd.supabase.co/storage/v1/object/public/images/${photo}`}
-                  className="h-full object-cover w-full"
-                />
-                <div className="absolute top-0 left-0 w-full h-full z-20 hover:bg-black hover:bg-opacity-20 " />
-              </div>
-            ))}
+          {data?.photos.slice(1, 5).map((photo: string, index: number) => (
+            <div key={index} className="relative w-full h-full cursor-pointer">
+              <Image
+                alt="Image of Home"
+                src={`https://jxvqpjydezilbytxarzd.supabase.co/storage/v1/object/public/images/${photo}`}
+                className="h-full object-cover w-full"
+              />
+              <div className="absolute top-0 left-0 w-full h-full z-20 hover:bg-black hover:bg-opacity-20 " />
+            </div>
+          ))}
         </div>
         <div className="absolute cursor-pointer right-5 bottom-5 z-40 flex items-center gap-x-1 px-2 py-1 bg-white border border-1 rounded-md transition-all duration-150 hover:shadow-md hover:scale-105">
           <Images />
@@ -192,7 +200,7 @@ async function HomeId({ params }: { params: { id: string } }) {
             <Dot />
             <p className="">{data?.bathrooms} Bathrooms</p>
           </div>
-          {/* <p className="mt-1 font-semibold flex items-center gap-x-1">
+          <p className="mt-1 font-semibold flex items-center gap-x-1">
             <Star fill="black" className="w-4 h-4" />
             {startTime !== undefined
               ? Math.round(
@@ -202,7 +210,7 @@ async function HomeId({ params }: { params: { id: string } }) {
                 ? "New"
                 : ""
               : ""}
-          </p> */}
+          </p>
 
           <Separator className="my-7 " />
           <div className="flex items-center">
@@ -218,12 +226,12 @@ async function HomeId({ params }: { params: { id: string } }) {
               <h3 className="font-medium text-[15px]">
                 Hosted by {data?.User?.firstname}
               </h3>
-              {/* <p className="text-[13px] text-gray-800">
+              <p className="text-[13px] text-gray-800">
                 Hosted since{" "}
                 {formatter.format(
                   Date.parse(data?.createdAT as unknown as string)
                 )}
-              </p> */}
+              </p>
             </div>
           </div>
           <Separator className="my-7" />
