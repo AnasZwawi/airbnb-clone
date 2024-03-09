@@ -38,7 +38,6 @@ async function HomeId({ params }: { params: { id: string } }) {
       setUser(data.user);
 			setAuthStatus(data.authenticated);
     };
-
     getKindeSession();
   }, []);
 
