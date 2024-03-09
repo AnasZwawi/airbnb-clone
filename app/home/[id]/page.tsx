@@ -24,7 +24,7 @@ import { Dot, Images, Star } from "lucide-react";
 import { redirect } from "next/navigation";
 
 async function getHome(userId: string, homeId: string) {
-  noStore()
+  noStore();
   const data = await prisma.home.findUnique({
     where: {
       id: homeId,
@@ -98,8 +98,8 @@ async function HomeId({ params }: { params: { id: string } }) {
   // fetching the user id from kinde auth
   const { getUser } = getKindeServerSession();
   const user = await getUser();
-  
-  const homeData = await getHome(user?.id as string,params.id)
+
+  const homeData = await getHome(user?.id as string, params.id);
 
   let startTime = data?.createdAT.getTime() ?? new Date().getTime();
   let endTime = new Date().getTime();
@@ -112,36 +112,51 @@ async function HomeId({ params }: { params: { id: string } }) {
         </h1>
         <div className="flex items-center">
           <>
-            {user && user.id &&  (    
-              (homeData?.Favorite.length as number > 0 ? (
-                <form action={deleteFromFavorite}>
-                  <input
-                    type="hidden"
-                    name="favoriteId"
-                    value={homeData?.Favorite[0].id as string}
-                  />
-                  <input type="hidden" name="userId" value={user.id as string} />
-                  <input
-                    type="hidden"
-                    name="pathName"
-                    value={"/home/" + params.id as string}
-                  />
-                  <DeleteFromFavoriteButton classn="w-5 h-5"/>
-                </form>
-              ) : (
-                <form action={addToFavorite}>
-                  <input type="hidden" name="homeId" value={params.id as string} />
-                  <input type="hidden" name="userId" value={user.id } />
-                  <input
-                    type="hidden"
-                    name="pathName"
-                    value={"/home/" + params.id}
-                  />
-                  <AddToFavoriteButton classn="h-5 w-5"/>
-                </form>
-              )))}
+            {user && user.id && (
+              <>
+                {(homeData?.Favorite.length as number) > 0 ? (
+                  <form action={deleteFromFavorite}>
+                    <input
+                      type="hidden"
+                      name="favoriteId"
+                      value={homeData?.Favorite[0].id as string}
+                    />
+                    <input
+                      type="hidden"
+                      name="userId"
+                      value={user.id as string}
+                    />
+                    <input
+                      type="hidden"
+                      name="pathName"
+                      value={("/home/" + params.id) as string}
+                    />
+                    <DeleteFromFavoriteButton classn="w-5 h-5" />
+                  </form>
+                ) : (
+                  <>
+                    <form action={addToFavorite}>
+                      <input
+                        type="hidden"
+                        name="homeId"
+                        value={params.id as string}
+                      />
+                      <input type="hidden" name="userId" value={user.id} />
+                      <input
+                        type="hidden"
+                        name="pathName"
+                        value={"/home/" + params.id}
+                      />
+                      <AddToFavoriteButton classn="h-5 w-5 relative top-1 left-1" />
+                    </form>
+                    <p className="font-semibold text-md tracking-tighter underline">
+                      Save
+                    </p>
+                  </>
+                )}
+              </>
+            )}
           </>
-          <p className="font-semibold text-md tracking-tighter underline">Save</p>
         </div>
       </div>
       <div className="relative flex flex-col md:flex-row gap-y-2 lg:gap-2 overflow-hidden rounded-xl h-[550px] md:h-[450px]">
@@ -167,7 +182,7 @@ async function HomeId({ params }: { params: { id: string } }) {
           ))}
         </div>
         <div className="absolute right-5 bottom-5 z-45 flex items-center gap-x-1 px-2 py-1 bg-white border border-1 rounded-md">
-          <Images/>
+          <Images />
           <p>Show all photos</p>
         </div>
       </div>
