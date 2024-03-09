@@ -21,7 +21,8 @@ import {
 } from "@/app/components/SubmitButton";
 import { unstable_noStore as noStore } from "next/cache";
 import { Dot, Images, Star } from "lucide-react";
-import { redirect } from "next/navigation";
+
+import { Gallery } from "@/app/components/Gallery";
 
 async function getHome(userId: string, homeId: string) {
   noStore();
@@ -181,7 +182,10 @@ async function HomeId({ params }: { params: { id: string } }) {
             </div>
           ))}
         </div>
-        <div className="absolute cursor-pointer right-5 bottom-5 z-40 flex items-center gap-x-1 px-2 py-1 bg-white border border-1 rounded-md transition-all duration-150 hover:shadow-md hover:scale-105">
+        <div
+          className="absolute cursor-pointer right-5 bottom-5 z-40 flex items-center gap-x-1 px-2 py-1 bg-white border border-1 rounded-md transition-all duration-150 hover:shadow-md hover:scale-105"
+          onClick={() => <Gallery />}
+        >
           <Images />
           <p>Show all photos</p>
         </div>
