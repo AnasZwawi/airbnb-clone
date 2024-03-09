@@ -25,6 +25,26 @@ import { Dot, Images, Star } from "lucide-react";
 
 import { Gallery } from "@/app/components/Gallery";
 
+
+async function fetchData(userId: string, homeId: string) {
+  try {
+    const [homeResponse, dataResponse] = await Promise.all([
+      fetch(`/api/getHome?${new URLSearchParams({ userId, homeId })}`),
+      fetch(`/api/getHome?${new URLSearchParams({ homeId })}`),
+    ]);
+
+    if (!homeResponse.ok || !dataResponse.ok) {
+      throw new Error('Failed to fetch home data');
+    }
+
+    const [homeData, data] = await Promise.all([homeResponse.json(), dataResponse.json()]);
+    return { homeData: homeData.data, data: data.data };
+  } catch (error) {
+    console.error('Error fetching home data:', error);
+    return { homeData: null, data: null };
+  }
+}
+
 async function HomeId({ params }: { params: { id: string } }) {
   const [user, setUser] = useState<any>();
   const [homeData, setHome] = useState<any>();
@@ -43,42 +63,14 @@ async function HomeId({ params }: { params: { id: string } }) {
 
   useEffect(() => {
     if (user && params.id) {
-      const getHome = async () => {
-        try {
-          const res = await fetch(`/api/getHome?${new URLSearchParams({ userId: user.id, homeId: params.id })}`);
-          if (!res.ok) {
-            throw new Error('Failed to fetch home data');
-          }
-          const data = await res.json();
-          setHome(data.data);
-        } catch (error) {
-          console.error('Error fetching home data:', error);
-        }
+      const fetchDataAndSetState = async () => {
+        const { homeData, data } = await fetchData(user.id, params.id);
+        setHome(homeData);
+        setData(data);
       };
-      console.log("from: getHome")
-      getHome();
+      fetchDataAndSetState();
     }
-  }, []);
-
-
-  useEffect(() => {
-    if (params.id) {
-      const getData = async () => {
-        try {
-          const res = await fetch(`/api/getHome?${new URLSearchParams({homeId: params.id })}`);
-          if (!res.ok) {
-            throw new Error('Failed to fetch home data');
-          }
-          const data = await res.json();
-          setData(data.data);
-        } catch (error) {
-          console.error('Error fetching home data:', error);
-        }
-      };
-      console.log("from: getHome")
-      getData();
-    }
-  }, []);
+  }, [user, params.id]);
 
   const { getCountryByValue } = useCountries();
   const country = getCountryByValue(data?.country as string);
