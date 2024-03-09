@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import React, { useEffect, useState } from "react";
 import prisma from "@/app/lib/db";
 import Image from "next/image";
@@ -36,53 +36,56 @@ async function HomeId({ params }: { params: { id: string } }) {
       const res = await fetch("../../api/kindeSession");
       const data = await res.json();
       setUser(data.user);
-			setAuthStatus(data.authenticated);
+      setAuthStatus(data.authenticated);
     };
     getKindeSession();
   }, []);
-  
+
   useEffect(() => {
     useEffect(() => {
       if (user && params.id) {
         const getHome = async () => {
           try {
-            const res = await fetch(`/api/getHome?${new URLSearchParams({ userId: user.id, homeId: params.id })}`);
+            const res = await fetch(
+              `/api/getHome?${new URLSearchParams({
+                userId: user.id,
+                homeId: params.id,
+              })}`
+            );
             if (!res.ok) {
-              throw new Error('Failed to fetch home data');
+              throw new Error("Failed to fetch home data");
             }
             const data = await res.json();
             setHome(data.data);
           } catch (error) {
-            console.error('Error fetching home data:', error);
+            console.error("Error fetching home data:", error);
           }
         };
-        console.log("from: getHome")
+        console.log("from: getHome");
         getHome();
       }
     }, [user, params.id]);
-    
   }, []);
 
   useEffect(() => {
-    
-    useEffect(() => {
-      if (user && params.id) {
-        const getData = async () => {
-          try {
-            const res = await fetch(`/api/getHome?${new URLSearchParams({ homeId: params.id })}`);
-            if (!res.ok) {
-              throw new Error('Failed to fetch home data');
-            }
-            const data = await res.json();
-            setData(data.data);
-          } catch (error) {
-            console.error('Error fetching home data:', error);
+    if (user && params.id) {
+      const getData = async () => {
+        try {
+          const res = await fetch(
+            `/api/getHome?${new URLSearchParams({ homeId: params.id })}`
+          );
+          if (!res.ok) {
+            throw new Error("Failed to fetch home data");
           }
-        };
-        console.log("from: getHome")
-        getData();
-      }
-    }, []);
+          const data = await res.json();
+          setData(data.data);
+        } catch (error) {
+          console.error("Error fetching home data:", error);
+        }
+      };
+      console.log("from: getHome");
+      getData();
+    }
   }, []);
 
   const { getCountryByValue } = useCountries();
@@ -177,8 +180,7 @@ async function HomeId({ params }: { params: { id: string } }) {
             </div>
           ))}
         </div>
-        <div
-          className="absolute cursor-pointer right-5 bottom-5 z-40 flex items-center gap-x-1 px-2 py-1 bg-white border border-1 rounded-md transition-all duration-150 hover:shadow-md hover:scale-105">
+        <div className="absolute cursor-pointer right-5 bottom-5 z-40 flex items-center gap-x-1 px-2 py-1 bg-white border border-1 rounded-md transition-all duration-150 hover:shadow-md hover:scale-105">
           <Images />
           <p>Show all photos</p>
         </div>
