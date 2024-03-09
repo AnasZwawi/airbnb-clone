@@ -63,7 +63,7 @@ async function HomeId({ params }: { params: { id: string } }) {
       console.log("from: getHome");
       getHome();
     }
-  }, [user, params.id]);
+  }, []);
 
   useEffect(() => {
     if (user && params.id) {
@@ -81,7 +81,7 @@ async function HomeId({ params }: { params: { id: string } }) {
           console.error("Error fetching home data:", error);
         }
       };
-      console.log("from: getHome");
+      console.log("from: getData");
       getData();
     }
   }, []);
