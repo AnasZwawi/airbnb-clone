@@ -76,7 +76,7 @@ async function HomeId({ params }: { params: { id: string } }) {
   
   let startTime = data?.createdAT.getTime() ?? new Date().getTime();
   let endTime = new Date().getTime();
-
+  
   return (
     <div className="w-[85%] max-w-[1320px] lg:w-[75%] mx-auto mt-5">
       <div className="flex flex-col lg:flex-row justify-between gap-y-4 lg:items-center mb-4">

@@ -4,9 +4,10 @@ import { unstable_noStore as noStore } from "next/cache";
 //userId: string, homeId: string
 
 export async function GET(request: NextRequest) {
-  noStore();
+  /* noStore(); */
   const userId = request.nextUrl.searchParams.get("userId") as string;
   const homeId = request.nextUrl.searchParams.get("homeId") as string;
+  console.log(userId, homeId)
   const data = await prisma.home.findUnique({
     where: {
       id: homeId,
