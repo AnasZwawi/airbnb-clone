@@ -10,15 +10,12 @@ const loading = () => {
       </div>
       <div className="flex gap-2 w-full h-[550px] md:h-[450px]">
         <Skeleton className="w-full lg:w-1/2 h-full" />
-        <div className="flex w-full lg:w-1/2 h-full">
-          <div className="flex gap-2">
-            <Skeleton className="w-full h-full mt-5" />
-            <Skeleton className="w-full h-full mt-5" />
-          </div>
-          <div className="flex gap-2 w:full lg:w-1/2 h-full">
-            <Skeleton className="w-full h-full mt-5" />
-            <Skeleton className="w-full h-full mt-5" />
-          </div>
+        <div className="w:full lg:w-1/2 h-full grid grid-cols-2 grid-rows-2 row-auto gap-2">
+          <Skeleton className="w-full h-full" />
+          <Skeleton className="w-full h-full" />
+
+          <Skeleton className="w-full h-full" />
+          <Skeleton className="w-full h-full" />
         </div>
       </div>
 
