@@ -67,7 +67,7 @@ async function HomeId({ params }: { params: { id: string } }) {
 
   //Just some function to show flag as png
 
-  const formatter = new Intl.DateTimeFormat("en-GB", {
+  /* const formatter = new Intl.DateTimeFormat("en-GB", {
     year: "numeric",
     month: "long",
     day: "2-digit",
@@ -75,8 +75,8 @@ async function HomeId({ params }: { params: { id: string } }) {
 
   
   let startTime = data?.createdAT.getTime() ?? new Date().getTime();
-  let endTime = new Date().getTime();
-  
+  let endTime = new Date().getTime(); */
+
   return (
     <div className="w-[85%] max-w-[1320px] lg:w-[75%] mx-auto mt-5">
       <div className="flex flex-col lg:flex-row justify-between gap-y-4 lg:items-center mb-4">
@@ -174,7 +174,7 @@ async function HomeId({ params }: { params: { id: string } }) {
             <Dot />
             <p className="">{data?.bathrooms} Bathrooms</p>
           </div>
-          <p className="mt-1 font-semibold flex items-center gap-x-1">
+          {/* <p className="mt-1 font-semibold flex items-center gap-x-1">
             <Star fill="black" className="w-4 h-4" />
             {startTime !== undefined
               ? Math.round(
@@ -184,7 +184,7 @@ async function HomeId({ params }: { params: { id: string } }) {
                 ? "New"
                 : ""
               : ""}
-          </p>
+          </p> */}
 
           <Separator className="my-7 " />
           <div className="flex items-center">
@@ -200,12 +200,12 @@ async function HomeId({ params }: { params: { id: string } }) {
               <h3 className="font-medium text-[15px]">
                 Hosted by {data?.User?.firstname}
               </h3>
-              <p className="text-[13px] text-gray-800">
+              {/* <p className="text-[13px] text-gray-800">
                 Hosted since{" "}
                 {formatter.format(
                   Date.parse(data?.createdAT as unknown as string)
                 )}
-              </p>
+              </p> */}
             </div>
           </div>
           <Separator className="my-7" />
