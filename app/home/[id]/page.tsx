@@ -110,29 +110,34 @@ async function HomeId({ params }: { params: { id: string } }) {
         <h1 className="font-semibold text-black text-[32px] tracking-tight lg:text-2xl">
           {data?.title}
         </h1>
-        <div className="flex items-center">
+        <div className="flex items-center relative left-[-8px] lg:left-0">
           <>
             {user && user.id && (
               <>
                 {(homeData?.Favorite.length as number) > 0 ? (
-                  <form action={deleteFromFavorite}>
-                    <input
-                      type="hidden"
-                      name="favoriteId"
-                      value={homeData?.Favorite[0].id as string}
-                    />
-                    <input
-                      type="hidden"
-                      name="userId"
-                      value={user.id as string}
-                    />
-                    <input
-                      type="hidden"
-                      name="pathName"
-                      value={("/home/" + params.id) as string}
-                    />
-                    <DeleteFromFavoriteButton classn="w-5 h-5" />
-                  </form>
+                  <>
+                    <form action={deleteFromFavorite}>
+                      <input
+                        type="hidden"
+                        name="favoriteId"
+                        value={homeData?.Favorite[0].id as string}
+                      />
+                      <input
+                        type="hidden"
+                        name="userId"
+                        value={user.id as string}
+                      />
+                      <input
+                        type="hidden"
+                        name="pathName"
+                        value={("/home/" + params.id) as string}
+                      />
+                      <DeleteFromFavoriteButton classn="w-6 h-6" />
+                    </form>
+                    <p className="font-semibold text-md tracking-tighter underline">
+                      Unsave
+                    </p>
+                  </>
                 ) : (
                   <>
                     <form action={addToFavorite}>
@@ -147,7 +152,7 @@ async function HomeId({ params }: { params: { id: string } }) {
                         name="pathName"
                         value={"/home/" + params.id}
                       />
-                      <AddToFavoriteButton classn="h-5 w-5 relative top-1 left-1" />
+                      <AddToFavoriteButton classn="h-6 w-6 relative top-[2px] left-[2px]" />
                     </form>
                     <p className="font-semibold text-md tracking-tighter underline">
                       Save
