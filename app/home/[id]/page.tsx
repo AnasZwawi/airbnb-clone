@@ -25,69 +25,12 @@ import { Dot, Images, Star } from "lucide-react";
 
 import { Gallery } from "@/app/components/Gallery";
 
-async function getHome(userId: string, homeId: string) {
-  noStore();
-  const data = await prisma.home.findUnique({
-    where: {
-      id: homeId,
-    },
-    select: {
-      id: true,
-      country: true,
-      photos: true,
-      description: true,
-      price: true,
-      Favorite: {
-        where: {
-          userId: userId,
-        },
-      },
-    },
-  });
-  return data;
-}
-
-async function getData(homeId: string) {
-  noStore();
-
-  const data = await prisma.home.findUnique({
-    where: {
-      id: homeId,
-    },
-    select: {
-      Favorite: true,
-      photos: true,
-      description: true,
-      guests: true,
-      bedrooms: true,
-      bathrooms: true,
-      country: true,
-      title: true,
-      category: true,
-      price: true,
-      createdAT: true,
-      User: {
-        select: {
-          profileImage: true,
-          firstname: true,
-          id: true,
-        },
-      },
-      Reservation: {
-        where: {
-          homeId: homeId,
-        },
-      },
-    },
-  });
-
-  return data;
-}
-
 async function HomeId({ params }: { params: { id: string } }) {
   const [user, setUser] = useState<any>();
+  const [homeData, setHome] = useState<any>();
+  const [data, setData] = useState<any>();
   const [authStatus, setAuthStatus] = useState(null);
-  // fetching the user id from our ap route
+  // fetching the user id from our end point
   useEffect(() => {
     const getKindeSession = async () => {
       const res = await fetch("/api/kindeSession");
@@ -99,7 +42,26 @@ async function HomeId({ params }: { params: { id: string } }) {
     getKindeSession();
   }, []);
 
-  const data = await getData(params.id);
+  useEffect(() => {
+    const getHome = async () => {
+      const res = await fetch("/api/getHome");
+      const data = await res.json();
+      setHome(data);
+    };
+
+    getHome();
+  }, []);
+
+  useEffect(() => {
+    const getData = async () => {
+      const res = await fetch("/api/getHome");
+      const data = await res.json();
+      setData(data);
+    };
+
+    getData();
+  }, []);
+
   const { getCountryByValue } = useCountries();
   const country = getCountryByValue(data?.country as string);
 
@@ -111,9 +73,7 @@ async function HomeId({ params }: { params: { id: string } }) {
     day: "2-digit",
   });
 
-
-  const homeData = await getHome(user?.id as string, params.id);
-
+  
   let startTime = data?.createdAT.getTime() ?? new Date().getTime();
   let endTime = new Date().getTime();
 
