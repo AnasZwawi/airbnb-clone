@@ -12,15 +12,15 @@ async function getData(userId: string) {
     where: {
       userId: userId,
     },
-    select: {
+    include: {
       Home: {
         select: {
           photos: true,
           id: true,
-          Favorite: true,
           price: true,
           country: true,
           description: true,
+          Favorite: true
         },
       },
     },
