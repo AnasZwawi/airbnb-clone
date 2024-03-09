@@ -190,7 +190,7 @@ async function HomeId({ params }: { params: { id: string } }) {
         </div>
         <div
           className="absolute cursor-pointer right-5 bottom-5 z-40 flex items-center gap-x-1 px-2 py-1 bg-white border border-1 rounded-md transition-all duration-150 hover:shadow-md hover:scale-105"
-          onClick={renderGallery}
+          onClick={()=>{renderGallery()}}
         >
           <Images />
           <p>Show all photos</p>
