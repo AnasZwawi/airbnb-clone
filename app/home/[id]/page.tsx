@@ -25,7 +25,6 @@ import { Dot, Images, Star } from "lucide-react";
 
 import { Gallery } from "@/app/components/Gallery";
 
-
 async function fetchData(userId: string, homeId: string) {
   try {
     const [homeResponse, dataResponse] = await Promise.all([
@@ -34,13 +33,16 @@ async function fetchData(userId: string, homeId: string) {
     ]);
 
     if (!homeResponse.ok || !dataResponse.ok) {
-      throw new Error('Failed to fetch home data');
+      throw new Error("Failed to fetch home data");
     }
 
-    const [homeData, data] = await Promise.all([homeResponse.json(), dataResponse.json()]);
+    const [homeData, data] = await Promise.all([
+      homeResponse.json(),
+      dataResponse.json(),
+    ]);
     return { homeData: homeData.data, data: data.data };
   } catch (error) {
-    console.error('Error fetching home data:', error);
+    console.error("Error fetching home data:", error);
     return { homeData: null, data: null };
   }
 }
@@ -143,26 +145,33 @@ async function HomeId({ params }: { params: { id: string } }) {
         </div>
       </div>
       <div className="relative flex flex-col md:flex-row gap-y-2 lg:gap-2 overflow-hidden rounded-xl h-[550px] md:h-[450px]">
-        <div className="relative w:full lg:w-1/2 h-full cursor-pointer">
-          <Image
-            alt="Image of Home"
-            src={`https://jxvqpjydezilbytxarzd.supabase.co/storage/v1/object/public/images/${data?.photos[0]}`}
-            fill
-            className="h-full object-cover w-full"
-          />
-          <div className="absolute top-0 left-0 w-full h-full z-20 hover:bg-black hover:bg-opacity-20 " />
-        </div>
+        {data.photo[0] && (
+          <div className="relative w:full lg:w-1/2 h-full cursor-pointer">
+            <Image
+              alt="Image of Home"
+              src={`https://jxvqpjydezilbytxarzd.supabase.co/storage/v1/object/public/images/${data?.photos[0]}`}
+              fill
+              className="h-full object-cover w-full"
+            />
+            <div className="absolute top-0 left-0 w-full h-full z-20 hover:bg-black hover:bg-opacity-20 " />
+          </div>
+        )}
+
         <div className="w:full lg:w-1/2 h-full grid grid-cols-2 grid-rows-2 row-auto gap-2">
-          {data?.photos.slice(1, 5).map((photo: string, index: number) => (
-            <div key={index} className="relative w-full h-full cursor-pointer">
-              <Image
-                alt="Image of Home"
-                src={`https://jxvqpjydezilbytxarzd.supabase.co/storage/v1/object/public/images/${photo}`}
-                className="h-full object-cover w-full"
-              />
-              <div className="absolute top-0 left-0 w-full h-full z-20 hover:bg-black hover:bg-opacity-20 " />
-            </div>
-          ))}
+          {data.photo[0] &&
+            data?.photos.slice(1, 5).map((photo: string, index: number) => (
+              <div
+                key={index}
+                className="relative w-full h-full cursor-pointer"
+              >
+                <Image
+                  alt="Image of Home"
+                  src={`https://jxvqpjydezilbytxarzd.supabase.co/storage/v1/object/public/images/${photo}`}
+                  className="h-full object-cover w-full"
+                />
+                <div className="absolute top-0 left-0 w-full h-full z-20 hover:bg-black hover:bg-opacity-20 " />
+              </div>
+            ))}
         </div>
         <div className="absolute cursor-pointer right-5 bottom-5 z-40 flex items-center gap-x-1 px-2 py-1 bg-white border border-1 rounded-md transition-all duration-150 hover:shadow-md hover:scale-105">
           <Images />
