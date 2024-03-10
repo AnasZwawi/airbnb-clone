@@ -85,6 +85,14 @@ async function getData(homeId: string) {
 
 async function HomeId({ params }: { params: { id: string } }) {
   //Just some function to show flag as png
+  function showOverflow(st: boolean = false){
+    if(st){
+      return true
+    }
+    else{
+      return false
+    }
+  }
 
   const formatter = new Intl.DateTimeFormat("en-GB", {
     year: "numeric",
@@ -164,7 +172,7 @@ async function HomeId({ params }: { params: { id: string } }) {
           </>
         </div>
       </div>
-      <div className="flex flex-col md:flex-row gap-y-2 lg:gap-2 overflow-hidden rounded-xl h-[550px] md:h-[450px]">
+      <div className={`relative flex flex-col md:flex-row gap-y-2 lg:gap-2 rounded-xl h-[550px] md:h-[450px] ${showOverflow() ? 'overflow-visible': 'overflow-hidden'}`}>
         <div className="relative w:full lg:w-1/2 h-full cursor-pointer">
           <Image
             alt="Image of Home"
@@ -186,7 +194,7 @@ async function HomeId({ params }: { params: { id: string } }) {
             </div>
           ))}
         </div>
-        <ShowGallery/>
+        <ShowGallery showOverflow={showOverflow}/>
       </div>
 
       <div className="flex flex-col gap-y-8 lg:flex-row justify-between gap-x-2 mt-6">
