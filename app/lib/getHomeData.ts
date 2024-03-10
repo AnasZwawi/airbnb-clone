@@ -20,12 +20,12 @@ export const useHomeData = ({ id }: { id: string }) => {
         const { getUser } = getKindeServerSession();
         const user = await getUser();
         const data = await getData(id);
-        const { getCountryByValue } = useCountries(); // Include useCountries here
-        const country = getCountryByValue(data?.country as string);
+        // Include useCountries here
+        
         const startTime = data?.createdAT ? new Date(data.createdAT).getTime() : new Date().getTime();
         const endTime = new Date().getTime();
   
-        setUserData({ user, data, country, startTime, endTime });
+        setUserData({ user, data, startTime, endTime });
         setHomeData(await getHome(user?.id as string, id));
       } catch (error) {
         console.error("Error fetching home data:", error);

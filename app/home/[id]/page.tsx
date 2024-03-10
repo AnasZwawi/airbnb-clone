@@ -29,11 +29,11 @@ import { Gallery } from "@/app/components/Gallery";
 async function HomeId({ params }: { params: { id: string } }) {
   /* const [gallery, showGallery] = useState(false); */
 
-  
+  const { getCountryByValue } = useCountries();
 
   // fetching the user id from kinde auth
 
-  const { user, homeData, data, country, startTime, endTime } = useHomeData({ id: params.id });
+  const { user, homeData, data, startTime, endTime } = useHomeData({ id: params.id });
 
 
 
@@ -138,7 +138,7 @@ async function HomeId({ params }: { params: { id: string } }) {
         <div className="flex flex-col gap-y-8 lg:flex-row justify-between gap-x-2 mt-6">
           <div className="w-full lg:w-2/3 leading-none">
             <h3 className="font-semibold text-black text-2xl tracking-tighter flex items-center gap-x-2">
-              {country?.label}
+              {/* {country?.label} */}
             </h3>
 
             <div className="w-full flex font-medium text-sm sm:mx-0 items-center">
@@ -195,7 +195,7 @@ async function HomeId({ params }: { params: { id: string } }) {
               Where you’ll be
             </h2>
 
-            <HomeMap locationValue={country?.value as string} />
+            {/* <HomeMap locationValue={country?.value as string} /> */}
           </div>
           <form
             action={createReservation}
