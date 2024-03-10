@@ -1,4 +1,4 @@
- 
+
 import React, { useState } from "react";
 import prisma from "@/app/lib/db";
 import Image from "next/image";
@@ -23,7 +23,6 @@ import {
 import { unstable_noStore as noStore } from "next/cache";
 import { Dot, Images, Star } from "lucide-react";
 import { redirect } from "next/navigation";
-
 
 async function getHome(userId: string, homeId: string) {
   noStore();
@@ -189,9 +188,10 @@ async function HomeId({ params }: { params: { id: string } }) {
             </div>
           ))}
         </div>
-        <div className="absolute cursor-pointer right-5 bottom-5 z-40">
-          <ShowAllImages/>
-        </div>
+        <div className="absolute cursor-pointer right-5 bottom-5 z-40 flex items-center gap-x-1 px-2 py-1 bg-white border border-1 rounded-md transition-all duration-150 hover:shadow-md hover:scale-105">
+            <Images />
+            <p>Show all photos</p>
+          </div>
       </div>
 
       <div className="flex flex-col gap-y-8 lg:flex-row justify-between gap-x-2 mt-6">
