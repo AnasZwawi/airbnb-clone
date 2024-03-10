@@ -83,10 +83,8 @@ async function getData(homeId: string) {
 }
 
 async function HomeId({ params }: { params: { id: string } }) {
-  const data = await getData(params.id);
-  const { getCountryByValue } = useCountries();
-  const country = getCountryByValue(data?.country as string);
-
+  const [bool , setBool] = useState(false)
+  console.log(bool)
   //Just some function to show flag as png
 
   const formatter = new Intl.DateTimeFormat("en-GB", {
@@ -96,11 +94,14 @@ async function HomeId({ params }: { params: { id: string } }) {
   });
 
   // fetching the user id from kinde auth
+  "use server"
   const { getUser } = getKindeServerSession();
   const user = await getUser();
 
   const homeData = await getHome(user?.id as string, params.id);
-
+  const data = await getData(params.id);
+  const { getCountryByValue } = useCountries();
+  const country = getCountryByValue(data?.country as string);
   let startTime = data?.createdAT.getTime() ?? new Date().getTime();
   let endTime = new Date().getTime();
 
@@ -132,7 +133,7 @@ async function HomeId({ params }: { params: { id: string } }) {
                         name="pathName"
                         value={("/home/" + params.id) as string}
                       />
-                      <DeleteFromFavoriteButton classn="w-6 h-6" />
+                      <DeleteFromFavoriteButton classn="w-6 h-6 relative top-[2px] left-[2px]" />
                     </form>
                     <p className="font-semibold text-md tracking-tighter underline">
                       Unsave
@@ -186,7 +187,7 @@ async function HomeId({ params }: { params: { id: string } }) {
             </div>
           ))}
         </div>
-        <div className="absolute cursor-pointer right-5 bottom-5 z-40 flex items-center gap-x-1 px-2 py-1 bg-white border border-1 rounded-md transition-all duration-150 hover:shadow-md hover:scale-105">
+        <div className="absolute cursor-pointer right-5 bottom-5 z-40 flex items-center gap-x-1 px-2 py-1 bg-white border border-1 rounded-md transition-all duration-150 hover:shadow-md hover:scale-105" onClick={()=>{setBool(true)}}>
           <Images />
           <p>Show all photos</p>
         </div>
