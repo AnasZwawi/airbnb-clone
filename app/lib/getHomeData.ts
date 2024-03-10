@@ -1,3 +1,4 @@
+"use server"
 import prisma from "@/app/lib/db";
 import { useCountries } from "@/app/lib/getCountries";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
@@ -65,13 +66,6 @@ async function getData(homeId: string) {
 
 export const useHomeData = async({ params }: { params: { id: string } }) => {
 
-  //Just some function to show flag as png
-
-  const formatter = new Intl.DateTimeFormat("en-GB", {
-    year: "numeric",
-    month: "long",
-    day: "2-digit",
-  });
 
   // fetching the user id from kinde auth
   const { getUser } = getKindeServerSession();
