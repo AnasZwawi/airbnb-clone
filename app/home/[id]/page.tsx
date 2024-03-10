@@ -1,4 +1,4 @@
-"use client";
+'use client'
 import React, { useState } from "react";
 import prisma from "@/app/lib/db";
 import Image from "next/image";
@@ -23,7 +23,6 @@ import {
 import { unstable_noStore as noStore } from "next/cache";
 import { Dot, Images, Star } from "lucide-react";
 import { redirect } from "next/navigation";
-import { dataHandler } from "./actions";
 
 async function getHome(userId: string, homeId: string) {
   noStore();
@@ -85,8 +84,8 @@ async function getData(homeId: string) {
 }
 
 async function HomeId({ params }: { params: { id: string } }) {
-  const [bool, setBool] = useState(false);
-  console.log(bool);
+  const [bool , setBool] = useState(false)
+  console.log(bool)
   //Just some function to show flag as png
 
   const formatter = new Intl.DateTimeFormat("en-GB", {
@@ -95,9 +94,18 @@ async function HomeId({ params }: { params: { id: string } }) {
     day: "2-digit",
   });
 
-  const { getCountryByValue } = useCountries();
+  // fetching the user id from kinde auth
+  
+  
+  const { getUser } = getKindeServerSession();
+  const user = await getUser();
 
-  const { data, homeData, country, startTime, endTime, user } = await dataHandler({ params,getCountryByValue });
+  const homeData = await getHome(user?.id as string, params.id);
+  const data = await getData(params.id);
+  const { getCountryByValue } = useCountries();
+  const country = getCountryByValue(data?.country as string);
+  let startTime = data?.createdAT.getTime() ?? new Date().getTime();
+  let endTime = new Date().getTime();
 
   return (
     <div className="w-[85%] max-w-[1320px] lg:w-[75%] mx-auto mt-5">
@@ -181,12 +189,7 @@ async function HomeId({ params }: { params: { id: string } }) {
             </div>
           ))}
         </div>
-        <div
-          className="absolute cursor-pointer right-5 bottom-5 z-40 flex items-center gap-x-1 px-2 py-1 bg-white border border-1 rounded-md transition-all duration-150 hover:shadow-md hover:scale-105"
-          onClick={() => {
-            setBool(true);
-          }}
-        >
+        <div className="absolute cursor-pointer right-5 bottom-5 z-40 flex items-center gap-x-1 px-2 py-1 bg-white border border-1 rounded-md transition-all duration-150 hover:shadow-md hover:scale-105" onClick={()=>{setBool(true)}}>
           <Images />
           <p>Show all photos</p>
         </div>
