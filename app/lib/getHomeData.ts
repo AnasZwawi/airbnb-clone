@@ -15,7 +15,7 @@ export const useHomeData = ({ id }: { id: string }) => {
     endTime: null,
   });
 
-  useEffect(() => {
+
     async function fetchData() {
       try {
         const { getUser } = getKindeServerSession();
@@ -34,7 +34,6 @@ export const useHomeData = ({ id }: { id: string }) => {
       }
     }
     fetchData();
-  }, [id]);
 
   return { ...userData, homeData };
 };

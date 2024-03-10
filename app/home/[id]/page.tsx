@@ -35,8 +35,9 @@ async function HomeId({ params }: { params: { id: string } }) {
     day: "2-digit",
   });
 
-  // fetching the user id from kinde auth
-  const { user, homeData, data, startTime, endTime } = useHomeData({ id: params.id });
+
+      const { user, homeData, data, startTime, endTime } = useHomeData({ id: params.id });
+      return {user, homeData, data, startTime, endTime}
 
   return (
     <>
