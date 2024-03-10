@@ -15,6 +15,5 @@ export const ShowGallery = () => {
     {gallery && <div className="absolute w-[100vw] h-[100vh] top-0 left-0 z-50 bg-white"></div>}
     
     </>
-    
   );
 };
