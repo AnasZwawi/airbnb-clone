@@ -1,231 +1,98 @@
-import React, { useState } from "react";
-import prisma from "@/app/lib/db";
-import Image from "next/image";
-import { useCountries } from "@/app/lib/getCountries";
-import { Separator } from "@/components/ui/separator";
-import { CategoryShowcase } from "@/app/components/CategoryShowcase";
-import { HomeMap } from "@/app/components/HomeMap";
-import { SelectCalendar } from "@/app/components/SelectCalendar";
-import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
 import {
   addToFavorite,
   createReservation,
   deleteFromFavorite,
 } from "@/app/actions";
-import {
-  AddToFavoriteButton,
-  DeleteFromFavoriteButton,
-  ReservationSubmit,
-} from "@/app/components/SubmitButton";
-import { unstable_noStore as noStore } from "next/cache";
-import { Dot, Images, Star } from "lucide-react";
-import { redirect } from "next/navigation";
-import Client from "./client";
-
-async function getHome(userId: string, homeId: string) {
-  noStore();
-  const data = await prisma.home.findUnique({
-    where: {
-      id: homeId,
-    },
-    select: {
-      id: true,
-      country: true,
-      photos: true,
-      description: true,
-      price: true,
-      Favorite: {
-        where: {
-          userId: userId,
-        },
-      },
-    },
-  });
-  return data;
-}
-
-async function getData(homeId: string) {
-  noStore();
-
-  const data = await prisma.home.findUnique({
-    where: {
-      id: homeId,
-    },
-    select: {
-      Favorite: true,
-      photos: true,
-      description: true,
-      guests: true,
-      bedrooms: true,
-      bathrooms: true,
-      country: true,
-      title: true,
-      category: true,
-      price: true,
-      createdAT: true,
-      User: {
-        select: {
-          profileImage: true,
-          firstname: true,
-          id: true,
-        },
-      },
-      Reservation: {
-        where: {
-          homeId: homeId,
-        },
-      },
-    },
-  });
-
-  return data;
-}
-
-async function HomeId({ params }: { params: { id: string } }) {
-  //Just some function to show flag as png
-
-  const formatter = new Intl.DateTimeFormat("en-GB", {
-    year: "numeric",
-    month: "long",
-    day: "2-digit",
-  });
-
-  // fetching the user id from kinde auth
-
-  const { getUser } = getKindeServerSession();
-  const user = await getUser();
-
-  const homeData = await getHome(user?.id as string, params.id);
-  const data = await getData(params.id);
-  const { getCountryByValue } = useCountries();
-  const country = getCountryByValue(data?.country as string);
-  let startTime = data?.createdAT.getTime() ?? new Date().getTime();
-  let endTime = new Date().getTime();
-
-  return (
-    <Client
-      user={user}
-      homeData={homeData}
-      data={data}
-      getCountryByValue={getCountryByValue}
-      id = {params.id}
-      startTime = {startTime}
-      endTime= {endTime}
-    />
-  );
-}
-
-export default HomeId;
-
-/* 
-import React, { useState } from "react";
-import prisma from "@/app/lib/db";
-import Image from "next/image";
-import { useCountries } from "@/app/lib/getCountries";
-import { Separator } from "@/components/ui/separator";
 import { CategoryShowcase } from "@/app/components/CategoryShowcase";
 import { HomeMap } from "@/app/components/HomeMap";
 import { SelectCalendar } from "@/app/components/SelectCalendar";
-import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
-import {
-  addToFavorite,
-  createReservation,
-  deleteFromFavorite,
-} from "@/app/actions";
 import {
   AddToFavoriteButton,
   DeleteFromFavoriteButton,
   ReservationSubmit,
 } from "@/app/components/SubmitButton";
-import { unstable_noStore as noStore } from "next/cache";
-import { Dot, Images, Star } from "lucide-react";
-import { redirect } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import { Separator } from "@radix-ui/react-dropdown-menu";
+import { Dot, Star, Images } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 
-async function getHome(userId: string, homeId: string) {
-  noStore();
-  const data = await prisma.home.findUnique({
-    where: {
-      id: homeId,
-    },
-    select: {
-      id: true,
-      country: true,
-      photos: true,
-      description: true,
-      price: true,
-      Favorite: {
-        where: {
-          userId: userId,
-        },
-      },
-    },
-  });
-  return data;
+interface HomeData {
+  id: string;
+  country: string | null;
+  description: string | null;
+  photos: string[];
+  price: number | null;
+  Favorite: {
+    id: string;
+    userId: string | null;
+    homeId: string | null;
+    createdAt: Date;
+  }[];
 }
 
-async function getData(homeId: string) {
-  noStore();
-
-  const data = await prisma.home.findUnique({
-    where: {
-      id: homeId,
-    },
-    select: {
-      Favorite: true,
-      photos: true,
-      description: true,
-      guests: true,
-      bedrooms: true,
-      bathrooms: true,
-      country: true,
-      title: true,
-      category: true,
-      price: true,
-      createdAT: true,
-      User: {
-        select: {
-          profileImage: true,
-          firstname: true,
-          id: true,
-        },
-      },
-      Reservation: {
-        where: {
-          homeId: homeId,
-        },
-      },
-    },
-  });
-
-  return data;
-}
-
-async function HomeId({ params }: { params: { id: string } }) {
-
-  //Just some function to show flag as png
-
-  const formatter = new Intl.DateTimeFormat("en-GB", {
-    year: "numeric",
-    month: "long",
-    day: "2-digit",
-  });
-
-  // fetching the user id from kinde auth
+interface UserData {
+  id: string;
+  title: string | null;
+  country: string | null;
+  category: string | null;
+  description: string | null;
+  guests: string | null;
+  bedrooms: string | null;
+  bathrooms: string | null;
+  User: { id: string; firstname: string; profileImage: string | null } | null;
+  photos: string[];
+  price : number | null;
+  Favorite : {
+    id: string;
+    userId: string | null;
+    homeId: string | null;
+    createdAt: Date;
+  }
+  addedCategory: boolean;
+  addedDescription: boolean;
+  addedLocation: boolean;
+  Reservation: {
+    id: string;
+    startDate : Date;
+    endDate: Date;
+    createdAt: Date;
+    userId: string | null;
+    home: string | null;
+  }
   
-  const { getUser } = getKindeServerSession();
-  const user = await getUser();
+  // Define other properties as needed
+}
 
-  const homeData = await getHome(user?.id as string, params.id);
-  const data = await getData(params.id);
-  const { getCountryByValue } = useCountries();
+interface KindeUser {
+  id: string;
+}
+
+interface ClientProps {
+  user: any;
+  homeData: any;
+  data: any;
+  getCountryByValue: (country: string) => any; // Define the return type as needed
+  id: string;
+  startTime: number;
+  endTime: number;
+}
+
+async function Client({
+  user,
+  homeData,
+  data,
+  getCountryByValue,
+  id,
+  startTime,
+  endTime,
+}: ClientProps) {
   const country = getCountryByValue(data?.country as string);
-  let startTime = data?.createdAT.getTime() ?? new Date().getTime();
-  let endTime = new Date().getTime();
-
+  const formatter = new Intl.DateTimeFormat("en-GB", {
+    year: "numeric",
+    month: "long",
+    day: "2-digit",
+  });
   return (
     <div className="w-[85%] max-w-[1320px] lg:w-[75%] mx-auto mt-5">
       <div className="flex flex-col lg:flex-row justify-between gap-y-4 lg:items-center mb-4">
@@ -252,7 +119,7 @@ async function HomeId({ params }: { params: { id: string } }) {
                       <input
                         type="hidden"
                         name="pathName"
-                        value={("/home/" + params.id) as string}
+                        value={("/home/" + id) as string}
                       />
                       <DeleteFromFavoriteButton classn="w-6 h-6 relative top-[1px] left-[3px]" />
                     </form>
@@ -263,16 +130,12 @@ async function HomeId({ params }: { params: { id: string } }) {
                 ) : (
                   <>
                     <form action={addToFavorite}>
-                      <input
-                        type="hidden"
-                        name="homeId"
-                        value={params.id as string}
-                      />
+                      <input type="hidden" name="homeId" value={id as string} />
                       <input type="hidden" name="userId" value={user.id} />
                       <input
                         type="hidden"
                         name="pathName"
-                        value={"/home/" + params.id}
+                        value={"/home/" + id}
                       />
                       <AddToFavoriteButton classn="h-6 w-6 relative top-[1px] left-[3px]" />
                     </form>
@@ -309,9 +172,9 @@ async function HomeId({ params }: { params: { id: string } }) {
           ))}
         </div>
         <div className="absolute cursor-pointer right-5 bottom-5 z-40 flex items-center gap-x-1 px-2 py-1 bg-white border border-1 rounded-md transition-all duration-150 hover:shadow-md hover:scale-105">
-            <Images />
-            <p>Show all photos</p>
-          </div>
+          <Images />
+          <p>Show all photos</p>
+        </div>
       </div>
 
       <div className="flex flex-col gap-y-8 lg:flex-row justify-between gap-x-2 mt-6">
@@ -378,7 +241,7 @@ async function HomeId({ params }: { params: { id: string } }) {
         </div>
         <form action={createReservation} className="flex flex-col items-center">
           <input type="hidden" name="userId" value={user?.id} />
-          <input type="hidden" name="homeId" value={params.id} />
+          <input type="hidden" name="homeId" value={id} />
           <SelectCalendar reservations={data?.Reservation} />
 
           {user?.id ? (
@@ -394,7 +257,4 @@ async function HomeId({ params }: { params: { id: string } }) {
   );
 }
 
-export default HomeId;
-
-
- */
+export default Client;
