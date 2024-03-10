@@ -94,7 +94,7 @@ async function HomeId({ params }: { params: { id: string } }) {
     day: "2-digit",
   });
 
-  // fetching the user id from kinde auth
+  // packing all server processing
   async function dataHandler() {
     "use server";
     const { getUser } = getKindeServerSession();
