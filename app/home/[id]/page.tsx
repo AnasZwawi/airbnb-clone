@@ -84,8 +84,7 @@ async function getData(homeId: string) {
 }
 
 async function HomeId({ params }: { params: { id: string } }) {
-  const [bool , setBool] = useState(false)
-  console.log(bool)
+
   //Just some function to show flag as png
 
   const formatter = new Intl.DateTimeFormat("en-GB", {
@@ -189,7 +188,7 @@ async function HomeId({ params }: { params: { id: string } }) {
             </div>
           ))}
         </div>
-        <div className="absolute cursor-pointer right-5 bottom-5 z-40 flex items-center gap-x-1 px-2 py-1 bg-white border border-1 rounded-md transition-all duration-150 hover:shadow-md hover:scale-105" onClick={()=>{setBool(true)}}>
+        <div className="absolute cursor-pointer right-5 bottom-5 z-40 flex items-center gap-x-1 px-2 py-1 bg-white border border-1 rounded-md transition-all duration-150 hover:shadow-md hover:scale-105">
           <Images />
           <p>Show all photos</p>
         </div>
