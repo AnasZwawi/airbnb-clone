@@ -1,4 +1,4 @@
-'use State'
+'use client'
 import { Images } from "lucide-react";
 import React, { useState } from "react";
 import { Gallery } from "./Gallery";
