@@ -10,7 +10,7 @@ import {
 import "pure-react-carousel/dist/react-carousel.es.css";
 export const Gallery = () => {
   return (
-    <div className="fixed left-0 top-0 z-50 bg-black bg-opacity-90 backdrop-blur-md w-full h-full flex justify-center items-center overflow-hidden">
+    <div className="fixed left-0 top-0 z-50 bg-black bg-opacity-90 backdrop-blur-md w-full h-[100vh] overflow-y-hidden flex justify-center items-center overflow-hidden">
       <CarouselProvider
         naturalSlideWidth={100}
         naturalSlideHeight={125}
