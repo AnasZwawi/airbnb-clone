@@ -3,6 +3,7 @@ import { Images } from "lucide-react";
 import React from "react";
 import { useState } from "react";
 import Image from "next/image";
+import { Gallery } from "./Gallery";
 
 export const ShowGallery = ({photos}: {photos: string[] | undefined}) => {
   const [gallery, showGallery] = useState(false);
@@ -12,7 +13,7 @@ export const ShowGallery = ({photos}: {photos: string[] | undefined}) => {
   return (
     <>
     {gallery && (
-          <div className="absolute w-[100vw] h-[100vh] top-0 left-0 z-50 bg-black bg-opacity-90"></div>
+          <Gallery/>
         )}
       <div
         className={`relative flex flex-col md:flex-row gap-y-2 lg:gap-2 rounded-xl h-[550px] md:h-[450px] overflow-hidden`}
