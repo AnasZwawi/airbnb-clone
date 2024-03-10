@@ -168,7 +168,7 @@ async function HomeId({ params }: { params: { id: string } }) {
         <ShowGallery photos={data?.photos}/>
       </div>
 
-      <div className="flex flex-col gap-y-8 lg:flex-row justify-between gap-x-2 mt-6">
+      <div className="flex container flex-col gap-y-8 lg:flex-row justify-between gap-x-2 mt-6">
         <div className="w-full lg:w-2/3 leading-none">
           <h3 className="font-semibold text-black text-2xl tracking-tighter flex items-center gap-x-2">
             {country?.label}
