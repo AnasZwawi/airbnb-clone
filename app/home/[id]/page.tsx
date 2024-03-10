@@ -29,19 +29,15 @@ import { Gallery } from "@/app/components/Gallery";
 async function HomeId({ params }: { params: { id: string } }) {
   /* const [gallery, showGallery] = useState(false); */
 
-  const { getCountryByValue } = useCountries();
-
-  // fetching the user id from kinde auth
-
-  const { user, homeData, data, startTime, endTime } = useHomeData({ id: params.id });
-
-
-
   const formatter = new Intl.DateTimeFormat("en-GB", {
     year: "numeric",
     month: "long",
     day: "2-digit",
   });
+
+  // fetching the user id from kinde auth
+  const { user, homeData, data, startTime, endTime } = useHomeData({ id: params.id });
+
   return (
     <>
       {/* {gallery && <Gallery />} */}
