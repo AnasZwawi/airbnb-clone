@@ -23,6 +23,7 @@ import {
 import { unstable_noStore as noStore } from "next/cache";
 import { Dot, Images, Star } from "lucide-react";
 import { redirect } from "next/navigation";
+import { dataHandler } from "./actions";
 
 async function getHome(userId: string, homeId: string) {
   noStore();
@@ -95,22 +96,9 @@ async function HomeId({ params }: { params: { id: string } }) {
   });
 
   // packing all server processing
-  async function dataHandler() {
-    "use server";
-    const { getUser } = getKindeServerSession();
-    const user = await getUser();
+ 
 
-    const homeData = await getHome(user?.id as string, params.id);
-    const data = await getData(params.id);
-    const { getCountryByValue } = useCountries();
-    const country = getCountryByValue(data?.country as string);
-    let startTime = data?.createdAT.getTime() ?? new Date().getTime();
-    let endTime = new Date().getTime();
-
-    return { data, homeData, country, startTime, endTime, user };
-  }
-
-  const { data, homeData, country, startTime, endTime, user } = await dataHandler();
+  const { data, homeData, country, startTime, endTime, user } = await dataHandler({ params: { id: params.id } });
 
   return (
     <div className="w-[85%] max-w-[1320px] lg:w-[75%] mx-auto mt-5">
