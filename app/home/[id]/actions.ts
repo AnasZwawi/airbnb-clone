@@ -64,14 +64,13 @@ async function getData(homeId: string) {
 }
 
 // packing all server processing
-export async function dataHandler({ params }: { params: { id: string } }) {
-  "use server";
+export async function dataHandler({ params, getCountryByValue }: { params: { id: string }, getCountryByValue: (value: string) => any }) {
   const { getUser } = getKindeServerSession();
   const user = await getUser();
 
   const homeData = await getHome(user?.id as string, params.id);
   const data = await getData(params.id);
-  const { getCountryByValue } = useCountries();
+  
   const country = getCountryByValue(data?.country as string);
   let startTime = data?.createdAT.getTime() ?? new Date().getTime();
   let endTime = new Date().getTime();

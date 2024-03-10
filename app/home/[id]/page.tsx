@@ -95,10 +95,9 @@ async function HomeId({ params }: { params: { id: string } }) {
     day: "2-digit",
   });
 
-  // packing all server processing
- 
+  const { getCountryByValue } = useCountries();
 
-  const { data, homeData, country, startTime, endTime, user } = await dataHandler({ params: { id: params.id } });
+  const { data, homeData, country, startTime, endTime, user } = await dataHandler({ params,getCountryByValue });
 
   return (
     <div className="w-[85%] max-w-[1320px] lg:w-[75%] mx-auto mt-5">
