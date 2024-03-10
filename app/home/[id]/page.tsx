@@ -105,70 +105,68 @@ async function HomeId({ params }: { params: { id: string } }) {
   let endTime = new Date().getTime();
 
   return (
-    <>
-      <div className="w-[85%] max-w-[1320px] lg:w-[75%] mx-auto mt-5">
-        <div className="flex flex-col lg:flex-row justify-between gap-y-4 lg:items-center mb-4">
-          <h1 className="font-semibold text-black text-[32px] tracking-tight lg:text-2xl">
-            {data?.title}
-          </h1>
-          <div className="flex items-center relative left-[-8px] lg:left-0">
-            <>
-              {user && user.id && (
-                <>
-                  {(homeData?.Favorite.length as number) > 0 ? (
-                    <>
-                      <form action={deleteFromFavorite}>
-                        <input
-                          type="hidden"
-                          name="favoriteId"
-                          value={homeData?.Favorite[0].id as string}
-                        />
-                        <input
-                          type="hidden"
-                          name="userId"
-                          value={user.id as string}
-                        />
-                        <input
-                          type="hidden"
-                          name="pathName"
-                          value={("/home/" + params.id) as string}
-                        />
-                        <DeleteFromFavoriteButton classn="w-6 h-6 relative top-[1px] left-[3px]" />
-                      </form>
-                      <p className="font-semibold text-md tracking-tighter underline">
-                        Unsave
-                      </p>
-                    </>
-                  ) : (
-                    <>
-                      <form action={addToFavorite}>
-                        <input
-                          type="hidden"
-                          name="homeId"
-                          value={params.id as string}
-                        />
-                        <input type="hidden" name="userId" value={user.id} />
-                        <input
-                          type="hidden"
-                          name="pathName"
-                          value={"/home/" + params.id}
-                        />
-                        <AddToFavoriteButton classn="h-6 w-6 relative top-[1px] left-[3px]" />
-                      </form>
-                      <p className="font-semibold text-md tracking-tighter underline">
-                        Save
-                      </p>
-                    </>
-                  )}
-                </>
-              )}
-            </>
-          </div>
+    <div className="w-[85%] max-w-[1320px] lg:w-[75%] mx-auto mt-5">
+      <div className="flex flex-col lg:flex-row justify-between gap-y-4 lg:items-center mb-4">
+        <h1 className="font-semibold text-black text-[32px] tracking-tight lg:text-2xl">
+          {data?.title}
+        </h1>
+        <div className="flex items-center relative left-[-8px] lg:left-0">
+          <>
+            {user && user.id && (
+              <>
+                {(homeData?.Favorite.length as number) > 0 ? (
+                  <>
+                    <form action={deleteFromFavorite}>
+                      <input
+                        type="hidden"
+                        name="favoriteId"
+                        value={homeData?.Favorite[0].id as string}
+                      />
+                      <input
+                        type="hidden"
+                        name="userId"
+                        value={user.id as string}
+                      />
+                      <input
+                        type="hidden"
+                        name="pathName"
+                        value={("/home/" + params.id) as string}
+                      />
+                      <DeleteFromFavoriteButton classn="w-6 h-6 relative top-[1px] left-[3px]" />
+                    </form>
+                    <p className="font-semibold text-md tracking-tighter underline">
+                      Unsave
+                    </p>
+                  </>
+                ) : (
+                  <>
+                    <form action={addToFavorite}>
+                      <input
+                        type="hidden"
+                        name="homeId"
+                        value={params.id as string}
+                      />
+                      <input type="hidden" name="userId" value={user.id} />
+                      <input
+                        type="hidden"
+                        name="pathName"
+                        value={"/home/" + params.id}
+                      />
+                      <AddToFavoriteButton classn="h-6 w-6 relative top-[1px] left-[3px]" />
+                    </form>
+                    <p className="font-semibold text-md tracking-tighter underline">
+                      Save
+                    </p>
+                  </>
+                )}
+              </>
+            )}
+          </>
         </div>
-        <ShowGallery photos={data?.photos}/>
       </div>
+      <ShowGallery photos={data?.photos} />
 
-      <div className="flex container flex-col gap-y-8 lg:flex-row justify-between gap-x-2 mt-6">
+      <div className="flex flex-col gap-y-8 lg:flex-row justify-between gap-x-2 mt-6">
         <div className="w-full lg:w-2/3 leading-none">
           <h3 className="font-semibold text-black text-2xl tracking-tighter flex items-center gap-x-2">
             {country?.label}
@@ -244,7 +242,7 @@ async function HomeId({ params }: { params: { id: string } }) {
           )}
         </form>
       </div>
-    </>
+    </div>
   );
 }
 
