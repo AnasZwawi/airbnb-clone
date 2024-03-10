@@ -1,26 +1,41 @@
-"use server"
-import prisma from "@/app/lib/db";
-import { useCountries } from "@/app/lib/getCountries";
-import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
-import { unstable_noStore as noStore } from "next/cache";
+import { useEffect, useState } from 'react';
+import prisma from '@/app/lib/db';
+import { useCountries } from '@/app/lib/getCountries';
+import { getKindeServerSession } from '@kinde-oss/kinde-auth-nextjs/server';
+import { unstable_noStore as noStore } from 'next/cache';
 
-export const useHomeData = async ({ params }: { params: { id: string } }) => {
-  try {
-    const { getUser } = getKindeServerSession();
-    const user = await getUser();
+export const useHomeData = ({ id }: { id: string }) => {
+  const [homeData, setHomeData] = useState<any>(null);
+  const [userData, setUserData] = useState<any>({
+    user: null,
+    data: null,
+    country: null,
+    startTime: null,
+    endTime: null,
+  });
 
-    const homeData = await getHome(user?.id as string, params.id);
-    const data = await getData(params.id);
-    const { getCountryByValue } = useCountries();
-    const country = getCountryByValue(data?.country as string);
-    const startTime = data?.createdAT ? new Date(data.createdAT).getTime() : new Date().getTime();
-    const endTime = new Date().getTime();
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const { getUser } = getKindeServerSession();
+        const user = await getUser();
+        const data = await getData(id);
+        const { getCountryByValue } = useCountries(); // Include useCountries here
+        const country = getCountryByValue(data?.country as string);
+        const startTime = data?.createdAT ? new Date(data.createdAT).getTime() : new Date().getTime();
+        const endTime = new Date().getTime();
+  
+        setUserData({ user, data, country, startTime, endTime });
+        setHomeData(await getHome(user?.id as string, id));
+      } catch (error) {
+        console.error("Error fetching home data:", error);
+        throw error; // Rethrow the error to handle it outside of the hook
+      }
+    }
+    fetchData();
+  }, [id]);
 
-    return { user, homeData, data, country, startTime, endTime };
-  } catch (error) {
-    console.error("Error fetching home data:", error);
-    throw error; // Rethrow the error to handle it outside of the hook
-  }
+  return { ...userData, homeData };
 };
 
 async function getHome(userId: string, homeId: string) {

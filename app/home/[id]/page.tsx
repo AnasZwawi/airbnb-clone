@@ -29,40 +29,19 @@ import { Gallery } from "@/app/components/Gallery";
 async function HomeId({ params }: { params: { id: string } }) {
   /* const [gallery, showGallery] = useState(false); */
 
+  
+
+  // fetching the user id from kinde auth
+
+  const { user, homeData, data, country, startTime, endTime } = useHomeData({ id: params.id });
+
+
+
   const formatter = new Intl.DateTimeFormat("en-GB", {
     year: "numeric",
     month: "long",
     day: "2-digit",
   });
-
-  // fetching the user id from kinde auth
-
-  const [userData, setUserData] = useState<{
-    user: any;
-    homeData: any;
-    data: any;
-    country: any;
-    startTime: any;
-    endTime: any;
-  }>({
-    user: null,
-    homeData: null,
-    data: null,
-    country: null,
-    startTime: null,
-    endTime: null
-  });
-
-  useEffect(() => {
-    async function fetchData() {
-      const newData = await useHomeData({ params: { id: params.id } });
-      setUserData(newData);
-    }
-    fetchData();
-  }, [params.id]); // Fetch data whenever params.id changes
-
-  const { user, homeData, data, country, startTime, endTime } = userData;
-  
   return (
     <>
       {/* {gallery && <Gallery />} */}
