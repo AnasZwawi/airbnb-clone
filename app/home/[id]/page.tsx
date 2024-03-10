@@ -86,7 +86,6 @@ async function getData(homeId: string) {
 async function HomeId({ params }: { params: { id: string } }) {
   //Just some function to show flag as png
 
-
   const formatter = new Intl.DateTimeFormat("en-GB", {
     year: "numeric",
     month: "long",
@@ -106,88 +105,67 @@ async function HomeId({ params }: { params: { id: string } }) {
   let endTime = new Date().getTime();
 
   return (
-    <div className="w-[85%] max-w-[1320px] lg:w-[75%] mx-auto mt-5">
-      <div className="flex flex-col lg:flex-row justify-between gap-y-4 lg:items-center mb-4">
-        <h1 className="font-semibold text-black text-[32px] tracking-tight lg:text-2xl">
-          {data?.title}
-        </h1>
-        <div className="flex items-center relative left-[-8px] lg:left-0">
-          <>
-            {user && user.id && (
-              <>
-                {(homeData?.Favorite.length as number) > 0 ? (
-                  <>
-                    <form action={deleteFromFavorite}>
-                      <input
-                        type="hidden"
-                        name="favoriteId"
-                        value={homeData?.Favorite[0].id as string}
-                      />
-                      <input
-                        type="hidden"
-                        name="userId"
-                        value={user.id as string}
-                      />
-                      <input
-                        type="hidden"
-                        name="pathName"
-                        value={("/home/" + params.id) as string}
-                      />
-                      <DeleteFromFavoriteButton classn="w-6 h-6 relative top-[1px] left-[3px]" />
-                    </form>
-                    <p className="font-semibold text-md tracking-tighter underline">
-                      Unsave
-                    </p>
-                  </>
-                ) : (
-                  <>
-                    <form action={addToFavorite}>
-                      <input
-                        type="hidden"
-                        name="homeId"
-                        value={params.id as string}
-                      />
-                      <input type="hidden" name="userId" value={user.id} />
-                      <input
-                        type="hidden"
-                        name="pathName"
-                        value={"/home/" + params.id}
-                      />
-                      <AddToFavoriteButton classn="h-6 w-6 relative top-[1px] left-[3px]" />
-                    </form>
-                    <p className="font-semibold text-md tracking-tighter underline">
-                      Save
-                    </p>
-                  </>
-                )}
-              </>
-            )}
-          </>
+    <>
+      <div className="w-[85%] max-w-[1320px] lg:w-[75%] mx-auto mt-5">
+        <div className="flex flex-col lg:flex-row justify-between gap-y-4 lg:items-center mb-4">
+          <h1 className="font-semibold text-black text-[32px] tracking-tight lg:text-2xl">
+            {data?.title}
+          </h1>
+          <div className="flex items-center relative left-[-8px] lg:left-0">
+            <>
+              {user && user.id && (
+                <>
+                  {(homeData?.Favorite.length as number) > 0 ? (
+                    <>
+                      <form action={deleteFromFavorite}>
+                        <input
+                          type="hidden"
+                          name="favoriteId"
+                          value={homeData?.Favorite[0].id as string}
+                        />
+                        <input
+                          type="hidden"
+                          name="userId"
+                          value={user.id as string}
+                        />
+                        <input
+                          type="hidden"
+                          name="pathName"
+                          value={("/home/" + params.id) as string}
+                        />
+                        <DeleteFromFavoriteButton classn="w-6 h-6 relative top-[1px] left-[3px]" />
+                      </form>
+                      <p className="font-semibold text-md tracking-tighter underline">
+                        Unsave
+                      </p>
+                    </>
+                  ) : (
+                    <>
+                      <form action={addToFavorite}>
+                        <input
+                          type="hidden"
+                          name="homeId"
+                          value={params.id as string}
+                        />
+                        <input type="hidden" name="userId" value={user.id} />
+                        <input
+                          type="hidden"
+                          name="pathName"
+                          value={"/home/" + params.id}
+                        />
+                        <AddToFavoriteButton classn="h-6 w-6 relative top-[1px] left-[3px]" />
+                      </form>
+                      <p className="font-semibold text-md tracking-tighter underline">
+                        Save
+                      </p>
+                    </>
+                  )}
+                </>
+              )}
+            </>
+          </div>
         </div>
-      </div>
-      <div className={`relative flex flex-col md:flex-row gap-y-2 lg:gap-2 rounded-xl h-[550px] md:h-[450px] overflow-hidden`}>
-        <div className="relative w:full lg:w-1/2 h-full cursor-pointer">
-          <Image
-            alt="Image of Home"
-            src={`https://jxvqpjydezilbytxarzd.supabase.co/storage/v1/object/public/images/${data?.photos[0]}`}
-            fill
-            className="h-full object-cover w-full"
-          />
-          <div className="absolute top-0 left-0 w-full h-full z-20 hover:bg-black hover:bg-opacity-20 " />
-        </div>
-        <div className="w:full lg:w-1/2 h-full grid grid-cols-2 grid-rows-2 row-auto gap-2">
-          {data?.photos.slice(1, 5).map((photo: string, index: number) => (
-            <div key={index} className="relative w-full h-full cursor-pointer">
-              <Image
-                alt="Image of Home"
-                src={`https://jxvqpjydezilbytxarzd.supabase.co/storage/v1/object/public/images/${photo}`}
-                className="h-full object-cover w-full"
-              />
-              <div className="absolute top-0 left-0 w-full h-full z-20 hover:bg-black hover:bg-opacity-20 " />
-            </div>
-          ))}
-        </div>
-        <ShowGallery />
+        <ShowGallery photos={data?.photos}/>
       </div>
 
       <div className="flex flex-col gap-y-8 lg:flex-row justify-between gap-x-2 mt-6">
@@ -266,7 +244,7 @@ async function HomeId({ params }: { params: { id: string } }) {
           )}
         </form>
       </div>
-    </div>
+    </>
   );
 }
 
