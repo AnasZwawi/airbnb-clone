@@ -68,3 +68,17 @@
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
+
+@keyframes toTop {
+  from{
+    top: 100vh;
+  }
+  to{
+    top: 0
+  }
+}
+
+.toTopDiv{
+  animation-name: toTop;
+  animation-duration: 0.5s; 
+}
