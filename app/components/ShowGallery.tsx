@@ -13,7 +13,7 @@ export const ShowGallery = ({photos}: {photos: string[] | undefined}) => {
   return (
     <>
     {gallery && (
-          <Gallery/>
+          <Gallery photos={photos}/>
         )}
       <div
         className={`relative flex flex-col md:flex-row gap-y-2 lg:gap-2 rounded-xl h-[550px] md:h-[450px] overflow-hidden`}
