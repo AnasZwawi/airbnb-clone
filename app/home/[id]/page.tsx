@@ -275,3 +275,5 @@ async function HomeId({ params }: { params: { id: string } }) {
 }
 
 export default HomeId;
+
+
