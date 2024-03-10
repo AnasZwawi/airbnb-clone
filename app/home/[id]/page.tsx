@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import prisma from "@/app/lib/db";
 import Image from "next/image";
 import { useCountries } from "@/app/lib/getCountries";
@@ -37,8 +37,32 @@ async function HomeId({ params }: { params: { id: string } }) {
 
   // fetching the user id from kinde auth
 
-  const { user, homeData, data, country, startTime, endTime } = await useHomeData({ params: { id: params.id } });
+  const [userData, setUserData] = useState<{
+    user: any;
+    homeData: any;
+    data: any;
+    country: any;
+    startTime: any;
+    endTime: any;
+  }>({
+    user: null,
+    homeData: null,
+    data: null,
+    country: null,
+    startTime: null,
+    endTime: null
+  });
 
+  useEffect(() => {
+    async function fetchData() {
+      const newData = await useHomeData({ params: { id: params.id } });
+      setUserData(newData);
+    }
+    fetchData();
+  }, [params.id]); // Fetch data whenever params.id changes
+
+  const { user, homeData, data, country, startTime, endTime } = userData;
+  
   return (
     <>
       {/* {gallery && <Gallery />} */}
