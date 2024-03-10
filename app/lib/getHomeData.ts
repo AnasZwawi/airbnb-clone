@@ -1,9 +1,26 @@
-"use server"
 import prisma from "@/app/lib/db";
 import { useCountries } from "@/app/lib/getCountries";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { unstable_noStore as noStore } from "next/cache";
 
+export const useHomeData = async ({ params }: { params: { id: string } }) => {
+  try {
+    const { getUser } = getKindeServerSession();
+    const user = await getUser();
+
+    const homeData = await getHome(user?.id as string, params.id);
+    const data = await getData(params.id);
+    const { getCountryByValue } = useCountries();
+    const country = getCountryByValue(data?.country as string);
+    const startTime = data?.createdAT ? new Date(data.createdAT).getTime() : new Date().getTime();
+    const endTime = new Date().getTime();
+
+    return { user, homeData, data, country, startTime, endTime };
+  } catch (error) {
+    console.error("Error fetching home data:", error);
+    throw error; // Rethrow the error to handle it outside of the hook
+  }
+};
 
 async function getHome(userId: string, homeId: string) {
   noStore();
@@ -62,22 +79,4 @@ async function getData(homeId: string) {
   });
 
   return data;
-}
-
-export const useHomeData = async({ params }: { params: { id: string } }) => {
-
-
-  // fetching the user id from kinde auth
-  const { getUser } = getKindeServerSession();
-  const user = await getUser();
-
-  const homeData = await getHome(user?.id as string, params.id);
-  const data = await getData(params.id);
-  const { getCountryByValue } = useCountries();
-  const country = getCountryByValue(data?.country as string);
-  let startTime = data?.createdAT.getTime() ?? new Date().getTime();
-  let endTime = new Date().getTime();
-
-
-  return {user, homeData, data, country, startTime, endTime}
 }

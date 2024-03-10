@@ -37,8 +37,7 @@ async function HomeId({ params }: { params: { id: string } }) {
 
   // fetching the user id from kinde auth
 
-  const { user, homeData, data, country, startTime, endTime } =
-    await useHomeData({ params: { id: params.id } });
+  const { user, homeData, data, country, startTime, endTime } = await useHomeData({ params: { id: params.id } });
 
   return (
     <>
