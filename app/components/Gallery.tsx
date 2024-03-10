@@ -4,8 +4,8 @@ import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from 'pure-re
 import 'pure-react-carousel/dist/react-carousel.es.css';
 export const Gallery = () => {
   return (
-    <div className='sticky left-0 top-0 z-50 bg-white bg-opacity-90 backdrop-blur-md w-[100vw] h-[100vh]  flex justify-center items-center toTop'>
-      <CarouselProvider
+    <div className='sticky left-0 top-0 z-50 bg-black bg-opacity-90 backdrop-blur-md w-[100vw] h-[100vh]  flex justify-center items-center toTop'>
+      {/* <CarouselProvider
         naturalSlideWidth={100}
         naturalSlideHeight={125}
         totalSlides={3}
@@ -15,7 +15,7 @@ export const Gallery = () => {
           <Slide index={1}>I am the second Slide.</Slide>
           <Slide index={2}>I am the third Slide.</Slide>
         </Slider>
-      </CarouselProvider>
+      </CarouselProvider> */}
     </div>
   )
 }
