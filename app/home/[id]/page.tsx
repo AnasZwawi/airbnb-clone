@@ -1,4 +1,4 @@
-
+"use client";
 import React, { useState } from "react";
 import prisma from "@/app/lib/db";
 import Image from "next/image";
@@ -23,71 +23,11 @@ import {
 import { unstable_noStore as noStore } from "next/cache";
 import { Dot, Images, Star } from "lucide-react";
 import { redirect } from "next/navigation";
-import { ShowAllImages } from "@/app/components/ShowAllImages";
 import { useHomeData } from "@/app/lib/getHomeData";
-
-async function getHome(userId: string, homeId: string) {
-  noStore();
-  const data = await prisma.home.findUnique({
-    where: {
-      id: homeId,
-    },
-    select: {
-      id: true,
-      country: true,
-      photos: true,
-      description: true,
-      price: true,
-      Favorite: {
-        where: {
-          userId: userId,
-        },
-      },
-    },
-  });
-  return data;
-}
-
-async function getData(homeId: string) {
-  noStore();
-
-  const data = await prisma.home.findUnique({
-    where: {
-      id: homeId,
-    },
-    select: {
-      Favorite: true,
-      photos: true,
-      description: true,
-      guests: true,
-      bedrooms: true,
-      bathrooms: true,
-      country: true,
-      title: true,
-      category: true,
-      price: true,
-      createdAT: true,
-      User: {
-        select: {
-          profileImage: true,
-          firstname: true,
-          id: true,
-        },
-      },
-      Reservation: {
-        where: {
-          homeId: homeId,
-        },
-      },
-    },
-  });
-
-  return data;
-}
+import { Gallery } from "@/app/components/Gallery";
 
 async function HomeId({ params }: { params: { id: string } }) {
-
-  //Just some function to show flag as png
+  const [gallery, showGallery] = useState(false)
 
   const formatter = new Intl.DateTimeFormat("en-GB", {
     year: "numeric",
@@ -96,12 +36,17 @@ async function HomeId({ params }: { params: { id: string } }) {
   });
 
   // fetching the user id from kinde auth
-  
-  const {user, homeData, data, country, startTime, endTime} = await useHomeData({ params: { id: params.id } })
+
+  const { user, homeData, data, country, startTime, endTime } =
+    await useHomeData({ params: { id: params.id } });
 
   return (
+    <>
+    {gallery && (
+      <Gallery/>  
+    )}
     <div className="w-[85%] max-w-[1320px] lg:w-[75%] mx-auto mt-5">
-      <div className="flex flex-col lg:flex-row justify-between gap-y-4 lg:items-center mb-4">
+      <div className="flex flex-col lg:flex-row justify-between gap-y-4 lg:items-end mb-4">
         <h1 className="font-semibold text-black text-[32px] tracking-tight lg:text-2xl">
           {data?.title}
         </h1>
@@ -181,8 +126,9 @@ async function HomeId({ params }: { params: { id: string } }) {
             </div>
           ))}
         </div>
-        <div className="absolute cursor-pointer right-5 bottom-5 z-40">
-          <ShowAllImages/>
+        <div className="absolute cursor-pointer right-5 bottom-5 z-40 flex items-center gap-x-1 px-2 py-1 bg-white border border-1 rounded-md transition-all duration-150 hover:shadow-md hover:scale-105" onClick={()=>{showGallery(true)}}>
+          <Images />
+          <p>Show all photos</p>
         </div>
       </div>
 
@@ -263,15 +209,11 @@ async function HomeId({ params }: { params: { id: string } }) {
         </form>
       </div>
     </div>
+    </>
   );
 }
 
 export default HomeId;
-
-
-
-
-
 
 /* 
 import React, { useState } from "react";
