@@ -15,7 +15,7 @@ export const Gallery = ({ photos }: { photos: string[] | undefined }) => {
       <Carousel>
         <CarouselContent>
           {photos?.map((photo: string, index: number) => (
-            <CarouselItem key={index}>
+            <CarouselItem key={index} className="w-full h-full flext items-center justify-center">
               <div className="w-[90%] cursor-pointer">
                 <Image
                   alt="Image of Home"
