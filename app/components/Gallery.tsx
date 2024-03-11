@@ -15,7 +15,7 @@ export const Gallery = ({ photos }: { photos: string[] | undefined }) => {
       <Carousel>
         <CarouselContent className="w-full h-full flext items-center justify-center">
           {photos?.map((photo: string, index: number) => (
-            <CarouselItem key={index} className="w-[90%] h-auto">
+            <CarouselItem key={index} className="w-[100%] h-auto">
               <div className="w-[100%]">
                 <Image
                   alt="Image of Home"
@@ -23,7 +23,7 @@ export const Gallery = ({ photos }: { photos: string[] | undefined }) => {
                   className="w-[90%] mx-auto"
                 />
               </div>
-              <h1 className="p-2 text-xl bg-white rounded-md mx-auto">{index} of {photos?.length}</h1>
+              <h1 className="p-2 text-xl bg-white rounded-md w-fit mx-auto">{index} of {photos?.length}</h1>
             </CarouselItem>
           ))}
         </CarouselContent>
