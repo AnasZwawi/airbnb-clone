@@ -20,10 +20,9 @@ export const Gallery = ({ photos }: { photos: string[] | undefined }) => {
                 <Image
                   alt="Image of Home"
                   src={`https://jxvqpjydezilbytxarzd.supabase.co/storage/v1/object/public/images/${photo}`}
-                  className="w-[90%] mx-auto"
+                  className="w-[90%]"
                 />
-              </div>
-              
+              </div> 
             </CarouselItem>
           ))}
         </CarouselContent>
