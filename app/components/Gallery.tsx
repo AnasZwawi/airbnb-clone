@@ -16,14 +16,15 @@ export const Gallery = ({ photos }: { photos: string[] | undefined }) => {
         <CarouselContent className="w-full h-full flext items-center justify-center">
           {photos?.map((photo: string, index: number) => (
             <CarouselItem key={index} className="w-[100%] h-auto">
-              <div className="w-[100%]">
+              <div className="w-[100%] flex flex-col items-center">
                 <Image
                   alt="Image of Home"
                   src={`https://jxvqpjydezilbytxarzd.supabase.co/storage/v1/object/public/images/${photo}`}
                   className="w-[90%] mx-auto"
                 />
+                <h1 className="p-2 text-xl bg-white rounded-md w-fit mx-auto">{index+1} of {photos?.length}</h1>
               </div>
-              <h1 className="p-2 text-xl bg-white rounded-md w-fit mx-auto">{index} of {photos?.length}</h1>
+              
             </CarouselItem>
           ))}
         </CarouselContent>
