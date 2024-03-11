@@ -13,9 +13,12 @@ export const Gallery = ({ photos }: { photos: string[] | undefined }) => {
   return (
     <div className="fixed left-0 top-0 z-50 bg-black bg-opacity-90 backdrop-blur-md w-full h-[100vh] overflow-y-hidden flex justify-center items-center overflow-hidden">
       <Carousel>
-        <CarouselContent>
+        <CarouselContent className="w-full h-full flext items-center justify-center">
           {photos?.map((photo: string, index: number) => (
-            <CarouselItem key={index} className="w-full h-full flext items-center justify-center">
+            <CarouselItem
+              key={index}
+              className="w-full h-full flext items-center justify-center"
+            >
               <div className="w-[90%] cursor-pointer">
                 <Image
                   alt="Image of Home"
@@ -23,11 +26,11 @@ export const Gallery = ({ photos }: { photos: string[] | undefined }) => {
                   className="w-full"
                 />
               </div>
+              <CarouselPrevious />
+              <CarouselNext />
             </CarouselItem>
           ))}
         </CarouselContent>
-        <CarouselPrevious />
-        <CarouselNext />
       </Carousel>
     </div>
   );
