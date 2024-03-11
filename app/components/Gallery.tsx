@@ -22,7 +22,6 @@ export const Gallery = ({ photos }: { photos: string[] | undefined }) => {
                   src={`https://jxvqpjydezilbytxarzd.supabase.co/storage/v1/object/public/images/${photo}`}
                   className="w-[90%] mx-auto"
                 />
-                <h1 className="p-2 text-xl bg-white rounded-md w-fit mx-auto">{index+1} of {photos?.length}</h1>
               </div>
               
             </CarouselItem>
