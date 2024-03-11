@@ -15,8 +15,8 @@ export const Gallery = ({ photos }: { photos: string[] | undefined }) => {
       <Carousel className="w-fit p-x-4">
         <CarouselContent className="w-full flex items-center">
           {photos?.map((photo: string, index: number) => (
-            <CarouselItem key={index} className="w-[90%] px-2 md:px-4">
-              <div className="w-[90%] mr-4">
+            <CarouselItem key={index} className="w-[90%] px-2 md:px-4 relative">
+              <div className="w-[90%] absolute right-0">
                 <Image
                   alt="Image of Home"
                   src={`https://jxvqpjydezilbytxarzd.supabase.co/storage/v1/object/public/images/${photo}`}
