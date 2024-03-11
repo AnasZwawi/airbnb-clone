@@ -26,8 +26,8 @@ export const Gallery = ({ photos }: { photos: string[] | undefined }) => {
             </CarouselItem>
           ))}
         </CarouselContent>
-        <CarouselPrevious />
-        <CarouselNext />
+        <CarouselPrevious className="absolute left-3 z-50 top-[50%] -translate-y-[50%]"/>
+        <CarouselNext className="absolute right-3 z-50 top-[50%] -translate-y-[50%]"/>
       </Carousel>
     </div>
   );
