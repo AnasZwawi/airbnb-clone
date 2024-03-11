@@ -12,7 +12,7 @@ import Image from "next/image";
 export const Gallery = ({ photos }: { photos: string[] | undefined }) => {
   return (
     <div className="fixed left-0 top-0 z-50 bg-black bg-opacity-90 backdrop-blur-md w-full h-[100vh] overflow-y-hidden flex justify-center items-center overflow-hidden">
-      <Carousel className="w-fit ml-2">
+      <Carousel className="w-fit ml-3">
         <CarouselContent className="w-full flex items-center">
           {photos?.map((photo: string, index: number) => (
             <CarouselItem key={index} className="w-[100%] ">
