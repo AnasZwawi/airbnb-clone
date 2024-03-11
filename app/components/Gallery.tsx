@@ -13,14 +13,14 @@ export const Gallery = ({ photos }: { photos: string[] | undefined }) => {
   return (
     <div className="fixed left-0 top-0 z-50 bg-black bg-opacity-90 backdrop-blur-md w-full h-[100vh] overflow-y-hidden flex justify-center items-center overflow-hidden">
       <Carousel>
-        <CarouselContent className="w-[90%] h-full flext items-center justify-center">
+        <CarouselContent className="">
           {photos?.map((photo: string, index: number) => (
-            <CarouselItem key={index} className="w-[100%] h-auto basis-1/3">
+            <CarouselItem key={index} className="">
               <div className="">
                 <Image
                   alt="Image of Home"
                   src={`https://jxvqpjydezilbytxarzd.supabase.co/storage/v1/object/public/images/${photo}`}
-                  className="w-[100%] mx-auto"
+                  className="w-[600px]"
                 />
               </div> 
             </CarouselItem>
