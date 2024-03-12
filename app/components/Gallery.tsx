@@ -51,7 +51,7 @@ export const Gallery: React.FC<GalleryProps> = ({ photos, showGallery }) => {
         </CarouselContent>
         <CarouselPrevious className="absolute left-3 z-50 top-[50%] -translate-y-[50%]"/>
         <CarouselNext className="absolute right-3 z-50 top-[50%] -translate-y-[50%]"/>
-        <div className="fixed top-4 z-[45] left-0 w-full flex items-center justify-center text-lg font-semibold">
+        <div className="fixed top-4 z-[45] left-0 w-full flex items-center justify-center text-lg font-semibold text-gray-200">
             {current}/{count}
         </div>
         <button className="w-7 h-7 flex z-50 rounded-full items-center justify-center bg-white bg-opacity-80 hover:bg-opacity-100 fixed top-4 right-4" onClick={()=>showGallery(false)}>

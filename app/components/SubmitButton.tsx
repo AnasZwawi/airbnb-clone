@@ -39,14 +39,14 @@ export const AddToFavoriteButton:React.FC<P> = ({classn = 'w-6 h-6'}) => {
           className="bg-opacity-0 p-2"
           disabled
         >
-          <Loader2 className="h-5 w-5 animate-spin text-primary" />
+          <Loader2 className="h-6 w-6 animate-spin text-primary" />
         </button>
       ) : (
         <button
           className="bg-opacity-0 p-2"
           type="submit"
         >
-          <Heart className={classn} color="#FFF" fill="#00000054"/>
+          <Heart className={classn} color="#FFF" fill="#00000030"/>
         </button>
       )}
     </>
@@ -62,7 +62,7 @@ export const DeleteFromFavoriteButton = ({classn = 'w-6 h-6'}) => {
           className="bg-opacity-0 p-2"
           disabled
         >
-          <Loader2 className="h-5 w-5 animate-spin text-primary" />
+          <Loader2 className="h-6 w-6 animate-spin text-primary" />
         </button>
       ) : (
         <button
