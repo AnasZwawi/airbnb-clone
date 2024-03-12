@@ -26,7 +26,7 @@ export const Gallery: React.FC<GalleryProps> = ({ photos, showGallery }) => {
                 <Image
                   alt="Image of Home"
                   src={`https://jxvqpjydezilbytxarzd.supabase.co/storage/v1/object/public/images/${photo}`}
-                  className="min-w-[100%]"
+                  className="min-w-[100%] ml-2"
                 />
               </div> 
             </CarouselItem>
