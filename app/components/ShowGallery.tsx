@@ -5,16 +5,19 @@ import { useState } from "react";
 import Image from "next/image";
 import { Gallery } from "./Gallery";
 
-export const ShowGallery = ({photos}: {photos: string[] | undefined}) => {
+export const ShowGallery = ({ photos }: { photos: string[] | undefined }) => {
   const [gallery, showGallery] = useState(false);
   if (!photos || photos.length === 0) {
     return <div>No photos available</div>;
   }
+
+  function hideGallery(){
+    showGallery(false);
+  }
+
   return (
     <>
-    {gallery && (
-          <Gallery photos={photos}/>
-        )}
+      {gallery && <Gallery photos={photos} hideGallery={hideGallery} />}
       <div
         className={`relative flex flex-col md:flex-row gap-y-2 lg:gap-2 rounded-xl h-[550px] md:h-[450px] overflow-hidden`}
       >
@@ -48,7 +51,6 @@ export const ShowGallery = ({photos}: {photos: string[] | undefined}) => {
           <Images />
           <p>Show all photos</p>
         </div>
-        
       </div>
     </>
   );
