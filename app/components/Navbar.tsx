@@ -29,7 +29,7 @@ export const Navbar = () => {
 
         <UserNav />
       </div>
-      <div className="block sm:hidden w-full mx-auto relative bottom-3">
+      <div className="block sm:hidden w-full mx-auto relative bottom-3 mt-3">
         <SearchComponent />
       </div>
     </nav>
