@@ -46,7 +46,7 @@ export const AddToFavoriteButton:React.FC<P> = ({classn = 'w-6 h-6'}) => {
           className="bg-opacity-0 p-2"
           type="submit"
         >
-          <Heart className={classn} color="#FFF" fill="#00000090"/>
+          <Heart className={classn} color="#FFF" fill="#00000075"/>
         </button>
       )}
     </>
