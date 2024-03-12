@@ -19,6 +19,9 @@ export const Gallery: React.FC<GalleryProps> = ({ photos, showGallery }) => {
   return (
     <>
     <div className="relative h-full">
+    <button className="w-7 h-7 flex z-50 rounded-full items-center justify-center bg-white bg-opacity-80 hover:bg-opacity-100 absolute top-4 right-3" onClick={()=>showGallery(false)}>
+          <X className="w-4 h-4" fill="#1f1f1f"/>
+        </button>
     <div className="fixed left-0 top-0 z-50 bg-black bg-opacity-90 backdrop-blur-md w-full h-[100vh] overflow-y-hidden flex justify-center items-center overflow-hidden">
       <Carousel className="w-full">
         <CarouselContent className="w-full flex items-center">
@@ -36,9 +39,7 @@ export const Gallery: React.FC<GalleryProps> = ({ photos, showGallery }) => {
         </CarouselContent>
         <CarouselPrevious className="absolute left-3 z-50 top-[50%] -translate-y-[50%]"/>
         <CarouselNext className="absolute right-3 z-50 top-[50%] -translate-y-[50%]"/>
-        <button className="w-7 h-7 flex z-50 rounded-full items-center justify-center bg-white bg-opacity-80 hover:bg-opacity-100 absolute top-4 right-3" onClick={()=>showGallery(false)}>
-          <X className="w-4 h-4" fill="#1f1f1f"/>
-        </button>
+        
       </Carousel>
     </div>
     </div>
