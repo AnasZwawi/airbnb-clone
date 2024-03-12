@@ -11,13 +11,11 @@ export const ShowGallery = ({ photos }: { photos: string[] | undefined }) => {
     return <div>No photos available</div>;
   }
 
-  function hideGallery(){
-    showGallery(false);
-  }
+
 
   return (
     <>
-      {gallery && <Gallery photos={photos} hideGallery={hideGallery} />}
+      {gallery && <Gallery photos={photos} showGallery={showGallery} />}
       <div
         className={`relative flex flex-col md:flex-row gap-y-2 lg:gap-2 rounded-xl h-[550px] md:h-[450px] overflow-hidden`}
       >
