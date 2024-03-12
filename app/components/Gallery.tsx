@@ -21,12 +21,12 @@ export const Gallery: React.FC<GalleryProps> = ({ photos, showGallery }) => {
       <Carousel className="w-full">
         <CarouselContent className="w-full flex items-center">
           {photos?.map((photo: string, index: number) => (
-            <CarouselItem key={index} className="w-[98vw] max-h-[95vh] flex justify-center">
+            <CarouselItem key={index} className="w-[98vw] max-h-[95vh] flex justify-center mx-auto">
               <div className="w-[100%]">
                 <Image
                   alt="Image of Home"
                   src={`https://jxvqpjydezilbytxarzd.supabase.co/storage/v1/object/public/images/${photo}`}
-                  className="w-[100%]"
+                  className="min-w-[100%]"
                 />
               </div> 
             </CarouselItem>
