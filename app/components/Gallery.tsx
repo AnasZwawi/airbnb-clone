@@ -34,7 +34,7 @@ export const Gallery: React.FC<GalleryProps> = ({ photos, hideGallery }) => {
         </CarouselContent>
         <CarouselPrevious className="absolute left-3 z-50 top-[50%] -translate-y-[50%]"/>
         <CarouselNext className="absolute right-3 z-50 top-[50%] -translate-y-[50%]"/>
-        <button className="w-9 h-9 flex z-50 rounded-full items-center justify-center bg-white bg-opacity-80 hover:bg-opacity-100 absolute top-4 right-3" onClick={()=>{hideGallery}}>
+        <button className="w-9 h-9 flex z-50 rounded-full items-center justify-center bg-white bg-opacity-80 hover:bg-opacity-100 absolute top-4 right-3" onClick={hideGallery}>
           <X className="w-6 h-6" fill="#1f1f1f"/>
         </button>
       </Carousel>
