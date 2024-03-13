@@ -246,8 +246,7 @@ export const SelectCalendar = ({
       <div className="w-full flex justify-between mb-3">
         <div className="border-b pb-0 border-gray-400">
           ${price} x{" "}
-          {1 +
-            Math.round(
+          {Math.round(
               (((state[0].endDate.getTime() as number) -
                 state[0].startDate.getTime()) as number) /
                 (1000 * 3600 * 24)
