@@ -58,8 +58,8 @@ export const SelectCalendar = ({
         direction="vertical"
         disabledDates={disabledDates}
       />
-      <div className="w-full flex justify-between">
-        <div className="underline">
+      <div className="w-full flex justify-between mb-3">
+        <div className="border-b pb-0 border-gray-400">
           ${price} x{" "}
           {1 + Math.round(
             (((state[0].endDate.getTime() as number) -
