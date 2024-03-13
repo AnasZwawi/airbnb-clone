@@ -239,7 +239,7 @@ async function HomeId({ params }: { params: { id: string } }) {
         >
           <input type="hidden" name="userId" value={user?.id} />
           <input type="hidden" name="homeId" value={params.id} />
-          <div className="w-full flex justify-between">
+          <div className="w-full flex justify-between items-center">
             <div className="text-left">
               <span className="font-bold text-[20px]">${data?.price} </span>
               <span>per night</span>
