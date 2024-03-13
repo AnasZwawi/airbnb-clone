@@ -103,7 +103,7 @@ async function HomeId({ params }: { params: { id: string } }) {
   const country = getCountryByValue(data?.country as string);
   let startTime = data?.createdAT.getTime() ?? new Date().getTime();
   let endTime = new Date().getTime();
-
+  const minRange = 2
   return (
     <div className="w-[85%] max-w-[1320px] lg:w-[75%] mx-auto mt-5">
       <div className="flex flex-col lg:flex-row justify-between gap-y-0 lg:items-center mb-4">
@@ -250,6 +250,7 @@ async function HomeId({ params }: { params: { id: string } }) {
           <SelectCalendar
             reservations={data?.Reservation}
             price={data?.price}
+            minRange={minRange}
           />
 
           {user?.id ? (
@@ -258,7 +259,7 @@ async function HomeId({ params }: { params: { id: string } }) {
             <Button className="w-full h-10">
               <Link href={"/api/auth/login"}>
                 <p className="font-medium text-[17px] py-3">
-                  Make a Reservation
+                  Make a Reservation!
                 </p>
               </Link>
             </Button>
