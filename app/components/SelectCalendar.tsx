@@ -8,16 +8,18 @@ import { eachDayOfInterval } from "date-fns";
 
 export const SelectCalendar = ({
   reservations,
+  selectedDateRange,
+  onDateRangeChange,
 }: {
+  selectedDateRange: { startDate: Date; endDate: Date; key: string }[];
+  onDateRangeChange: (newDateRange: {
+    startDate: Date;
+    endDate: Date;
+    key: string;
+  }) => void;
   reservations: { startDate: Date; endDate: Date }[] | undefined;
 }) => {
-  const [state, setState] = useState([
-    {
-      startDate: new Date(),
-      endDate: new Date(),
-      key: "selection",
-    },
-  ]);
+  
 
   let disabledDates : Date[] = [];
   reservations?.forEach((reservation)=>{
@@ -34,12 +36,12 @@ export const SelectCalendar = ({
       <input
         type="hidden"
         name="startDate"
-        value={state[0].startDate.toISOString()}
+        value={selectedDateRange[0].startDate.toISOString()}
       />
       <input
         type="hidden"
         name="endDate"
-        value={state[0].endDate.toISOString()}
+        value={selectedDateRange[0].endDate.toISOString()}
       />
       <DateRange
         months={2}
@@ -47,8 +49,8 @@ export const SelectCalendar = ({
         showDateDisplay={false}
         rangeColors={["#000"]}
         color="blue"
-        ranges={state}
-        onChange={(item) => setState([item.selection] as any)}
+        ranges={selectedDateRange}
+        onChange={(item) => onDateRangeChange([item.selection] as any)}
         minDate={new Date()}
         direction="vertical"
         disabledDates={disabledDates}

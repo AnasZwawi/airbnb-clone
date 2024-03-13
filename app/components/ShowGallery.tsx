@@ -56,7 +56,7 @@ export const ShowGallery = ({ photos }: { photos: string[] | undefined }) => {
           }}
         >
           <Images className="w-4 h-4"/>
-          <p className="font-emibold">Show all photos</p>
+          <p className="font-semibold">Show all photos</p>
         </div>
       </div>
     </>
