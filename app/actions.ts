@@ -157,7 +157,7 @@ export async function createDescription(formData: FormData) {
         .from("images")
         .upload(`${new Date().toISOString()}-${imageFile.name}`, imageFile, {
           cacheControl: "2592000",
-          contentType: "image/png",
+          contentType: "image/webp",
         });
       return imageData?.path; // Instead of returning the whole imageData, return just the path
     }
