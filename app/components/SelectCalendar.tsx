@@ -246,7 +246,7 @@ export const SelectCalendar = ({
         }
       />
       <DateRange
-        months={2}
+        months={1}
         date={new Date()}
         showDateDisplay={false}
         rangeColors={["#000"]}
@@ -254,7 +254,7 @@ export const SelectCalendar = ({
         ranges={state}
         onChange={handleDateChange}
         minDate={new Date()}
-        direction="horizontal"
+        direction="vertical"
         disabledDates={disabledDates}
       />
       <div className="w-full flex justify-between mb-3">
