@@ -8,40 +8,40 @@ import { eachDayOfInterval } from "date-fns";
 
 export const SelectCalendar = ({
   reservations,
-  selectedDateRange,
-  onDateRangeChange,
+  price,
 }: {
-  selectedDateRange: { startDate: Date; endDate: Date; key: string }[];
-  onDateRangeChange: (newDateRange: {
-    startDate: Date;
-    endDate: Date;
-    key: string;
-  }) => void;
+  price: number | null | undefined;
   reservations: { startDate: Date; endDate: Date }[] | undefined;
 }) => {
-  
+  const [state, setState] = useState([
+    {
+      startDate: new Date(),
+      endDate: new Date(),
+      key: "selection",
+    },
+  ]);
 
-  let disabledDates : Date[] = [];
-  reservations?.forEach((reservation)=>{
+  let disabledDates: Date[] = [];
+  reservations?.forEach((reservation) => {
     const dateRange = eachDayOfInterval({
       start: new Date(reservation.startDate),
-      end: new Date(reservation.endDate)
-    })
+      end: new Date(reservation.endDate),
+    });
 
     disabledDates = [...disabledDates, ...dateRange];
-  })
+  });
 
   return (
     <>
       <input
         type="hidden"
         name="startDate"
-        value={selectedDateRange[0].startDate.toISOString()}
+        value={state[0].startDate.toISOString()}
       />
       <input
         type="hidden"
         name="endDate"
-        value={selectedDateRange[0].endDate.toISOString()}
+        value={state[0].endDate.toISOString()}
       />
       <DateRange
         months={2}
@@ -49,12 +49,36 @@ export const SelectCalendar = ({
         showDateDisplay={false}
         rangeColors={["#000"]}
         color="blue"
-        ranges={selectedDateRange}
-        onChange={(item) => onDateRangeChange([item.selection] as any)}
+        ranges={state}
+        onChange={(item) => setState([item.selection] as any)}
         minDate={new Date()}
         direction="vertical"
         disabledDates={disabledDates}
       />
+      <div className="w-full flex justify-between">
+        <div className="underline">
+          ${price} x{" "}
+          {Math.round(
+            (((state[0].endDate.getTime() as number) -
+              state[0].startDate.getTime()) as number) /
+              (1000 * 3600 * 24)
+          )}{" "}
+          nights
+        </div>
+        <p>
+          $
+          {price && price !== null ? (
+            price *
+            Math.round(
+              (((state[0].endDate.getTime() as number) -
+                state[0].startDate.getTime()) as number) /
+                (1000 * 3600 * 24)
+            )
+          ) : (
+            ""
+          )}
+        </p>
+      </div>
     </>
   );
 };

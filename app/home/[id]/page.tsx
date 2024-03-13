@@ -104,19 +104,6 @@ async function HomeId({ params }: { params: { id: string } }) {
   let startTime = data?.createdAT.getTime() ?? new Date().getTime();
   let endTime = new Date().getTime();
 
-  const [selectedDateRange, setSelectedDateRange] = useState([
-    {
-      startDate: new Date(),
-      endDate: new Date(),
-      key: "selection",
-    },
-  ]);
-
-  // Function to update the state when the child updates it
-  const handleDateRangeChange = (newDateRange: any) => {
-    setSelectedDateRange([newDateRange]);
-  };
-
   return (
     <div className="w-[85%] max-w-[1320px] lg:w-[75%] mx-auto mt-5">
       <div className="flex flex-col lg:flex-row justify-between gap-y-0 lg:items-center mb-4">
@@ -241,22 +228,12 @@ async function HomeId({ params }: { params: { id: string } }) {
 
           <HomeMap locationValue={country?.value as string} />
         </div>
-        <form
-          action={createReservation}
-          className="flex flex-col h-fit items-center p-3 border border-muted-foreground rounded-xl shadow-md"
-        >
+        <form action={createReservation} className="flex flex-col h-fit items-center p-3 border border-muted-foreground rounded-xl shadow-md">
           <input type="hidden" name="userId" value={user?.id} />
           <input type="hidden" name="homeId" value={params.id} />
-          <p className="flex gap-x-1">
-            <span className="font-bold text-lg">${data?.price}</span>
-            <span>per night</span>
-          </p>
-
-          <SelectCalendar
-            reservations={data?.Reservation}
-            selectedDateRange={selectedDateRange}
-            onDateRangeChange={handleDateRangeChange}
-          />
+          <p className="flex gap-x-1"><span className="font-bold text-lg">${data?.price}</span><span>per night</span></p>
+          
+          <SelectCalendar reservations={data?.Reservation} price={data?.price}/>
 
           {user?.id ? (
             <ReservationSubmit />
@@ -265,12 +242,6 @@ async function HomeId({ params }: { params: { id: string } }) {
               <Link href={"/api/auth/login"}>Make a Reservation</Link>
             </Button>
           )}
-          <div className="w-full flex justify-between">
-            <div className="underline">
-              ${} x {} nights
-            </div>
-            <p>$</p>
-          </div>
         </form>
       </div>
     </div>
