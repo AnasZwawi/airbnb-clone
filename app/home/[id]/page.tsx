@@ -239,12 +239,12 @@ async function HomeId({ params }: { params: { id: string } }) {
         >
           <input type="hidden" name="userId" value={user?.id} />
           <input type="hidden" name="homeId" value={params.id} />
-          <div>
-            <div className="w-full text-left">
+          <div className="w-full flex justify-between">
+            <div className="text-left">
               <span className="font-bold text-[20px]">${data?.price} </span>
               <span>per night</span>
             </div>
-            <p>(minimum {2} nights)</p>
+            <p className="text-sm">(minimum {2} nights)</p>
           </div>
 
           <SelectCalendar
