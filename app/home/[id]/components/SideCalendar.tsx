@@ -1,3 +1,4 @@
+"use client"
 import React, { useState } from "react";
 import { SelectCalendar } from "@/app/components/SelectCalendar";
 import { Button } from "@/components/ui/button";
