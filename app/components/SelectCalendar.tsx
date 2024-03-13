@@ -212,6 +212,7 @@ export const SelectCalendar = ({
 
     // If there's an overlap, cancel the range picking
     if (overlap) {
+      console.log(overlap)
       return;
     }
 
