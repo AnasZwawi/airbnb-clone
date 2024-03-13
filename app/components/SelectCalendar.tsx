@@ -211,7 +211,7 @@ export const SelectCalendar = ({
       );
     });
 
-    // If there's an overlap, cancel the state change
+    // If there's an overlap, cancel the range picking
     if (overlap) {
       return;
     }
