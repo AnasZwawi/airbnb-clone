@@ -115,7 +115,7 @@ export const SelectCalendar = ({
   const handleDateChange = (ranges: any) => {
     const { selection } = ranges;
     if (selection.endDate.getTime() - selection.startDate.getTime() < 2 * 24 * 60 * 60 * 1000) {
-      const newEndDate = addDays(selection.startDate, 7);
+      const newEndDate = addDays(selection.startDate, 2);
       setState([{ ...selection, endDate: newEndDate }]);
     } else {
       setState([selection]);
