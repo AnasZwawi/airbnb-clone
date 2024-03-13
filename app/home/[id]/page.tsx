@@ -228,7 +228,7 @@ async function HomeId({ params }: { params: { id: string } }) {
 
           <HomeMap locationValue={country?.value as string} />
         </div>
-        <form action={createReservation} className="flex flex-col items-center p-3 border-muted-foreground rounded-lg">
+        <form action={createReservation} className="flex flex-col items-center p-3 border border-muted-foreground rounded-lg">
           <input type="hidden" name="userId" value={user?.id} />
           <input type="hidden" name="homeId" value={params.id} />
           <SelectCalendar reservations={data?.Reservation} />
