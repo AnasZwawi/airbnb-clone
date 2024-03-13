@@ -85,8 +85,8 @@ export const SelectCalendar = ({
   );
 };
  */
-/* 
-export const SelectCalendar = ({
+
+/* export const SelectCalendar = ({
   reservations,
   price,
 }: {
@@ -201,20 +201,22 @@ export const SelectCalendar = ({
     disabledDates = [...disabledDates, ...dateRange];
   });
 
-  // Disable the entire range if it's less than 2 days
-  if (
-    state[0].endDate.getTime() - state[0].startDate.getTime() < 2 * 24 * 60 * 60 * 1000
-  ) {
-    disabledDates = disabledDates.concat(
-      eachDayOfInterval({
-        start: state[0].startDate,
-        end: state[0].endDate,
-      })
-    );
-  }
-
   const handleDateChange = (ranges: any) => {
     const { selection } = ranges;
+    
+    // Check if the selected range overlaps with any existing reservations
+    const overlap = reservations?.some(reservation => {
+      return (
+        (reservation.startDate <= selection.endDate && reservation.endDate >= selection.startDate)
+      );
+    });
+
+    // If there's an overlap, cancel the state change
+    if (overlap) {
+      return;
+    }
+
+    // If the selected range is less than 2 days, adjust the end date
     if (selection.endDate.getTime() - selection.startDate.getTime() < 2 * 24 * 60 * 60 * 1000) {
       const newEndDate = addDays(selection.startDate, 2);
       setState([{ ...selection, endDate: newEndDate }]);
