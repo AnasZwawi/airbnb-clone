@@ -254,7 +254,7 @@ export const SelectCalendar = ({
         ranges={state}
         onChange={handleDateChange}
         minDate={new Date()}
-        direction="vertical"
+        direction="horizontal"
         disabledDates={disabledDates}
       />
       <div className="w-full flex justify-between mb-3">
