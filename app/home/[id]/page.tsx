@@ -254,7 +254,7 @@ async function HomeId({ params }: { params: { id: string } }) {
           ) : (
             <Button className="w-full ">
               <Link href={"/api/auth/login"}>
-                <p className="font-semibold text-[23px] py-2">Make a Reservation</p>
+                <p className="font-semibold text-[18px] py-2">Make a Reservation</p>
               </Link>
             </Button>
           )}

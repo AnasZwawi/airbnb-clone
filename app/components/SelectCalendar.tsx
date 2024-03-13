@@ -258,7 +258,7 @@ export const SelectCalendar = ({
           $
           {price && price !== null
             ? price *
-              (1 +
+              (
                 Math.round(
                   (((state[0].endDate.getTime() as number) -
                     state[0].startDate.getTime()) as number) /
