@@ -180,15 +180,20 @@ async function HomeId({ params }: { params: { id: string } }) {
             <p className="">{data?.bathrooms} Bathrooms</p>
           </div>
           <p className="mt-1 font-semibold flex items-center gap-x-1">
-            <Star fill="black" className="w-4 h-4" />
-            {startTime !== undefined
-              ? Math.round(
-                  (((endTime as number) - startTime) as number) /
-                    (1000 * 3600 * 24)
-                ) < 3
-                ? "New"
-                : ""
-              : ""}
+            {startTime !== undefined ? (
+              Math.round(
+                (((endTime as number) - startTime) as number) /
+                  (1000 * 3600 * 24)
+              ) < 3 ? (
+                <div>
+                  <Star fill="black" className="w-4 h-4" /> New
+                </div>
+              ) : (
+                ""
+              )
+            ) : (
+              ""
+            )}
           </p>
 
           <Separator className="my-7 " />
@@ -230,7 +235,7 @@ async function HomeId({ params }: { params: { id: string } }) {
         </div>
         <form
           action={createReservation}
-          className="sticky top-44 flex flex-col h-fit items-center px-4 py-6 border border-gray-500 rounded-xl shadow-xl"
+          className="sticky top-20 flex flex-col h-fit items-center px-4 py-6 border border-gray-300 rounded-xl shadow-xl"
         >
           <input type="hidden" name="userId" value={user?.id} />
           <input type="hidden" name="homeId" value={params.id} />
