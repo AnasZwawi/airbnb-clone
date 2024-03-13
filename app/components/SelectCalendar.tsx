@@ -221,30 +221,7 @@ export const SelectCalendar = ({
     setState([selection]);
   };
 
-  if (
-    minRange >
-    (Math.round(
-      (((state[0].endDate.getTime() as number) -
-        state[0].startDate.getTime()) as number) /
-        (1000 * 3600 * 24)
-    ) as number)
-  ) {
-    return (
-      <div className="w-full h-[100vh] z-49 fixed top-0 left-0 flex justify-center items-center">
-        <div className="z-50 relative w-[350px] h-fit bg-white rounded-lg border border-gray-300 shadow-xl ">
-          <X className="absolute top-3 right-3 bg-gray-700" />
-          <div className="w-full">
-            <p className="text-lg text-center font-semibold">
-              Minimum {minRange} nights.
-            </p>
-            <p className="text-gray-600 text-center">
-              Please choose more than {minRange} nights...
-            </p>
-          </div>
-        </div>
-      </div>
-    );
-  }
+
   return (
     <>
       <input

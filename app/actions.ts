@@ -230,12 +230,16 @@ export async function deleteFromFavorite(formData: FormData) {
 }
 
 export async function createReservation(formData: FormData) {
-
+  const minRange = 2
   const userId = formData.get("userId") as string;
   const homeId = formData.get("homeId") as string;
   const startDate = formData.get("startDate") as string;
   const endDate = formData.get("endDate") as string;
+  const range = formData.get("range") as any;
 
+  if (Number(range) < minRange) {
+    throw new Error(`Minimum ${minRange} nights.`);
+  }
 
   const data = await prisma.reservation.create({
     data: {
