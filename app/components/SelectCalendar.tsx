@@ -5,6 +5,7 @@ import "react-date-range/dist/theme/default.css"; // theme css file
 import { DateRange } from "react-date-range";
 import { useState } from "react";
 import { eachDayOfInterval } from "date-fns";
+import { addDays } from "date-fns";
 
 export const SelectCalendar = ({
   reservations,
@@ -13,6 +14,7 @@ export const SelectCalendar = ({
   price: number | null | undefined;
   reservations: { startDate: Date; endDate: Date }[] | undefined;
 }) => {
+  
   const [state, setState] = useState([
     {
       startDate: new Date(),
@@ -23,9 +25,10 @@ export const SelectCalendar = ({
 
   let disabledDates: Date[] = [];
   reservations?.forEach((reservation) => {
+    const endDate = addDays(new Date(reservation.startDate), 3);
     const dateRange = eachDayOfInterval({
       start: new Date(reservation.startDate),
-      end: new Date(reservation.endDate),
+      end: endDate,
     });
 
     disabledDates = [...disabledDates, ...dateRange];
