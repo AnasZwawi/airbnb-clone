@@ -230,7 +230,7 @@ async function HomeId({ params }: { params: { id: string } }) {
         </div>
         <form
           action={createReservation}
-          className="flex flex-col h-fit items-center px-4 py-6 border border-gray-500 rounded-xl shadow-xl"
+          className="sticky top-44 flex flex-col h-fit items-center px-4 py-6 border border-gray-500 rounded-xl shadow-xl"
         >
           <input type="hidden" name="userId" value={user?.id} />
           <input type="hidden" name="homeId" value={params.id} />
