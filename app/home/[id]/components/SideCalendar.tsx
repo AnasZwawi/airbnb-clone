@@ -37,9 +37,8 @@ export const SideCalendar = ({
     <>
       {error && (
         <div className="w-full bg-black bg-opacity-70 backdrop-blur-md h-[100vh] z-50 fixed top-0 left-0 flex justify-center items-center">
-          <div className="z-50 relative w-full md:w-[400px] h-[300px] bg-white rounded-lg border border-gray-300 shadow-lg flex justify-center items-center">
-            <X className="absolute top-3 right-3 text-gray-700" />
-            <Button className="absolute bottom-3 right-3 bg-primary rounded-md text-white font-medium text-[16px]">Close</Button>
+          <div className="z-50 relative w-full md:w-[400px] h-[280px] bg-white rounded-lg border border-gray-300 shadow-lg flex justify-center items-center">
+            <Button className="absolute bottom-3 right-3 bg-primary rounded-md text-white font-medium text-[16px]" onClick={()=>{setError(null)}}>Close</Button>
             <div className="w-full">
               <p className="text-lg text-center font-semibold">{error}</p>
               <p className="text-gray-600 text-center">
