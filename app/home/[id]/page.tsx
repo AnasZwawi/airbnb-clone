@@ -20,9 +20,10 @@ import {
   ReservationSubmit,
 } from "@/app/components/SubmitButton";
 import { unstable_noStore as noStore } from "next/cache";
-import { Dot, Images, Star, X } from "lucide-react";
+import { Dot, Images, Star } from "lucide-react";
 import { redirect } from "next/navigation";
 import { ShowGallery } from "@/app/components/ShowGallery";
+import { SideCalendar } from "./components/SideCalendar";
 
 async function getHome(userId: string, homeId: string) {
   noStore();
@@ -103,36 +104,7 @@ async function HomeId({ params }: { params: { id: string } }) {
   const country = getCountryByValue(data?.country as string);
   let startTime = data?.createdAT.getTime() ?? new Date().getTime();
   let endTime = new Date().getTime();
-  const minRange = 2
-
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const formData = new FormData(event.currentTarget);
-
-    try {
-      await createReservation(formData);
-    } catch (error: any) {
-      if (error.message === `Minimum ${minRange} nights.`) {
-        // Render UI element indicating minimum nights requirement
-        return (
-          <div className="w-full h-[100vh] z-49 fixed top-0 left-0 flex justify-center items-center">
-            <div className="z-50 relative w-[350px] h-fit bg-white rounded-lg border border-gray-300 shadow-xl ">
-              <X className="absolute top-3 right-3 bg-gray-700" />
-              <div className="w-full">
-                <p className="text-lg text-center font-semibold">
-                  Minimum {minRange} nights.
-                </p>
-                <p className="text-gray-600 text-center">
-                  Please choose more than {minRange} nights...
-                </p>
-              </div>
-            </div>
-          </div>
-        );
-      }
-      // Handle other errors if needed
-    }
-  };
+  const minRange = 2;
 
   return (
     <div className="w-[85%] max-w-[1320px] lg:w-[75%] mx-auto mt-5">
@@ -263,38 +235,13 @@ async function HomeId({ params }: { params: { id: string } }) {
 
           <HomeMap locationValue={country?.value as string} />
         </div>
-        <form
-          onSubmit={handleSubmit}
-          className="sticky top-[90px] flex flex-col h-fit items-center px-4 py-6 border border-gray-200 rounded-xl shadow-[0_3px_8px_20px_rgba(0,0,0,0.1)]"
-        >
-          <input type="hidden" name="userId" value={user?.id} />
-          <input type="hidden" name="homeId" value={params.id} />
-          <div className="w-full flex justify-between items-center">
-            <div className="text-left">
-              <span className="font-bold text-[20px]">${data?.price} </span>
-              <span>per night</span>
-            </div>
-            <p className="text-sm">(minimum {2} nights)</p>
-          </div>
-
-          <SelectCalendar
-            reservations={data?.Reservation}
-            price={data?.price}
-            minRange={minRange}
-          />
-
-          {user?.id ? (
-            <ReservationSubmit />
-          ) : (
-            <Button className="w-full h-10">
-              <Link href={"/api/auth/login"}>
-                <p className="font-medium text-[17px] py-3">
-                  Make a Reservation!
-                </p>
-              </Link>
-            </Button>
-          )}
-        </form>
+        <SideCalendar
+          price={data?.price}
+          id={params.id}
+          userId={user?.id}
+          reservations={data?.Reservation}
+          minRange={minRange}
+        />
       </div>
     </div>
   );
