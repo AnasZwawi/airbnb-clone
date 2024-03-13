@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useState } from "react";
 import { SelectCalendar } from "@/app/components/SelectCalendar";
 import { Button } from "@/components/ui/button";
@@ -36,23 +36,22 @@ export const SideCalendar = ({
   return (
     <>
       {error && (
-        <div className="w-full h-[100vh] z-49 fixed top-0 left-0 flex justify-center items-center">
-        <div className="z-50 relative max-w-[400px] h-[300px] bg-white rounded-lg border border-gray-300 shadow-lg ">
-          <X className="absolute top-3 right-3 bg-gray-700" />
-          <div className="w-full">
-            <p className="text-lg text-center font-semibold">
-              {error}
-            </p>
-            <p className="text-gray-600 text-center">
-              Please choose more than {minRange} nights...
-            </p>
+        <div className="w-full bg-black bg-opacity-70 backdrop-blur-md h-[100vh] z-49 fixed top-0 left-0 flex justify-center items-center">
+          <div className="z-50 relative w-full md:w-[400px] h-[300px] bg-white rounded-lg border border-gray-300 shadow-lg">
+            <X className="absolute top-3 right-3 text-gray-700" />
+            <Button className="absolute bottom-3 right-3 bg-primary rounded-md text-white font-medium text-[16px]">Close</Button>
+            <div className="w-full flex items-center justify-center">
+              <p className="text-lg text-center font-semibold">{error}</p>
+              <p className="text-gray-600 text-center">
+                Please choose more than {minRange} nights...
+              </p>
+            </div>
           </div>
         </div>
-      </div>
       )}
       <form
         onSubmit={handleSubmit}
-        className="sticky top-[90px] flex flex-col h-fit items-center px-4 py-6 border border-gray-200 rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)]"
+        className="sticky top-[90px] flex flex-col h-fit items-center px-5 py-6 border border-gray-200 rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)]"
       >
         <input type="hidden" name="userId" value={userId} />
         <input type="hidden" name="homeId" value={id} />
@@ -76,7 +75,9 @@ export const SideCalendar = ({
         ) : (
           <Button className="w-full h-10">
             <Link href={"/api/auth/login"}>
-              <p className="font-medium text-[17px] py-3">Make a Reservation!</p>
+              <p className="font-medium text-[17px] py-3">
+                Make a Reservation!
+              </p>
             </Link>
           </Button>
         )}
