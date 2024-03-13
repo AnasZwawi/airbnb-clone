@@ -239,9 +239,12 @@ async function HomeId({ params }: { params: { id: string } }) {
         >
           <input type="hidden" name="userId" value={user?.id} />
           <input type="hidden" name="homeId" value={params.id} />
-          <div className="w-full text-left">
-            <span className="font-bold text-[20px]">${data?.price} </span>
-            <span>per night</span>
+          <div>
+            <div className="w-full text-left">
+              <span className="font-bold text-[20px]">${data?.price} </span>
+              <span>per night</span>
+            </div>
+            <p>(minimum {2} nights)</p>
           </div>
 
           <SelectCalendar
@@ -254,7 +257,9 @@ async function HomeId({ params }: { params: { id: string } }) {
           ) : (
             <Button className="w-full ">
               <Link href={"/api/auth/login"}>
-                <p className="font-semibold text-[18px] py-2">Make a Reservation</p>
+                <p className="font-semibold text-[18px] py-2">
+                  Make a Reservation
+                </p>
               </Link>
             </Button>
           )}
