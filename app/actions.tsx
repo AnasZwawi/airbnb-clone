@@ -3,8 +3,8 @@ import { redirect } from "next/navigation";
 import prisma from "./lib/db";
 import { supabase } from "./lib/supabase";
 import { revalidatePath } from "next/cache";
-import sharp from 'sharp';
-
+import sharp from "sharp";
+import { X } from "lucide-react";
 
 export async function createAirbnbHome({ userId }: { userId: string }) {
   const data = await prisma.home.findFirst({
@@ -230,10 +230,26 @@ export async function deleteFromFavorite(formData: FormData) {
 }
 
 export async function createReservation(formData: FormData) {
+  const minRange = 2;
   const userId = formData.get("userId") as string;
   const homeId = formData.get("homeId") as string;
   const startDate = formData.get("startDate") as string;
   const endDate = formData.get("endDate") as string;
+  const range = formData.get("range") as any;
+
+  if ((range as number) < minRange) {
+    return (
+      <div className="w-full h-[100vh] fixed top-0 left-0 flex justify-center items-center">
+        <div className="relative w-[350px] h-fit bg-white rounded-lg border border-gray-300 shadow-xl ">
+          <X className="absolute top-3 right-3 bg-gray-700"/>
+          <div className="w-full">
+            <p className="text-lg text-center font-semibold">Minimum {minRange} nights.</p>
+            <p className="text-gray-600 text-center">Please choose more than {minRange} nights...</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   const data = await prisma.reservation.create({
     data: {

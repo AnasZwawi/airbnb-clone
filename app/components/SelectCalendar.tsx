@@ -1,4 +1,4 @@
- "use client";
+"use client";
 
 import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
@@ -178,7 +178,7 @@ export const SelectCalendar = ({
 export const SelectCalendar = ({
   reservations,
   price,
-  minRange
+  minRange,
 }: {
   minRange: number;
   price: number | null | undefined;
@@ -232,6 +232,15 @@ export const SelectCalendar = ({
         name="endDate"
         value={state[0].endDate.toISOString()}
       />
+      <input
+        type="hidden"
+        name="range"
+        value={Math.round(
+          (((state[0].endDate.getTime() as number) -
+            state[0].startDate.getTime()) as number) /
+            (1000 * 3600 * 24)
+        ) as number}
+      />
       <DateRange
         months={2}
         date={new Date()}
@@ -248,22 +257,21 @@ export const SelectCalendar = ({
         <div className="border-b pb-0 border-gray-400">
           ${price} x{" "}
           {Math.round(
-              (((state[0].endDate.getTime() as number) -
-                state[0].startDate.getTime()) as number) /
-                (1000 * 3600 * 24)
-            )}{" "}
+            (((state[0].endDate.getTime() as number) -
+              state[0].startDate.getTime()) as number) /
+              (1000 * 3600 * 24)
+          )}{" "}
           nights
         </div>
         <p>
           $
           {price && price !== null
             ? price *
-              (
-                Math.round(
-                  (((state[0].endDate.getTime() as number) -
-                    state[0].startDate.getTime()) as number) /
-                    (1000 * 3600 * 24)
-                ))
+              Math.round(
+                (((state[0].endDate.getTime() as number) -
+                  state[0].startDate.getTime()) as number) /
+                  (1000 * 3600 * 24)
+              )
             : ""}
         </p>
       </div>
