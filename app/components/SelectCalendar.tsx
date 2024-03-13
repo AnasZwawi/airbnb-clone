@@ -201,15 +201,14 @@ export const SelectCalendar = ({
     disabledDates = [...disabledDates, ...dateRange];
   });
 
-  // Disable the end date if the range is less than 2 days
+  // Disable the entire range if it's less than 2 days
   if (
     state[0].endDate.getTime() - state[0].startDate.getTime() < 2 * 24 * 60 * 60 * 1000
   ) {
-    const endOfRange = addDays(state[0].startDate, 2);
     disabledDates = disabledDates.concat(
       eachDayOfInterval({
-        start: addDays(state[0].startDate, 1),
-        end: endOfRange,
+        start: state[0].startDate,
+        end: state[0].endDate,
       })
     );
   }
