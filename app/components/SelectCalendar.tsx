@@ -97,7 +97,7 @@ export const SelectCalendar = ({
   const [state, setState] = useState([
     {
       startDate: new Date(),
-      endDate: addDays(new Date(), 7), // Set default end date to 7 days after start date
+      endDate: addDays(new Date(), 2), // Set default end date to 7 days after start date
       key: "selection",
     },
   ]);
