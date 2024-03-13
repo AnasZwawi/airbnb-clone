@@ -68,12 +68,12 @@ export const SelectCalendar = ({
         <p>
           $
           {price && price !== null ? (
-            price *
+            price * (1 +
             Math.round(
               (((state[0].endDate.getTime() as number) -
                 state[0].startDate.getTime()) as number) /
                 (1000 * 3600 * 24)
-            )
+            ))
           ) : (
             ""
           )}

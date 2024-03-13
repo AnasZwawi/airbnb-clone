@@ -166,7 +166,7 @@ async function HomeId({ params }: { params: { id: string } }) {
       </div>
       <ShowGallery photos={data?.photos} />
 
-      <div className="flex flex-col gap-y-8 lg:flex-row justify-between gap-x-2 mt-6">
+      <div className="flex flex-col gap-y-8 lg:flex-row justify-between gap-x-4 mt-10">
         <div className="w-full lg:w-2/3 leading-none">
           <h3 className="font-semibold text-black text-2xl tracking-tighter flex items-center gap-x-2">
             {country?.label}
@@ -228,18 +228,29 @@ async function HomeId({ params }: { params: { id: string } }) {
 
           <HomeMap locationValue={country?.value as string} />
         </div>
-        <form action={createReservation} className="flex flex-col h-fit items-center p-3 border border-muted-foreground rounded-xl shadow-md">
+        <form
+          action={createReservation}
+          className="flex flex-col h-fit items-center px-4 py-6 border border-gray-500 rounded-xl shadow-xl"
+        >
           <input type="hidden" name="userId" value={user?.id} />
           <input type="hidden" name="homeId" value={params.id} />
-          <p className="flex gap-x-1"><span className="font-bold text-lg">${data?.price}</span><span>per night</span></p>
-          
-          <SelectCalendar reservations={data?.Reservation} price={data?.price}/>
+          <div className="flex gap-x-1 w-full text-left">
+            <span className="font-bold text-lg">${data?.price}</span>
+            <span>per night</span>
+          </div>
+
+          <SelectCalendar
+            reservations={data?.Reservation}
+            price={data?.price}
+          />
 
           {user?.id ? (
             <ReservationSubmit />
           ) : (
-            <Button className="w-full text-md font-semibold">
-              <Link href={"/api/auth/login"}>Make a Reservation</Link>
+            <Button className="w-full ">
+              <Link href={"/api/auth/login"}>
+                <p className="font-semibold text-lg">Make a Reservation</p>
+              </Link>
             </Button>
           )}
         </form>
