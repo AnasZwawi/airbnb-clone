@@ -236,11 +236,11 @@ export async function createReservation(formData: FormData) {
   const startDate = formData.get("startDate") as string;
   const endDate = formData.get("endDate") as string;
   const range = formData.get("range") as any;
-
+  console.log(range, minRange)
   if ((range as number) < minRange) {
     return (
-      <div className="w-full h-[100vh] fixed top-0 left-0 flex justify-center items-center">
-        <div className="relative w-[350px] h-fit bg-white rounded-lg border border-gray-300 shadow-xl ">
+      <div className="w-full h-[100vh] z-49 fixed top-0 left-0 flex justify-center items-center">
+        <div className="z-50 relative w-[350px] h-fit bg-white rounded-lg border border-gray-300 shadow-xl ">
           <X className="absolute top-3 right-3 bg-gray-700"/>
           <div className="w-full">
             <p className="text-lg text-center font-semibold">Minimum {minRange} nights.</p>
