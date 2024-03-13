@@ -85,7 +85,7 @@ export const SelectCalendar = ({
   );
 };
  */
-
+/* 
 export const SelectCalendar = ({
   reservations,
   price,
@@ -111,6 +111,108 @@ export const SelectCalendar = ({
 
     disabledDates = [...disabledDates, ...dateRange];
   });
+
+  const handleDateChange = (ranges: any) => {
+    const { selection } = ranges;
+    if (selection.endDate.getTime() - selection.startDate.getTime() < 2 * 24 * 60 * 60 * 1000) {
+      const newEndDate = addDays(selection.startDate, 2);
+      setState([{ ...selection, endDate: newEndDate }]);
+    } else {
+      setState([selection]);
+    }
+  };
+
+  return (
+    <>
+      <input
+        type="hidden"
+        name="startDate"
+        value={state[0].startDate.toISOString()}
+      />
+      <input
+        type="hidden"
+        name="endDate"
+        value={state[0].endDate.toISOString()}
+      />
+      <DateRange
+        months={2}
+        date={new Date()}
+        showDateDisplay={false}
+        rangeColors={["#000"]}
+        color="blue"
+        ranges={state}
+        onChange={handleDateChange}
+        minDate={new Date()}
+        direction="vertical"
+        disabledDates={disabledDates}
+      />
+      <div className="w-full flex justify-between mb-3">
+        <div className="border-b pb-0 border-gray-400">
+          ${price} x{" "}
+          {1 + Math.round(
+            (((state[0].endDate.getTime() as number) -
+              state[0].startDate.getTime()) as number) /
+              (1000 * 3600 * 24)
+          )}{" "}
+          nights
+        </div>
+        <p>
+          $
+          {price && price !== null ? (
+            price * (1 +
+            Math.round(
+              (((state[0].endDate.getTime() as number) -
+                state[0].startDate.getTime()) as number) /
+                (1000 * 3600 * 24)
+            ))
+          ) : (
+            ""
+          )}
+        </p>
+      </div>
+    </>
+  );
+};
+ */
+
+export const SelectCalendar = ({
+  reservations,
+  price,
+}: {
+  price: number | null | undefined;
+  reservations: { startDate: Date; endDate: Date }[] | undefined;
+}) => {
+  
+  const [state, setState] = useState([
+    {
+      startDate: new Date(),
+      endDate: addDays(new Date(), 2), // Set default end date to 2 days after start date
+      key: "selection",
+    },
+  ]);
+
+  let disabledDates: Date[] = [];
+  reservations?.forEach((reservation) => {
+    const dateRange = eachDayOfInterval({
+      start: new Date(reservation.startDate),
+      end: new Date(reservation.endDate)
+    });
+
+    disabledDates = [...disabledDates, ...dateRange];
+  });
+
+  // Disable the end date if the range is less than 2 days
+  if (
+    state[0].endDate.getTime() - state[0].startDate.getTime() < 2 * 24 * 60 * 60 * 1000
+  ) {
+    const endOfRange = addDays(state[0].startDate, 2);
+    disabledDates = disabledDates.concat(
+      eachDayOfInterval({
+        start: addDays(state[0].startDate, 1),
+        end: endOfRange,
+      })
+    );
+  }
 
   const handleDateChange = (ranges: any) => {
     const { selection } = ranges;
