@@ -37,15 +37,18 @@ export const SideCalendar = ({
     <>
       {error && (
         <div className="w-full h-[100vh] z-49 fixed top-0 left-0 flex justify-center items-center">
-          <div className="z-50 relative w-[350px] h-fit bg-white rounded-lg border border-gray-300 shadow-xl ">
-            <X className="absolute top-3 right-3 bg-gray-700" />
-            <div className="w-full">
-              <p className="text-lg text-center font-semibold">
-                {error}
-              </p>
-            </div>
+        <div className="z-50 relative max-w-[400px] h-[300px] bg-white rounded-lg border border-gray-300 shadow-lg ">
+          <X className="absolute top-3 right-3 bg-gray-700" />
+          <div className="w-full">
+            <p className="text-lg text-center font-semibold">
+              {error}
+            </p>
+            <p className="text-gray-600 text-center">
+              Please choose more than {minRange} nights...
+            </p>
           </div>
         </div>
+      </div>
       )}
       <form
         onSubmit={handleSubmit}
