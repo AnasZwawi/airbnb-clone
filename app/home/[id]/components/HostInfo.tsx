@@ -13,12 +13,11 @@ export const HostInfo: React.FC<HostInfoProps> = ({
   profilePicture,
   hostName,
 }) => {
-  const [name , setName] = useState('')
-  if(hostName !== undefined){
+  
+  
     const word = hostName;
-    const HostName = word.charAt(0).toUpperCase() + word.slice(1);
-    setName(HostName)  
-  }
+     
+  
   return (
     <section className="w-[100vw] md:w-full bg-stone-200 md:bg-white p-6 md:p-y-8 mt-6 md:px-0">
       <h2 className="text-2xl font-semibold text-black pb-5">Meet your Host</h2>
@@ -33,7 +32,7 @@ export const HostInfo: React.FC<HostInfoProps> = ({
             className="w-28 h-28 rounded-full mb-2"
           />
           <h3 className="text-center text-[23px] font-semibold text-stone-900">
-            {name}
+            {word && (word.charAt(0).toUpperCase() + word.slice(1))}
           </h3>
           <p className="text-center text-sm font-semibold text-black tracking-tighter">
             Host
