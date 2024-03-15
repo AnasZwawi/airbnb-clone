@@ -31,7 +31,7 @@ export const HostInfo: React.FC<HostInfoProps> = ({
             alt="User Profile image"
             className="w-28 h-28 rounded-full mb-2"
           />
-          <h3 className="text-center text-[23px] font-semibold text-stone-900">
+          <h3 className="text-center text-[27px] font-bold text-stone-900">
             {word && (word.charAt(0).toUpperCase() + word.slice(1))}
           </h3>
           <p className="text-center text-sm font-semibold text-black tracking-tighter">
