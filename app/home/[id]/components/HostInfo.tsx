@@ -60,7 +60,7 @@ export const HostInfo: React.FC<HostInfoProps> = ({
           </Button>
           <Separator className="w-full bg-stone-300" />
           <div className="mt-4 flex gap-x-1 items-center">
-            <ShieldAlert className="text-primary min-w-[14px] min-h-[14px]" />
+            <ShieldAlert className="text-primary min-w-[11px] min-h-[11px]" />
             <p className="text-[13px] text-stone-700">
               To protect your payment, never transfer money or communicate
               outside of the Tuniloge website.
