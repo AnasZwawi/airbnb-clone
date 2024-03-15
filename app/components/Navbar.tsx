@@ -1,24 +1,18 @@
- "use client";
-/*import Image from "next/image";
+/* 'use client'
+import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
 import DesktipLogo from "@/public/tuniloge.png";
 import MobileLogo from "@/public/tuniloge.png";
 import { UserNav } from "./UserNav";
 import { SearchComponent } from "./SearchComponent";
-import { useSearchParams } from "next/navigation";
+
 
 export const Navbar = () => {
-  const searchParams = useSearchParams()
-  const homeId = searchParams.get('id')
-  
+
   return (
     <nav className="w-full flex flex-col sm:block border-b sticky top-0 bg-white bg-opacity-90 backdrop-blur-md z-40">
-      <div
-        className={`flex items-center justify-between ${
-          homeId ? "max-w-[1320px]" : "container"
-        } mx-auto px-5 lg:px-10 py-3`}
-      >
+      <div className={`flex items-center justify-between container mx-auto px-5 lg:px-10 py-3`}>
         <Link href={"/"}>
           <Image
             src={DesktipLogo}
@@ -45,34 +39,25 @@ export const Navbar = () => {
   );
 };
  */
+"use client"
 import Image from "next/image";
 import Link from "next/link";
-import React, { Suspense } from "react";
+import { useRouter } from "next/router";
+import React from "react";
 import DesktipLogo from "@/public/tuniloge.png";
 import MobileLogo from "@/public/tuniloge.png";
 import { UserNav } from "./UserNav";
 import { SearchComponent } from "./SearchComponent";
-import { useSearchParams } from "next/navigation";
 
 export const Navbar = () => {
-  return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <NavbarContent />
-    </Suspense>
-  );
-};
+  const router = useRouter();
 
-const NavbarContent = () => {
-  const searchParams = useSearchParams();
-  const homeId = searchParams.get("id");
+  // Check if current path matches the pattern
+  const isMaxWidth1300 = router.pathname.includes("/home/");
 
   return (
     <nav className="w-full flex flex-col sm:block border-b sticky top-0 bg-white bg-opacity-90 backdrop-blur-md z-40">
-      <div
-        className={`flex items-center justify-between ${
-          homeId ? "max-w-[1320px]" : "container"
-        } mx-auto px-5 lg:px-10 py-3`}
-      >
+      <div className={`flex items-center justify-between ${isMaxWidth1300 ? "max-w-[1300px]" : "container"} mx-auto px-5 lg:px-10 py-3`}>
         <Link href={"/"}>
           <Image
             src={DesktipLogo}
