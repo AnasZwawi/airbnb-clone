@@ -44,7 +44,7 @@ export const HostInfo: React.FC<HostInfoProps> = ({ profilePicture, hostName }) 
               confirmed phone number
             </span>
           </p>
-          <Button className="my-4 font-bold tracking-[-0.07em] px-4 py-3 rounded-md bg-slate-800 text-white">
+          <Button className="my-4 font-bold tracking-[-0.07em] px-4 py-3 rounded-md bg-slate-900 text-white">
             Contact Host
           </Button>
           <Separator className="w-full" />
