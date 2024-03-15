@@ -1,15 +1,27 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import DesktipLogo from "@/public/tuniloge.png";
 import MobileLogo from "@/public/tuniloge.png";
 import { UserNav } from "./UserNav";
 import { SearchComponent } from "./SearchComponent";
+import { useRouter } from "next/router";
 
 export const Navbar = () => {
+  const [isItHomeId, setIsItHomeId] = useState("");
+  const router = useRouter();
+  const { houseId } = router.query;
+  if (houseId) {
+    setIsItHomeId("max-w-[1320px]");
+  }
   return (
     <nav className="w-full flex flex-col sm:block border-b sticky top-0 bg-white bg-opacity-90 backdrop-blur-md z-40">
-      <div className="flex items-center justify-between container mx-auto px-5 lg:px-10 py-3">
+      <div
+        className={`flex items-center justify-between ${
+          houseId ? isItHomeId : "container"
+        } mx-auto px-5 lg:px-10 py-3`}
+      >
         <Link href={"/"}>
           <Image
             src={DesktipLogo}
