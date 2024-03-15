@@ -21,8 +21,8 @@ export const HostInfo: React.FC<HostInfoProps> = ({
   return (
     <section className="md:w-full bg-[#ebe4dd] md:bg-white p-6 md:p-y-8 mt-6 md:px-0">
       <h2 className="text-2xl font-semibold text-black pb-5">Meet your Host</h2>
-      <div className="flex flex-col rounded-2xl bg-[#ebe4dd] p-0 md:p-10 md:px-12 w-full items-center md:flex-row gap-x-0 md:gap-x-10 gap-y-7">
-        <div className="bg-white flex flex-col items-center w-[320px] h-fit px-4 py-7 rounded-2xl shadow-[0px_7px_25px_5px_#00000024]">
+      <div className="flex flex-col rounded-3xl bg-[#ebe4dd] p-0 md:p-10 md:px-12 w-full items-center md:flex-row gap-x-0 md:gap-x-10 gap-y-7">
+        <div className="bg-white flex flex-col items-center w-[320px] h-fit px-4 py-7 rounded-3xl shadow-[0px_7px_25px_5px_#00000024]">
           <img
             src={
               profilePicture ??
