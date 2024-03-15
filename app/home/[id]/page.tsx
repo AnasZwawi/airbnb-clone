@@ -24,6 +24,7 @@ import { Dot, Images, Star } from "lucide-react";
 import { redirect } from "next/navigation";
 import { ShowGallery } from "@/app/components/ShowGallery";
 import { SideCalendar } from "./components/SideCalendar";
+import { HostInfo } from "./components/HostInfo";
 
 async function getHome(userId: string, homeId: string) {
   noStore();
@@ -209,7 +210,7 @@ async function HomeId({ params }: { params: { id: string } }) {
               className="w-8 h-8 md:w-11 md:h-11 rounded-full"
             />
             <div className="flex flex-col ml-2 lg:ml-3 leading-snug">
-              <h3 className="font-medium text-[15px]">
+              <h3 className="font-semibold tracking-tighter text-[15px] text-black">
                 Hosted by {data?.User?.firstname}
               </h3>
               <p className="text-[13px] text-gray-800">
@@ -243,6 +244,8 @@ async function HomeId({ params }: { params: { id: string } }) {
           minRange={minRange}
         />
       </div>
+
+      <HostInfo profilePicture = {data?.User?.profileImage}/>
     </div>
   );
 }

@@ -56,7 +56,7 @@ export const SearchComponent = () => {
       <Dialog>
         <DialogTrigger asChild>
           <div className="shadow-[0_2px_5px_0px_rgba(0,0,0,0.1)] transition-shadow duration-200 hover:shadow-md mx-5 rounded-full py-[7px] px-3 border flex justify-between items-center cursor-pointer">
-            <div className="flex h-full divide-x font-medium text-sm sm:text-[16px] text-gray-700">
+            <div className="flex h-full divide-x font-medium tracking-tighter text-sm bg-white text-black">
               <p className="px-2 sm:px-4 line-clamp-1">Anywhere</p>
               <p className="px-2 sm:px-4 line-clamp-1">Any Week</p>
               <p className="px-2 sm:px-4 line-clamp-1">Any Guests</p>

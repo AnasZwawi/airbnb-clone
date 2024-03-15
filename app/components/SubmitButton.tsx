@@ -85,12 +85,12 @@ export function ReservationSubmit() {
   return (
     <>
       {pending ? (
-        <Button className="w-full h-13 font-[500] text-[17px] py-3" disabled>
+        <Button className="w-full h-13 font-[500] text-[16px] py-3" disabled>
           <Loader2 className="h-5 w-5 animate-spin mr-2" />
           Please wait...
         </Button>
       ) : (
-        <Button className="w-full h-13 font-[500] text-[17px] py-3" type="submit">
+        <Button className="w-full h-13 font-[500] text-[16px] py-3" type="submit">
           Make a Reservation!
         </Button>
       )}
