@@ -8,18 +8,16 @@ import { UserNav } from "./UserNav";
 import { SearchComponent } from "./SearchComponent";
 import { useRouter } from "next/router";
 
-export const Navbar = () => {
+export const Navbar = ({ params }: { params: { id: string | undefined } }) => {
   const [isItHomeId, setIsItHomeId] = useState("");
-  const router = useRouter();
-  const { houseId } = router.query;
-  if (houseId) {
+  if (params?.id) {
     setIsItHomeId("max-w-[1320px]");
   }
   return (
     <nav className="w-full flex flex-col sm:block border-b sticky top-0 bg-white bg-opacity-90 backdrop-blur-md z-40">
       <div
         className={`flex items-center justify-between ${
-          houseId ? isItHomeId : "container"
+          params?.id ? isItHomeId : "container"
         } mx-auto px-5 lg:px-10 py-3`}
       >
         <Link href={"/"}>
