@@ -10,7 +10,7 @@ interface HostInfoProps {
 
 export const HostInfo: React.FC<HostInfoProps> = ({ profilePicture, hostName }) => {
   return (
-    <section className="w-[100vw] md:w-full bg-stone-100 md:bg-white p-6 md:p-y-8 rounded-xl mt-6 md:px-0">
+    <section className="w-[100vw] md:w-full bg-stone-100 md:bg-white p-6 md:p-y-8 mt-6 md:px-0">
       <h2 className="text-2xl font-semibold text-black pb-5">Meet your Host</h2>
       <div className="flex flex-col rounded-2xl bg-stone-100 p-0 md:p-10 w-full items-center md:flex-row gap-x-0 md:gap-x-8 gap-y-7">
         <div className="bg-white flex flex-col items-center w-[320px] h-fit px-4 py-7 rounded-2xl shadow-[0px_7px_25px_5px_#00000024]">
