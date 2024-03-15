@@ -1,7 +1,7 @@
-/* import type { Metadata } from "next";
+import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import "./globals.css";
-import { Navbar } from "./components/Navbar";
+/*import { Navbar } from "./components/Navbar";
 
 const montserrat = Montserrat({ subsets: ["latin"] });
 
@@ -25,36 +25,32 @@ export default function RootLayout({
   );
 }
  */
-import type { Metadata } from "next";
-import { Montserrat } from "next/font/google";
-import Head from "next/head";
-import "./globals.css";
-import { Navbar } from "./components/Navbar";
+// components/Layout.tsx
+import React, { useEffect, useState } from "react";
+import dynamic from "next/dynamic";
 
-const montserrat = Montserrat({ subsets: ["latin"] });
-
-export const metadata: Metadata = {
-  title: "TuniLoge",
-  description: "Louez, Explorez, Vibrez avec Tuniloge",
-};
+// Lazy load Navbar component
+const  Navbar = dynamic(() => import("./components/Navbar") as any, { ssr: false });
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
-}>) {
+}>){
+  const [isClient, setIsClient] = useState<boolean>(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
   return (
-    <>
-      <Head>
-        <title>{metadata.title as string}</title>
-        <meta name="description" content={metadata.description as string} />
-      </Head>
-      <html lang="en">
-        <body className={montserrat.className}>
+    <div>
+      {isClient && (
+        <React.Suspense fallback={<div>Loading...</div>}>
           <Navbar />
-          {children}
-        </body>
-      </html>
-    </>
+        </React.Suspense>
+      )}
+      {children}
+    </div>
   );
-}
+};
