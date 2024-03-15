@@ -7,7 +7,6 @@ import MobileLogo from "@/public/tuniloge.png";
 import { UserNav } from "./UserNav";
 import { SearchComponent } from "./SearchComponent";
 
-
 export const Navbar = () => {
 
   return (
