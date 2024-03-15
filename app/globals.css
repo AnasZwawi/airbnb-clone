@@ -2,16 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
 @layer base {
   :root {
     /* Name: custom color palette
-       Author: Ilias Ism
-       URL: https://gradient.page */
+         Author: Ilias Ism
+         URL: https://gradient.page */
 
     /* CSS: .bg-gradient { background: var(--gradient) } */
-    --gradient: linear-gradient(to top left,#FF5A5F,#FC642D);
+    --gradient: #ff5a5f;
 
     --background: -2 65% 5.44%;
     --foreground: -2 10% 98.4%;
@@ -41,6 +39,41 @@
     --destructive-foreground: -2 10% 98.4%;
 
     --ring: -2 100% 68%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --gradient: #ff5a5f;
+
+    --background: -2 65% 5.44%;
+    --foreground: -2 10% 98.4%;
+
+    --muted: -2 50% 20.400000000000002%;
+    --muted-foreground: -2 10% 56.8%;
+
+    --popover: -2 45% 8.84%;
+    --popover-foreground: -2 10% 98.4%;
+
+    --card: -2 45% 8.84%;
+    --card-foreground: -2 10% 98.4%;
+
+    --border: -2 50% 20.400000000000002%;
+    --input: -2 50% 20.400000000000002%;
+
+    --primary: -2 100% 68%;
+    --primary-foreground: -2 10% 6.800000000000001%;
+
+    --secondary: -2 50% 20.400000000000002%;
+    --secondary-foreground: -2 10% 98.4%;
+
+    --accent: -2 50% 20.400000000000002%;
+    --accent-foreground: -2 10% 98.4%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: -2 10% 98.4%;
+
+    --ring: -2 100% 68%;
+    --radius: 0.5rem;
   }
 }
 
@@ -63,15 +96,15 @@
 }
 
 @keyframes toTop {
-  from{
+  from {
     top: 100vh;
   }
-  to{
-    top: 0
+  to {
+    top: 0;
   }
 }
 
-.toTopDiv{
+.toTopDiv {
   animation-name: toTop;
-  animation-duration: 0.5s; 
+  animation-duration: 0.5s;
 }
