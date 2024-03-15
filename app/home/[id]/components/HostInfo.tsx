@@ -11,8 +11,8 @@ interface HostInfoProps {
 export const HostInfo: React.FC<HostInfoProps> = ({ profilePicture, hostName }) => {
   return (
     <section className="bg-gray-400 md:bg-white p-8 md:p-y-8 md:px-0">
-      <h2 className="text-lg font-semibold text-black pb-4">Meet your Host</h2>
-      <div className="flex flex-col rounded-2xl bg-gray-200 p-0 md:p-8 w-full items-center md:flex-row gap-x-6 md:gap-x-0 md:gap-y-5">
+      <h2 className="text-xl font-semibold text-black pb-4">Meet your Host</h2>
+      <div className="flex flex-col rounded-2xl bg-gray-200 p-0 md:p-8 w-full items-center md:flex-row gap-x-0 md:gap-x-6 gap-y-5">
         <div className="bg-white flex flex-col justify-center w-[320px] h-fit p-4 rounded-2xl shadow-[0px_7px_25px_5px_#00000024]">
           <img
             src={
@@ -29,25 +29,25 @@ export const HostInfo: React.FC<HostInfoProps> = ({ profilePicture, hostName }) 
         </div>
 
         <div className="w-[65%]">
-          <h4 className="mb-4 text-black font-semibold text-md tracking-tighter">
+          <h4 className="mb-6 text-black font-semibold text-lg tracking-tighter">
             Host details
           </h4>
-          <p className="p-0 m-0 flex gap-x-1">
-            <Check className="w-3 h-3 text-gray-800" />
-            <span className="text-sm text-gray-800">
+          <p className="p-0 m-0 flex gap-x-1 items-center">
+            <Check className="w-4 h-4 text-gray-800" />
+            <span className="text-md text-gray-800">
               confirmed email address
             </span>
           </p>
           <p className="p-0 m-0 flex items-center gap-x-1">
-            <Check className="w-3 h-3 text-gray-800" />
-            <span className="text-sm text-gray-800 ">
+            <Check className="w-4 h-4 text-gray-800" />
+            <span className="text-md text-gray-800 ">
               confirmed phone number
             </span>
           </p>
-          <Button className="my-4 font-bold tracking-[-0.07em] px-4 py-3 rounded-md bg-slate-900 text-white">
+          <Button className="my-6 font-bold text-lg tracking-tight px-5 py-4 rounded-md bg-slate-900 text-white">
             Contact Host
           </Button>
-          <Separator className="w-full" />
+          <Separator className="w-full bg-gray-400" />
           <div className="mt-4 flex gap-x-1 items-center">
             <ShieldAlert className="text-primary w-3 h-3" />
             <p className="text-[13px] text-gray-700">
