@@ -207,10 +207,10 @@ async function HomeId({ params }: { params: { id: string } }) {
                 "https://cdn-icons-png.flaticon.com/512/149/149071.png"
               }
               alt="User Profile image"
-              className="w-8 h-8 md:w-11 md:h-11 rounded-full"
+              className="w-11 h-11 rounded-full"
             />
             <div className="flex flex-col ml-2 lg:ml-3 leading-snug">
-              <h3 className="font-semibold tracking-tighter text-[15px] text-black">
+              <h3 className="font-semibold tracking-tighter text-[16px] text-black">
                 Hosted by {data?.User?.firstname}
               </h3>
               <p className="text-[13px] text-gray-800">
@@ -245,7 +245,7 @@ async function HomeId({ params }: { params: { id: string } }) {
         />
       </div>
 
-      <HostInfo profilePicture = {data?.User?.profileImage}/>
+      <HostInfo profilePicture = {data?.User?.profileImage} hostName = {data?.User?.firstname}/>
     </div>
   );
 }
