@@ -44,13 +44,13 @@ export const HostInfo: React.FC<HostInfoProps> = ({
             Host details
           </h4>
           <p className="p-0 m-0 flex gap-x-1 items-center">
-            <Check className="min-w-[14px] min-h-[14px] text-stone-900" />
+            <Check className="min-w-[13px] min-h-[13px] text-stone-900" />
             <span className="text-md text-stone-900">
               confirmed email address
             </span>
           </p>
           <p className="p-0 m-0 flex items-center gap-x-1">
-            <Check className="min-w-[14px] min-h-[14px] text-stone-900" />
+            <Check className="min-w-[13px] min-h-[13px] text-stone-900" />
             <span className="text-md text-stone-900 ">
               confirmed phone number
             </span>
