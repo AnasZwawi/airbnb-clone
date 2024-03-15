@@ -52,12 +52,12 @@ import { SearchComponent } from "./SearchComponent";
 export const Navbar = () => {
   const router = useRouter();
 
-  // Check if current path matches the pattern
+  // Check if current path matches the pattern 
   const isMaxWidth1300 = router.pathname.includes("/home/");
 
   return (
     <nav className="w-full flex flex-col sm:block border-b sticky top-0 bg-white bg-opacity-90 backdrop-blur-md z-40">
-      <div className={`flex items-center justify-between ${isMaxWidth1300 ? "max-w-[1300px]" : "container"} mx-auto px-5 lg:px-10 py-3`}>
+      <div className={`flex items-center justify-between ${isMaxWidth1300 ? "max-w-[1320px]" : "container"} mx-auto px-5 lg:px-10 py-3`}>
         <Link href={"/"}>
           <Image
             src={DesktipLogo}
