@@ -6,18 +6,17 @@ import DesktipLogo from "@/public/tuniloge.png";
 import MobileLogo from "@/public/tuniloge.png";
 import { UserNav } from "./UserNav";
 import { SearchComponent } from "./SearchComponent";
-import { useRouter } from "next/router";
+import { useSearchParams } from "next/navigation";
 
-export const Navbar = ({ params }: { params: { id: string | undefined } }) => {
-  const [isItHomeId, setIsItHomeId] = useState("");
-  if (params?.id) {
-    setIsItHomeId("max-w-[1320px]");
-  }
+export const Navbar = () => {
+  const searchParams = useSearchParams()
+  const homeId = searchParams.get('id')
+  
   return (
     <nav className="w-full flex flex-col sm:block border-b sticky top-0 bg-white bg-opacity-90 backdrop-blur-md z-40">
       <div
         className={`flex items-center justify-between ${
-          params?.id ? isItHomeId : "container"
+          homeId ? "max-w-[1320px]" : "container"
         } mx-auto px-5 lg:px-10 py-3`}
       >
         <Link href={"/"}>
