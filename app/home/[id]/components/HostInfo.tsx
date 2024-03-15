@@ -29,7 +29,7 @@ export const HostInfo: React.FC<HostInfoProps> = ({ profilePicture, hostName }) 
         </div>
 
         <div className="w-full md:w-[65%]">
-          <h4 className="mb-5 text-black font-semibold text-lg tracking-tighter">
+          <h4 className="mb-5 text-black font-semibold text-lg tracking-tight">
             Host details
           </h4>
           <p className="p-0 m-0 flex gap-x-1 items-center">
