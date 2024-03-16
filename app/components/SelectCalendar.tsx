@@ -263,6 +263,7 @@ export const SelectCalendar = ({
         }
       />
       <DateRange
+      editableDateInputs={true}
         months={1}
         date= {new Date()}
         showDateDisplay={false}
