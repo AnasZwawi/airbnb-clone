@@ -280,7 +280,7 @@ export const SelectCalendar = ({
         color="rose"
         ranges={state}
         onChange={handleDateChange}
-        minDate={new Date()}
+        minDate={undefined}
         direction="vertical"
         disabledDates={disabledDates}
       />
