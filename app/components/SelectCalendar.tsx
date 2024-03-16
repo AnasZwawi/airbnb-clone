@@ -187,8 +187,8 @@ export const SelectCalendar = ({
 }) => {
   const [state, setState] = useState([
     {
-      startDate: undefined,
-      endDate: undefined, // Set default end date to 2 days after start date
+      startDate: new Date(),
+      endDate: new Date(), // Set default end date to 2 days after start date
       key: "selection",
     },
   ]);
@@ -265,7 +265,11 @@ export const SelectCalendar = ({
         type="hidden"
         name="range"
         value={
-          undefined
+          Math.round(
+            (((state[0].endDate.getTime() as number) -
+              state[0].startDate.getTime()) as number) /
+              (1000 * 3600 * 24)
+          ) as number
         }
       />
       <DateRange
@@ -283,12 +287,23 @@ export const SelectCalendar = ({
       <div className="w-full flex justify-between mb-3">
         <div className="border-b pb-0 border-gray-400">
           ${price} x{" "}
-          {}{" "}
+          {Math.round(
+            (((state[0].endDate.getTime() as number) -
+              state[0].startDate.getTime()) as number) /
+              (1000 * 3600 * 24)
+          )}{" "}
           nights
         </div>
         <p>
           $
-          {undefined}
+          {price && price !== null
+            ? price *
+              Math.round(
+                (((state[0].endDate.getTime() as number) -
+                  state[0].startDate.getTime()) as number) /
+                  (1000 * 3600 * 24)
+              )
+            : ""}
         </p>
       </div>
     </>
