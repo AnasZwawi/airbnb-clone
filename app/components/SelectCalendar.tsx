@@ -209,9 +209,7 @@ export const SelectCalendar = ({
     // Check if the selected range overlaps with any existing reservations
     const overlap = reservations?.some((reservation) => {
       return (
-        (selection.startDate >= reservation.startDate && selection.startDate <= reservation.endDate) ||
-        (selection.endDate >= reservation.startDate && selection.endDate <= reservation.endDate) ||
-        (selection.startDate <= reservation.startDate && selection.endDate >= reservation.endDate)
+        (selection.startDate <= reservation.endDate && selection.endDate >= reservation.startDate)
       );
     });
   
@@ -223,6 +221,7 @@ export const SelectCalendar = ({
   
     setState([selection]);
   };
+  
   
 
 
