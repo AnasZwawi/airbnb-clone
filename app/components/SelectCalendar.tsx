@@ -247,7 +247,7 @@ export const SelectCalendar = ({
       />
       <DateRange
         months={1}
-        date={new Date()}
+        
         showDateDisplay={false}
         rangeColors={["#000"]}
         color="violet"
