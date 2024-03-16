@@ -187,8 +187,8 @@ export const SelectCalendar = ({
 }) => {
   const [state, setState] = useState([
     {
-      startDate: new Date(),
-      endDate: addDays(new Date(), 2), // Set default end date to 2 days after start date
+      startDate: undefined,
+      endDate: undefined, // Set default end date to 2 days after start date
       key: "selection",
     },
   ]);
@@ -203,7 +203,7 @@ export const SelectCalendar = ({
   });
 
   const handleDateChange = (ranges: any) => {
-    /* const { selection } = ranges;
+    const { selection } = ranges;
 
     // Check if the selected range overlaps with any existing reservations
     const overlap = reservations?.some((reservation) => {
@@ -218,11 +218,11 @@ export const SelectCalendar = ({
     });
     
     // If there's an overlap, cancel the range picking
-    if (true) {
+    if (overlap) {
       setWrongSelection(true);
       return; // Exit the function early to prevent updating state
     }
-    setState([selection]); */
+    setState([selection]);
     
   };
 
@@ -254,22 +254,18 @@ export const SelectCalendar = ({
       <input
         type="hidden"
         name="startDate"
-        value={state[0].startDate.toISOString()}
+        value={undefined}
       />
       <input
         type="hidden"
         name="endDate"
-        value={state[0].endDate.toISOString()}
+        value={undefined}
       />
       <input
         type="hidden"
         name="range"
         value={
-          Math.round(
-            (((state[0].endDate.getTime() as number) -
-              state[0].startDate.getTime()) as number) /
-              (1000 * 3600 * 24)
-          ) as number
+          undefined
         }
       />
       <DateRange
@@ -287,23 +283,12 @@ export const SelectCalendar = ({
       <div className="w-full flex justify-between mb-3">
         <div className="border-b pb-0 border-gray-400">
           ${price} x{" "}
-          {Math.round(
-            (((state[0].endDate.getTime() as number) -
-              state[0].startDate.getTime()) as number) /
-              (1000 * 3600 * 24)
-          )}{" "}
+          {}{" "}
           nights
         </div>
         <p>
           $
-          {price && price !== null
-            ? price *
-              Math.round(
-                (((state[0].endDate.getTime() as number) -
-                  state[0].startDate.getTime()) as number) /
-                  (1000 * 3600 * 24)
-              )
-            : ""}
+          {undefined}
         </p>
       </div>
     </>
