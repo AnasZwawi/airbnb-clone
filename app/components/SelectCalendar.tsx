@@ -203,7 +203,7 @@ export const SelectCalendar = ({
   });
 
   const handleDateChange = (ranges: any) => {
-    const { selection } = ranges;
+    /* const { selection } = ranges;
 
     // Check if the selected range overlaps with any existing reservations
     const overlap = reservations?.some((reservation) => {
@@ -216,14 +216,14 @@ export const SelectCalendar = ({
           selection.endDate >= reservation.endDate)
       );
     });
-
+    
     // If there's an overlap, cancel the range picking
     if (true) {
       setWrongSelection(true);
       return; // Exit the function early to prevent updating state
     }
-
-    setState([selection]);
+    setState([selection]); */
+    
   };
 
   return (
