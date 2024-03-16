@@ -7,6 +7,7 @@ import { useState } from "react";
 import { eachDayOfInterval } from "date-fns";
 import { addDays } from "date-fns";
 import { X } from "lucide-react";
+import { Button } from "@/components/ui/button";
 /*
 export const SelectCalendar = ({
   reservations,
@@ -192,7 +193,7 @@ export const SelectCalendar = ({
       key: "selection",
     },
   ]);
-
+  const [wrongSelection, setWrongSelection] = useState(false)
   let disabledDates: Date[] = [];
   reservations?.forEach((reservation) => {
     const dateRange = eachDayOfInterval({
@@ -208,14 +209,14 @@ export const SelectCalendar = ({
     // Check if the selected range overlaps with any existing reservations
     const overlap = reservations?.some((reservation) => {
       return (
-        reservation.startDate > selection.startDate &&
-        reservation.startDate <= selection.endDate
+        reservation.startDate >= selection.startDate &&
+        reservation.endDate <= selection.endDate
       );
     });
 
     // If there's an overlap, cancel the range picking
     if (overlap) {
-      return;
+      setWrongSelection(true)
     }
 
     setState([selection]);
@@ -224,6 +225,19 @@ export const SelectCalendar = ({
 
   return (
     <>
+    {wrongSelection && (
+        <div className="w-full bg-black bg-opacity-70 backdrop-blur-md h-[100vh] z-50 fixed top-0 left-0 flex justify-center items-center">
+          <div className="z-50 relative w-full md:w-[400px] h-[280px] bg-white rounded-lg border border-gray-300 shadow-lg flex justify-center items-center">
+            <Button className="absolute bottom-3 right-3 bg-primary rounded-md text-white font-medium text-[16px]" onClick={()=>{setWrongSelection(false)}}>Close</Button>
+            <div className="w-full">
+              <p className="text-lg text-center font-semibold">{wrongSelection}</p>
+              <p className="text-gray-600 text-center">
+                Please select a different time frame as it overlaps with an existing reservation.
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
       <input
         type="hidden"
         name="startDate"
@@ -247,7 +261,7 @@ export const SelectCalendar = ({
       />
       <DateRange
         months={1}
-        
+        date= {undefined}
         showDateDisplay={false}
         rangeColors={["#000"]}
         color="violet"
