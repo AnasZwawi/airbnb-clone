@@ -12,7 +12,7 @@ async function getData({
   userId,
 }: {
   searchParams: {
-    filter: string;
+    filter?: string;
     country?: string;
     bathroom?: string;
     room?: string;
@@ -21,7 +21,7 @@ async function getData({
   userId?: string | undefined;
 }) {
   noStore();
-  if (searchParams.guest && searchParams.room && searchParams.bathroom) {
+  if (!searchParams.guest && !searchParams.room && !searchParams.bathroom) {
     const data = await prisma.home.findMany({
       where: {
         addedCategory: true,
@@ -77,7 +77,7 @@ export default async function Home({
   searchParams,
 }: {
   searchParams: {
-    filter: string;
+    filter?: string;
     country?: string;
     bathroom?: string;
     room?: string;
@@ -103,7 +103,7 @@ async function ShowItems({
   searchParams,
 }: {
   searchParams: {
-    filter: string;
+    filter?: string;
     country?: string;
     bathroom?: string;
     room?: string;
