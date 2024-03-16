@@ -209,7 +209,9 @@ export const SelectCalendar = ({
     // Check if the selected range overlaps with any existing reservations
     const overlap = reservations?.some((reservation) => {
       return (
-        (selection.startDate <= reservation.endDate && selection.endDate >= reservation.startDate)
+        (selection.startDate >= reservation.startDate && selection.startDate <= reservation.endDate) ||
+        (selection.endDate >= reservation.startDate && selection.endDate <= reservation.endDate) ||
+        (selection.startDate <= reservation.startDate && selection.endDate >= reservation.endDate)
       );
     });
   
@@ -221,7 +223,6 @@ export const SelectCalendar = ({
   
     setState([selection]);
   };
-  
   
 
 
@@ -267,7 +268,7 @@ export const SelectCalendar = ({
         showDateDisplay={false}
         rangeColors={["#000"]}
         color="violet"
-        ranges={state}
+        ranges={undefined}
         onChange={handleDateChange}
         minDate={new Date()}
         direction="vertical"
