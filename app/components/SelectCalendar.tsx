@@ -254,12 +254,12 @@ export const SelectCalendar = ({
       <input
         type="hidden"
         name="startDate"
-        value={undefined}
+        value={state[0].startDate.toISOString()}
       />
       <input
         type="hidden"
         name="endDate"
-        value={undefined}
+        value={state[0].endDate.toISOString()}
       />
       <input
         type="hidden"
