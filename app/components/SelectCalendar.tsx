@@ -1,13 +1,4 @@
-"use client";
 
-import "react-date-range/dist/styles.css"; // main css file
-import "react-date-range/dist/theme/default.css"; // theme css file
-import { DateRange } from "react-date-range";
-import { useState } from "react";
-import { eachDayOfInterval } from "date-fns";
-import { addDays } from "date-fns";
-import { X } from "lucide-react";
-import { Button } from "@/components/ui/button";
 /*
 export const SelectCalendar = ({
   reservations,
@@ -176,7 +167,16 @@ export const SelectCalendar = ({
   );
 };
  */
+"use client";
 
+import "react-date-range/dist/styles.css"; // main css file
+import "react-date-range/dist/theme/default.css"; // theme css file
+import { DateRange } from "react-date-range";
+import { useState } from "react";
+import { eachDayOfInterval } from "date-fns";
+import { addDays } from "date-fns";
+import { X } from "lucide-react";
+import { Button } from "@/components/ui/button";
 export const SelectCalendar = ({
   reservations,
   price,
@@ -205,22 +205,25 @@ export const SelectCalendar = ({
 
   const handleDateChange = (ranges: any) => {
     const { selection } = ranges;
-
+  
     // Check if the selected range overlaps with any existing reservations
     const overlap = reservations?.some((reservation) => {
       return (
-        reservation.startDate <= selection.startDate ||
-        reservation.endDate >= selection.endDate
+        (selection.startDate >= reservation.startDate && selection.startDate <= reservation.endDate) ||
+        (selection.endDate >= reservation.startDate && selection.endDate <= reservation.endDate) ||
+        (selection.startDate <= reservation.startDate && selection.endDate >= reservation.endDate)
       );
     });
-
+  
     // If there's an overlap, cancel the range picking
     if (overlap) {
-      setWrongSelection(true)
+      setWrongSelection(true);
+      return; // Exit the function early to prevent updating state
     }
-
+  
     setState([selection]);
   };
+  
 
 
   return (
