@@ -218,7 +218,7 @@ export const SelectCalendar = ({
     });
 
     // If there's an overlap, cancel the range picking
-    if (overlap) {
+    if (true) {
       setWrongSelection(true);
       return; // Exit the function early to prevent updating state
     }
@@ -274,13 +274,13 @@ export const SelectCalendar = ({
       />
       <DateRange
         months={1}
-        date={undefined}
+        date={new Date()}
         showDateDisplay={false}
         rangeColors={["#000"]}
         color="rose"
         ranges={state}
         onChange={handleDateChange}
-        minDate={undefined}
+        minDate={new Date()}
         direction="vertical"
         disabledDates={disabledDates}
       />
