@@ -47,7 +47,7 @@ export const HostInfo: React.FC<HostInfoProps> = ({
       ${textareaValue}
     `;
 
-    const emailUrl = `mailto:${email}?body=${message}`;
+    const emailUrl = `mailto:${email}?subject=Tuniloge%20message&body=${message}`;
     window.open(emailUrl, "_blank");
   };
   return (
