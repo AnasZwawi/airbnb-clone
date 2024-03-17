@@ -246,7 +246,7 @@ async function HomeId({ params }: { params: { id: string } }) {
         />
       </div>
 
-      <HostInfo houseThumbnail = {data?.photos[0]} housePrice = {data?.price} houseTitle = {data?.title} houseCountry = {data?.country} profilePicture = {data?.User?.profileImage} hostName = {data?.User?.firstname} email = {data?.User?.email}/>
+      <HostInfo houseThumbnail = {data?.photos[0]} housePrice = {data?.price} houseTitle = {data?.title} houseCountry = {country?.label} profilePicture = {data?.User?.profileImage} hostName = {data?.User?.firstname} email = {data?.User?.email}/>
     </div>
   );
 }

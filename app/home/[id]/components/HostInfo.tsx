@@ -114,9 +114,9 @@ export const HostInfo: React.FC<HostInfoProps> = ({
                         {houseCountry}
                       </p>
                     </div>
-                    <img
+                    <Image
                       src={
-                        houseThumbnail ??
+                        `https://jxvqpjydezilbytxarzd.supabase.co/storage/v1/object/public/images/${houseThumbnail}` ??
                         "https://cdn0.iconfinder.com/data/icons/real-estate-288/60/house__home__avatar__man__building-512.png"
                       }
                       alt="house image"
