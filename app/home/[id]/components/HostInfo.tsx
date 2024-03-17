@@ -79,7 +79,7 @@ export const HostInfo: React.FC<HostInfoProps> = ({
                 Contact Host
               </Button>
             </SheetTrigger>
-            <SheetContent className="w-[100%] md:w-[40%]">
+            <SheetContent className="w-[100%] md:w-[50%] lg:w-[40%]">
               <SheetHeader>
                 <div className="flex flex-col items-start w-full">
                   <div className="flex justify-between items-center w-full my-5">
@@ -120,7 +120,7 @@ export const HostInfo: React.FC<HostInfoProps> = ({
                         "https://cdn0.iconfinder.com/data/icons/real-estate-288/60/house__home__avatar__man__building-512.png"
                       }
                       alt="house image"
-                      className="rounded-xl w-24 h-24"
+                      className="rounded-xl bg-cover w-[110px] h-[110px]"
                     />
                   </div>
                   <Separator />
