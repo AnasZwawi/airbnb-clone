@@ -11,7 +11,7 @@ export const CategoryShowcase = ({
   return (
     <div className="flex items-center">
       <Image
-        src={category?.imageUrl as string}
+        src={category?.imageUrl as string} 
         alt="category image"
         width={44}
         height={44}
