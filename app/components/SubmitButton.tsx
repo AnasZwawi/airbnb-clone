@@ -82,9 +82,16 @@ export const DeleteFromFavoriteButton = ({classn = 'w-6 h-6'}) => {
 
 export function ReservationSubmit() {
   const [clicked, setClicked] = useState(false)
+  const handleClick = () => {
+    setClicked(true);
+
+    setTimeout(() => {
+      setClicked(false);
+    }, 500);
+  };
   const { pending } = useFormStatus();
   return (
-    <div onClick={()=>{setClicked(true)}}>
+    <div onClick={handleClick}>
       {pending || clicked ? (
         <Button className="w-full h-13 font-[500] text-[16px] py-3" disabled>
           <Loader2 className="h-5 w-5 animate-spin mr-2" />
