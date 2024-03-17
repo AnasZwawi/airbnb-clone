@@ -21,9 +21,12 @@ async function getData({
   userId?: string | undefined;
 }) {
   noStore();
-  const hasOtherParams =
-    searchParams.guest && searchParams.room && searchParams.bathroom;
-
+  
+  const hasOnlyCountry = searchParams.country && 
+                        searchParams.guest === "0" && 
+                        searchParams.room === "0" && 
+                        searchParams.bathroom === "0";
+  
   const whereClause: any = {
     addedCategory: true,
     addedDescription: true,
@@ -32,7 +35,7 @@ async function getData({
     country: searchParams.country ?? undefined,
   };
 
-  if (hasOtherParams) {
+  if (!hasOnlyCountry) {
     whereClause.guests = searchParams.guest ?? undefined;
     whereClause.bedrooms = searchParams.room ?? undefined;
     whereClause.bathrooms = searchParams.bathroom ?? undefined;
