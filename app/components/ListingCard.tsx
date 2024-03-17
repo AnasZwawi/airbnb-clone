@@ -63,7 +63,7 @@ export const ListingCard = ({
 
       <Link href={`/home/${homeId}`}>
         <h3 className="pt-2 font-semibold flex text-[14px]">
-          {country?.label} Almuñécar, Espagne
+          {country?.label}
         </h3>
 
         <p className="text-gray-700 text-sm line-clamp-2 text-[14px]">
