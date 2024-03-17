@@ -93,7 +93,7 @@ export const HostInfo: React.FC<HostInfoProps> = ({
                 Contact Host
               </Button>
             </SheetTrigger>
-            <SheetContent className="w-[100%] md:w-[50%] lg:w-[40%]">
+            <SheetContent className="w-[100%] md:w-[50%] lg:w-[40%] overflow-scroll">
               <SheetHeader>
                 <div className="flex flex-col items-start w-full">
                   <div className="flex justify-between items-center w-full my-5">
@@ -164,7 +164,7 @@ export const HostInfo: React.FC<HostInfoProps> = ({
 
           <Separator className="w-full bg-stone-300" />
           <div className="mt-4 flex gap-x-1 items-start">
-            <ShieldAlert className="text-primary w-4 h-4 min-w-4 min-h-4" />
+            <ShieldAlert className="text-primary w-4 h-4 min-w-4 min-h-4 mt-[3px]" />
             <p className="text-[13px] text-stone- text-left">
               To protect your payment, never transfer money or communicate
               outside of the Tuniloge website.
