@@ -79,7 +79,7 @@ export const HostInfo: React.FC<HostInfoProps> = ({
                 Contact Host
               </Button>
             </SheetTrigger>
-            <SheetContent className="w-[600px] sm:w-[100vw]">
+            <SheetContent className="w-[50%] sm:w-[100%]">
               <SheetHeader>
                 <div className="flex flex-col items-start w-full">
                   <div className="flex justify-between items-center w-full my-5">
