@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState,useTransition } from "react";
 import { SelectCalendar } from "@/app/components/SelectCalendar";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
@@ -21,16 +21,20 @@ export const SideCalendar = ({
   reservations: { startDate: Date; endDate: Date }[] | undefined;
 }) => {
   const [error, setError] = useState<string | null>(null);
+  const [isPending, startTransition] = useTransition();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const formData = new FormData(event.currentTarget);
-
-    try {
-      await createReservation(formData);
-    } catch (error) {
-      setError(`Minimum ${minRange} nights required.`);
-    }
+    startTransition(async()=>{
+      event.preventDefault();
+      const formData = new FormData(event.currentTarget);
+  
+      try {
+        await createReservation(formData);
+      } catch (error) {
+        setError(`Minimum ${minRange} nights required.`);
+      }
+    })
+    
   };
 
   return (
@@ -70,7 +74,7 @@ export const SideCalendar = ({
         />
 
         {userId ? (
-          <ReservationSubmit />
+          <ReservationSubmit isPending={isPending}/>
         ) : (
           <Button className="w-full h-10">
             <Link href={"/api/auth/login"}>
