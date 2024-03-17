@@ -97,12 +97,12 @@ export const HostInfo: React.FC<HostInfoProps> = ({
                         "https://cdn-icons-png.flaticon.com/512/149/149071.png"
                       }
                       alt="User Profile image"
-                      className="w-16 h-16 rounded-full"
+                      className="w-14 h-14 rounded-full"
                     />
                   </div>
                   <Separator />
-                  <div className="flex justify-between my-5 w-full items-center">
-                    <div>
+                  <div className="flex justify-between my-5 w-full items-start">
+                    <div className="flex flex-col items-start gap-y-1">
                       <p className="text-[15px] text-stone-700">
                         <span className="text-[18px] font-semibold text-stone-950">
                           ${housePrice}
@@ -120,7 +120,7 @@ export const HostInfo: React.FC<HostInfoProps> = ({
                         "https://cdn0.iconfinder.com/data/icons/real-estate-288/60/house__home__avatar__man__building-512.png"
                       }
                       alt="house image"
-                      className="rounded-xl w-32 h-32"
+                      className="rounded-xl w-24 h-24"
                     />
                   </div>
                   <Separator />
@@ -141,8 +141,8 @@ export const HostInfo: React.FC<HostInfoProps> = ({
           </Sheet>
 
           <Separator className="w-full bg-stone-300" />
-          <div className="mt-4 flex gap-x-1 items-center">
-            <ShieldAlert className="text-primary min-w-[11px] min-h-[11px]" />
+          <div className="mt-4 flex gap-x-1 items-start">
+            <ShieldAlert className="text-primary min-w-[11px] min-h-[11px] mt-[3px]" />
             <p className="text-[13px] text-stone-700">
               To protect your payment, never transfer money or communicate
               outside of the Tuniloge website.
