@@ -1,7 +1,7 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { Check, ShieldAlert } from "lucide-react";
+import { AlertCircle, Check, ShieldAlert } from "lucide-react";
 import React, { useState } from "react";
 import {
   Sheet,
@@ -11,22 +11,35 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { Input } from "@/components/ui/input"
+import { Textarea } from "@/components/ui/textarea"
+import Image from "next/image";
 
 interface HostInfoProps {
   profilePicture?: string | null; // profilePicture can be string or undefined
   hostName?: string;
+  email?: string;
+  houseThumbnail?: string;
+  housePrice?: number | null;
+  houseTitle?: string | null;
+  houseCountry?: string | null;
 }
 
 export const HostInfo: React.FC<HostInfoProps> = ({
   profilePicture,
   hostName,
+  email,
+  houseThumbnail,
+  housePrice,
+  houseCountry,
+  houseTitle,
 }) => {
   const word = hostName;
 
   return (
-    <section className="md:w-full bg-[#b6b6b675] rounded-3xl md:bg-white p-6 md:p-y-8 mt-6 md:px-0">
+    <section className="md:w-full bg-[#f8f2f2] rounded-3xl md:bg-white p-6 md:p-y-8 mt-6 md:px-0">
       <h2 className="text-2xl font-semibold text-black pb-5">Meet your Host</h2>
-      <div className="flex flex-col rounded-3xl bg-[#b6b6b675] p-0 md:p-10 md:px-12 w-full items-center md:flex-row gap-x-0 md:gap-x-10 gap-y-7">
+      <div className="flex flex-col rounded-3xl bg-[#f8f2f2] p-0 md:p-10 md:px-12 w-full items-center md:flex-row gap-x-0 md:gap-x-14 gap-y-7">
         <div className="bg-white flex flex-col items-center w-[320px] h-fit px-4 py-7 rounded-3xl shadow-[0px_7px_25px_5px_#00000035]">
           <img
             src={
@@ -62,17 +75,72 @@ export const HostInfo: React.FC<HostInfoProps> = ({
           </p>
           <Sheet>
             <SheetTrigger>
-              <Button className="my-6 mb-7 font-semibold text-[16px] tracking-tight px-[23px] py-[23px] rounded-md bg-[zinc-900] text-white hover:bg-zinc-800">
+              <Button className="my-6 mb-7 font-semibold text-[16px] tracking-tight px-[23px] py-[23px] rounded-md bg-zinc-900 text-white hover:bg-zinc-800">
                 Contact Host
               </Button>
             </SheetTrigger>
-            <SheetContent className="w-[400px] sm:w-full">
+            <SheetContent className="w-[600px] sm:w-[100vw]">
               <SheetHeader>
                 <SheetTitle>Are you absolutely sure?</SheetTitle>
                 <SheetDescription>
                   This action cannot be undone. This will permanently delete
                   your account and remove your data from our servers.
                 </SheetDescription>
+                <div className="flex flex-col items-start w-full">
+                  <div className="flex justify-between items-center w-full my-3">
+                    <div>
+                      <p className="text-[18px] font-semibold text-zinc-950">
+                        Contact {hostName}
+                      </p>
+                      <p className="text-[14px] font-normal text-zinc-700">
+                        email contact
+                      </p>
+                    </div>
+                    <Image
+                      src={
+                        profilePicture ??
+                        "https://cdn-icons-png.flaticon.com/512/149/149071.png"
+                      }
+                      alt="User Profile image"
+                      className="w-16 h-16 rounded-full"
+                    />
+                  </div>
+                  <Separator />
+                  <div className="flex justify-between my-3 w-full items-center">
+                    <div>
+                      <p className="text-[15px] text-zinc-700">
+                        <span className="text-[18px] font-semibold text-zinc-950">
+                          ${housePrice}
+                        </span>{" "}
+                        night
+                      </p>
+                      <p className="text-[14px] text-zinc-700">{houseTitle}</p>
+                      <p className="text-[12px] text-zinc-700">
+                        {houseCountry}
+                      </p>
+                    </div>
+                    <Image
+                      src={
+                        houseThumbnail ??
+                        "https://cdn0.iconfinder.com/data/icons/real-estate-288/60/house__home__avatar__man__building-512.png"
+                      }
+                      alt="house image"
+                      className="rounded-xl w-32 h-32"
+                    />
+                  </div>
+                  <Separator />
+                  <div className="w-full flex flex-col items-start my-3">
+                    <p className="text-[18px] font-semibold text-zinc-950">Contact the host with email</p>
+                    <Input type="email" placeholder="Email" />
+                    <Textarea placeholder="Type your message here." />
+                    <Button>Send Message</Button>
+                  </div>
+                  <Separator/>
+                  <div className="my-3">
+                    <AlertCircle className="min-w-3 min-h-3 text-primary"/>
+                    <p className="text-[13px] text-zinc-700">The Host will reply with an email,please check your email frequently.</p>
+                  </div>
+                </div>
               </SheetHeader>
             </SheetContent>
           </Sheet>
