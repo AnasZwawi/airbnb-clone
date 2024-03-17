@@ -2,7 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { AlertCircle, Check, ShieldAlert } from "lucide-react";
-import React, { useState } from "react";
+import React, { useState, ChangeEvent } from "react";
 import {
   Sheet,
   SheetContent,
@@ -34,23 +34,20 @@ export const HostInfo: React.FC<HostInfoProps> = ({
   houseCountry,
   houseTitle,
 }) => {
+  const [textareaValue, setTextareaValue] = useState<string>("");
+
+  // Event handler to update the state when textarea value changes
+  const handleTextareaChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
+    setTextareaValue(event.target.value);
+  };
   const word = hostName;
   const handleButtonClick = () => {
     // Replace 'mailto:' with the email address you want to send the email to
-    const htmlTemplate = `
-      <html>
-        <body>
-          <h1>Hello!</h1>
-          <p>This is a sample HTML email template.</p>
-          <p>You can include any HTML content here.</p>
-          <p>Regards,</p>
-          <p>Your Name</p>
-        </body>
-      </html>
+    const message = `
+      ${textareaValue}
     `;
 
-    const encodedHtml = encodeURIComponent(htmlTemplate);
-    const emailUrl = `mailto:${email}?body=${encodedHtml}`;
+    const emailUrl = `mailto:${email}?body=${message}`;
     window.open(emailUrl, "_blank");
   };
   return (
@@ -145,8 +142,11 @@ export const HostInfo: React.FC<HostInfoProps> = ({
                     <p className="text-[18px] font-semibold text-zinc-950">
                       Contact the host with email
                     </p>
-                    <Input type="email" placeholder="Email" />
-                    <Textarea placeholder="Type your message here." />
+                    <Textarea
+                      placeholder="Type your message here."
+                      value={textareaValue}
+                      onChange={handleTextareaChange}
+                    />
                     <Button onClick={handleButtonClick}>Send Message</Button>
                   </div>
                   <Separator />
