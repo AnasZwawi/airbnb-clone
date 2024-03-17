@@ -40,6 +40,7 @@
     "react-hook-form": "^7.51.0",
     "react-leaflet": "^4.2.1",
     "react-slick": "^0.30.2",
+    "resend": "^3.2.0",
     "sharp": "^0.33.2",
     "slick-carousel": "^1.8.1",
     "tailwind-merge": "^2.2.1",
