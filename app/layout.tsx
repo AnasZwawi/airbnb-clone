@@ -17,8 +17,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${montserrat.className} relative`}>
+    <html lang="en" className="relative">
+      <body className={`${montserrat.className}`}>
         <Navbar />
         {children}
         <Footer/>
