@@ -17,8 +17,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="relative">
-      <body className={`${montserrat.className}`}>
+    <html lang="en">
+      <body className={`${montserrat.className} flex flex-col min-h-screen`}>
         <Navbar />
         {children}
         <Footer/>
