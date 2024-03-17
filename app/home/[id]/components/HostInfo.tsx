@@ -141,8 +141,8 @@ export const HostInfo: React.FC<HostInfoProps> = ({
           </Sheet>
 
           <Separator className="w-full bg-stone-300" />
-          <div className="mt-4 flex gap-x-1 items-start">
-            <ShieldAlert className="text-primary min-w-[11px] min-h-[11px] mt-[3px]" />
+          <div className="flex gap-x-1 items-start">
+            <ShieldAlert className="text-primary w-6 h-6 min-w-6 min-h-6" />
             <p className="text-[13px] text-stone- text-left">
               To protect your payment, never transfer money or communicate
               outside of the Tuniloge website.
