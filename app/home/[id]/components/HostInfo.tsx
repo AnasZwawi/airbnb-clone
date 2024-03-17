@@ -11,8 +11,8 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import Image from "next/image";
 
 interface HostInfoProps {
@@ -35,7 +35,24 @@ export const HostInfo: React.FC<HostInfoProps> = ({
   houseTitle,
 }) => {
   const word = hostName;
+  const handleButtonClick = () => {
+    // Replace 'mailto:' with the email address you want to send the email to
+    const htmlTemplate = `
+      <html>
+        <body>
+          <h1>Hello!</h1>
+          <p>This is a sample HTML email template.</p>
+          <p>You can include any HTML content here.</p>
+          <p>Regards,</p>
+          <p>Your Name</p>
+        </body>
+      </html>
+    `;
 
+    const encodedHtml = encodeURIComponent(htmlTemplate);
+    const emailUrl = `mailto:${email}?body=${encodedHtml}`;
+    window.open(emailUrl, "_blank");
+  };
   return (
     <section className="md:w-full bg-[#f0ecec] rounded-3xl md:bg-white p-6 md:p-y-8 mt-6 md:px-0">
       <h2 className="text-2xl font-semibold text-black pb-5">Meet your Host</h2>
@@ -125,15 +142,20 @@ export const HostInfo: React.FC<HostInfoProps> = ({
                   </div>
                   <Separator />
                   <div className="w-full flex flex-col items-start my-5 gap-y-3">
-                    <p className="text-[18px] font-semibold text-zinc-950">Contact the host with email</p>
+                    <p className="text-[18px] font-semibold text-zinc-950">
+                      Contact the host with email
+                    </p>
                     <Input type="email" placeholder="Email" />
                     <Textarea placeholder="Type your message here." />
-                    <Button>Send Message</Button>
+                    <Button onClick={handleButtonClick}>Send Message</Button>
                   </div>
-                  <Separator/>
+                  <Separator />
                   <div className="my-3 flex items-center gap-x-2">
-                    <AlertCircle className="min-w-3 min-h-3 text-primary"/>
-                    <p className="text-[13px] text-stone-700">The Host will reply with an email,please check your email frequently.</p>
+                    <AlertCircle className="w-4 h-4 min-w-4 min-h-4 text-primary" />
+                    <p className="text-[13px] text-stone-700">
+                      The Host will reply with an email,please check your email
+                      frequently.
+                    </p>
                   </div>
                 </div>
               </SheetHeader>
@@ -141,8 +163,8 @@ export const HostInfo: React.FC<HostInfoProps> = ({
           </Sheet>
 
           <Separator className="w-full bg-stone-300" />
-          <div className="flex gap-x-1 items-start">
-            <ShieldAlert className="text-primary w-6 h-6 min-w-6 min-h-6" />
+          <div className="mt-4 flex gap-x-1 items-start">
+            <ShieldAlert className="text-primary w-4 h-4 min-w-4 min-h-4" />
             <p className="text-[13px] text-stone- text-left">
               To protect your payment, never transfer money or communicate
               outside of the Tuniloge website.
