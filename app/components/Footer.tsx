@@ -20,7 +20,7 @@ export const Footer = () => {
             <span className="sr-only">Twitter</span>
           </Link>
         </div>
-        <p className="mt-4 md:mt-0 text-sm text-gray-300">
+        <p className="mt-4 md:mt-0 text-sm text-stone-900">
           © 2024 Tuniloge Inc - LLC by Anas zouaoui. All rights reserved.
         </p>
       </div>
