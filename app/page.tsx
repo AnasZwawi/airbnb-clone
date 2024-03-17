@@ -21,57 +21,42 @@ async function getData({
   userId?: string | undefined;
 }) {
   noStore();
-  if (!searchParams.guest && !searchParams.room && !searchParams.bathroom) {
-    const data = await prisma.home.findMany({
-      where: {
-        addedCategory: true,
-        addedDescription: true,
-        addedLocation: true,
-        category: searchParams.filter ?? undefined,
-        country: searchParams.country ?? undefined,
-      },
-      select: {
-        photos: true,
-        id: true,
-        price: true,
-        description: true,
-        country: true,
-        Favorite: {
-          where: {
-            userId: userId ?? undefined,
-          },
-        },
-      },
-    });
-    return data;
-  } else {
-    const data = await prisma.home.findMany({
-      where: {
-        addedCategory: true,
-        addedDescription: true,
-        addedLocation: true,
-        category: searchParams.filter ?? undefined,
-        country: searchParams.country ?? undefined,
-        guests: searchParams.guest ?? undefined,
-        bedrooms: searchParams.room ?? undefined,
-        bathrooms: searchParams.bathroom ?? undefined,
-      },
-      select: {
-        photos: true,
-        id: true,
-        price: true,
-        description: true,
-        country: true,
-        Favorite: {
-          where: {
-            userId: userId ?? undefined,
-          },
-        },
-      },
-    });
-    return data;
+  const hasOtherParams =
+    searchParams.guest && searchParams.room && searchParams.bathroom;
+
+  const whereClause: any = {
+    addedCategory: true,
+    addedDescription: true,
+    addedLocation: true,
+    category: searchParams.filter ?? undefined,
+    country: searchParams.country ?? undefined,
+  };
+
+  if (hasOtherParams) {
+    whereClause.guests = searchParams.guest ?? undefined;
+    whereClause.bedrooms = searchParams.room ?? undefined;
+    whereClause.bathrooms = searchParams.bathroom ?? undefined;
   }
+
+  const data = await prisma.home.findMany({
+    where: whereClause,
+    select: {
+      photos: true,
+      id: true,
+      price: true,
+      description: true,
+      country: true,
+      Favorite: {
+        where: {
+          userId: userId ?? undefined,
+        },
+      },
+    },
+  });
+
+  return data;
 }
+
 
 export default async function Home({
   searchParams,
