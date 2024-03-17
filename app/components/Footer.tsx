@@ -1,4 +1,4 @@
-import { GithubIcon, TwitterIcon, YoutubeIcon } from "lucide-react";
+import { FacebookIcon, GithubIcon, TwitterIcon } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 
@@ -8,7 +8,7 @@ export const Footer = () => {
       <div className="container mx-auto px-4 md:px-6 flex flex-col md:flex-row items-center justify-between">
         <div className="flex items-center space-x-4">
           <Link className="text-stone-900 " href="#">
-            <YoutubeIcon className="h-6 w-6" />
+            <FacebookIcon className="h-6 w-6" />
             <span className="sr-only">YouTube</span>
           </Link>
           <Link className="text-stone-900 " href="#">
