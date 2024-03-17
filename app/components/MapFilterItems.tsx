@@ -31,7 +31,7 @@
             <Link
               key={item.id}
               /* href={pathname + "?" + createQueryString("filter", item.name)} */
-              href={pathname+"?"+"filter"+item.name}
+              href={pathname+"?"+"filter="+item.name}
               className={cn(
                 search === item.name
                   ? "border-b-2 border-slate-600  flex-shrink-0"
