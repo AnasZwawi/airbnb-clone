@@ -1,7 +1,7 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { Heart, Loader2 } from "lucide-react";
-import React from "react";
+import React, { useState } from "react";
 import { useFormStatus } from "react-dom";
 
 export const SubmitButton = ({
@@ -81,10 +81,11 @@ export const DeleteFromFavoriteButton = ({classn = 'w-6 h-6'}) => {
 }
 
 export function ReservationSubmit() {
+  const [clicked, setClicked] = useState(false)
   const { pending } = useFormStatus();
   return (
-    <>
-      {pending ? (
+    <div onClick={()=>{setClicked(true)}}>
+      {pending || clicked ? (
         <Button className="w-full h-13 font-[500] text-[16px] py-3" disabled>
           <Loader2 className="h-5 w-5 animate-spin mr-2" />
           Please wait...
@@ -94,6 +95,6 @@ export function ReservationSubmit() {
           Make a Reservation!
         </Button>
       )}
-    </>
+    </div>
   );
 }
