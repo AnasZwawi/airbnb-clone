@@ -40,7 +40,7 @@ export const HostInfo: React.FC<HostInfoProps> = ({
     <section className="md:w-full bg-[#f0ecec] rounded-3xl md:bg-white p-6 md:p-y-8 mt-6 md:px-0">
       <h2 className="text-2xl font-semibold text-black pb-5">Meet your Host</h2>
       <div className="flex flex-col rounded-3xl bg-[#f0ecec] p-0 md:p-10 md:px-12 w-full items-center md:flex-row gap-x-0 md:gap-x-14 gap-y-7">
-        <div className="bg-white flex flex-col items-center w-[320px] h-fit px-4 py-7 rounded-3xl shadow-[0px_7px_25px_5px_#00000035]">
+        <div className="bg-white flex flex-col items-center w-[320px] h-fit px-4 py-7 rounded-3xl shadow-[3px_7px_15px_2px_#00000035]">
           <img
             src={
               profilePicture ??
@@ -83,7 +83,7 @@ export const HostInfo: React.FC<HostInfoProps> = ({
               <SheetHeader>
                 <div className="flex flex-col items-start w-full">
                   <div className="flex justify-between items-center w-full my-5">
-                    <div>
+                    <div className="flex flex-col items-start">
                       <p className="text-[18px] font-semibold text-stone-950">
                         Contact {hostName}
                       </p>
@@ -120,7 +120,7 @@ export const HostInfo: React.FC<HostInfoProps> = ({
                         "https://cdn0.iconfinder.com/data/icons/real-estate-288/60/house__home__avatar__man__building-512.png"
                       }
                       alt="house image"
-                      className="rounded-xl bg-cover w-[110px] h-[110px]"
+                      className="rounded-xl object-cover w-[110px] h-[110px]"
                     />
                   </div>
                   <Separator />
@@ -143,7 +143,7 @@ export const HostInfo: React.FC<HostInfoProps> = ({
           <Separator className="w-full bg-stone-300" />
           <div className="mt-4 flex gap-x-1 items-start">
             <ShieldAlert className="text-primary min-w-[11px] min-h-[11px] mt-[3px]" />
-            <p className="text-[13px] text-stone-700">
+            <p className="text-[13px] text-stone- text-left">
               To protect your payment, never transfer money or communicate
               outside of the Tuniloge website.
             </p>
