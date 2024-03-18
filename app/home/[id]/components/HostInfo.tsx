@@ -111,7 +111,7 @@ export const HostInfo: React.FC<HostInfoProps> = ({
                         "https://cdn-icons-png.flaticon.com/512/149/149071.png"
                       }
                       alt="User Profile image"
-                      className="w-14 h-14 rounded-full"
+                      className="w-12 h-12 rounded-full"
                     />
                   </div>
                   <Separator />

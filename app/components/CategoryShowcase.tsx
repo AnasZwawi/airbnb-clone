@@ -16,7 +16,7 @@ export const CategoryShowcase = ({
         width={44}
         height={44}
       />
-      <div className="flex flex-col ml-4">
+      <div className="flex flex-col ml-4 lg:ml-5">
         <h3 className="font-medium">{category?.name}</h3>
         <p className="text-sm text-gray-700">{category?.description}</p>
       </div>
