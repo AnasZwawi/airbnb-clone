@@ -59,7 +59,7 @@ export const ListingCard = ({
           <AlertDialog>
             <AlertDialogTrigger>
               <XCircle
-                fill="#48484860"
+                fill="#48484870"
                 className="z-10 absolute top-2 left-2 h-8 w-8 text-white rounded-md"
               />
             </AlertDialogTrigger>
