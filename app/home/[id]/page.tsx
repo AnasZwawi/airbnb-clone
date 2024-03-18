@@ -20,11 +20,22 @@ import {
   ReservationSubmit,
 } from "@/app/components/SubmitButton";
 import { unstable_noStore as noStore } from "next/cache";
-import { Dot, Images, Star } from "lucide-react";
+import { Copy, Dot, Images, Share, Star } from "lucide-react";
 import { redirect } from "next/navigation";
 import { ShowGallery } from "@/app/components/ShowGallery";
 import { SideCalendar } from "./components/SideCalendar";
 import { HostInfo } from "./components/HostInfo";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 
 async function getHome(userId: string, homeId: string) {
   noStore();
@@ -110,7 +121,7 @@ async function HomeId({ params }: { params: { id: string } }) {
 
   return (
     <div className="w-[85%] max-w-[1320px] lg:w-[75%] mx-auto mt-5">
-      <div className="flex flex-col lg:flex-row justify-between gap-y-0 lg:items-center mb-4">
+      <div className="flex flex-col lg:flex-row justify-between gap-y-0 lg:items-end mb-4">
         <h1 className="font-semibold text-black text-[32px] tracking-tight lg:text-2xl">
           {data?.title}
         </h1>
@@ -118,8 +129,36 @@ async function HomeId({ params }: { params: { id: string } }) {
           <>
             {user && user.id && (
               <>
+                <AlertDialog>
+                  <AlertDialogTrigger>
+                    <div className="flex">
+                      <Share className="h-5 w-5 text-stone-900" />
+                      <p className="font-semibold text-md tracking-tighter underline decoration-1">
+                        Share
+                      </p>
+                    </div>
+                  </AlertDialogTrigger>
+                  <AlertDialogContent>
+                    <AlertDialogHeader>
+                      <AlertDialogTitle>
+                        Are you absolutely sure?
+                      </AlertDialogTitle>
+                      <AlertDialogDescription>
+                        This action cannot be undone. This will permanently
+                        delete your listing.
+                      </AlertDialogDescription>
+                    </AlertDialogHeader>
+                    <AlertDialogFooter>
+                      <AlertDialogAction className="w-full flex gap-x-4 bg-white border border-stone-900 rounded-2xl hover:bg-stone-100">
+                        <Copy />
+                        Copy Link
+                      </AlertDialogAction>
+                    </AlertDialogFooter>
+                  </AlertDialogContent>
+                </AlertDialog>
+
                 {(homeData?.Favorite.length as number) > 0 ? (
-                  <div className="hover:bg-stone-200 rounded-md flex">
+                  <div className="hover:bg-stone-200 rounded-md flex transition-all duration-200">
                     <form action={deleteFromFavorite}>
                       <input
                         type="hidden"
@@ -136,9 +175,7 @@ async function HomeId({ params }: { params: { id: string } }) {
                         name="pathName"
                         value={("/home/" + params.id) as string}
                       />
-                      <DeleteFromFavoriteButton
-                        classn="w-5 h-5 relative top-[2px]"
-                      >
+                      <DeleteFromFavoriteButton classn="w-5 h-5">
                         <p className="font-semibold text-md tracking-tighter underline decoration-1">
                           Unsave
                         </p>
@@ -146,7 +183,7 @@ async function HomeId({ params }: { params: { id: string } }) {
                     </form>
                   </div>
                 ) : (
-                  <div className="hover:bg-stone-200 rounded-md flex">
+                  <div className="hover:bg-stone-200 rounded-md flex transition-all duration-200">
                     <form action={addToFavorite}>
                       <input
                         type="hidden"
