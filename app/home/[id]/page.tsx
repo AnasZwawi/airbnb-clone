@@ -131,7 +131,7 @@ async function HomeId({ params }: { params: { id: string } }) {
               <div className="flex gap-x-4">
                 <AlertDialog>
                   <AlertDialogTrigger>
-                    <div className="flex">
+                    <div className="flex items-end">
                       <Share className="h-4 w-4 text-stone-700" />
                       <p className="font-semibold text-md tracking-tighter underline decoration-1">
                         Share
