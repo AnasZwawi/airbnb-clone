@@ -140,22 +140,22 @@ async function HomeId({ params }: { params: { id: string } }) {
                   </AlertDialogTrigger>
                   <AlertDialogContent>
                     <AlertDialogHeader>
-                      <AlertDialogTitle className="text-stone-900 text-xl mt-5 mb-4">
+                      <AlertDialogTitle className="text-stone-900 text-2xl mt-5 mb-4">
                         Share this place
                       </AlertDialogTitle>
                       <AlertDialogDescription>
-                        <div className="flex items-start my-4">
+                        <div className="flex gap-x-7 items-start my-4">
                           <Image
                             alt="Image of Home"
                             src={`https://jxvqpjydezilbytxarzd.supabase.co/storage/v1/object/public/images/${data?.photos[0]}`}
-                            className="w-14 h-14 object-cover rounded-lg"
+                            className="w-[90px] h-[90px] object-cover rounded-xl"
                           />
 
                           <div className="flex flex-col items-start">
-                            <p className="text-md text-stone-700">
+                            <p className="text-lg text-stone-900 tracking-tight">
                               {data?.title}
                             </p>
-                            <p className="text-sm text-stone-700">
+                            <p className="text-sm text-stone-700 flex">
                               {data?.guests} guests
                               <Dot />
                               {data?.bedrooms} bedrooms
@@ -167,8 +167,8 @@ async function HomeId({ params }: { params: { id: string } }) {
                       </AlertDialogDescription>
                     </AlertDialogHeader>
                     <AlertDialogFooter>
-                      <AlertDialogCancel className="absolute top-3 left-3">
-                        <X className="hover:bg-stone-200 rounded-full" />
+                      <AlertDialogCancel className="absolute top-3 left-3 border-none bg-none hover:bg-none">
+                        <X className="hover:bg-stone-200 p-1 rounded-full" />
                       </AlertDialogCancel>
                       <AlertDialogAction className="w-full flex gap-x-4 bg-white border-[1px] border-stone-900 rounded-xl hover:bg-stone-100 text-stone-900">
                         <Copy />
