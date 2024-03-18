@@ -18,7 +18,7 @@ interface iAppProps {
   homeId: string;
   pathName: string;
   deleteList?: boolean;
-  deleteListing: (userId?:string,listingId?:string) => void;
+  deleteListing?: (userId?: string, listingId?: string) => void;
 }
 
 export const ListingCard = ({
@@ -32,15 +32,17 @@ export const ListingCard = ({
   homeId,
   pathName,
   deleteListing,
-  deleteList: deleteOption= false
+  deleteList: deleteOption = false,
 }: iAppProps) => {
   const { getCountryByValue } = useCountries();
   const country = getCountryByValue(location);
   const handleDeleteListing = async () => {
-    try {
-      await deleteListing(userId, homeId); // Call deleteListing function
-    } catch (error) {
-      console.error("Error deleting listing:", error);
+    if (deleteListing) {
+      try {
+        await deleteListing(userId, homeId); // Call deleteListing function
+      } catch (error) {
+        console.error("Error deleting listing:", error);
+      }
     }
   };
   return (
@@ -55,7 +57,7 @@ export const ListingCard = ({
         {deleteOption && (
           <div className="z-10 absolute top-2 left-2">
             <button onClick={handleDeleteListing}>
-              <XCircle className="h-6 w-6 p-1 bg-white text-stone-900 rounded-md"/>
+              <XCircle className="h-6 w-6 p-1 bg-white text-stone-900 rounded-md" />
             </button>
           </div>
         )}
