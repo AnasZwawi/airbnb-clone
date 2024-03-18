@@ -131,7 +131,7 @@ async function HomeId({ params }: { params: { id: string } }) {
               <div className="flex gap-x-4">
                 <AlertDialog>
                   <AlertDialogTrigger>
-                    <div className="flex items-end">
+                    <div className="flex items-center gap-x-[2px]">
                       <Share className="h-4 w-4 text-stone-700" />
                       <p className="font-semibold text-md tracking-tighter underline decoration-1">
                         Share
@@ -149,7 +149,7 @@ async function HomeId({ params }: { params: { id: string } }) {
                             alt="Image of Home"
                             src={`https://jxvqpjydezilbytxarzd.supabase.co/storage/v1/object/public/images/${data?.photos[0]}`}
                             fill
-                            className="h-[90px] w-[90px]"
+                            className="w-14 h-14 object-cover rounded-lg"
                           />
 
                           <div className="flex flex-col items-start">
