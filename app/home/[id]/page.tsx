@@ -143,18 +143,25 @@ async function HomeId({ params }: { params: { id: string } }) {
                       <AlertDialogTitle className="text-stone-900 text-xl mt-5 mb-4">
                         Share this place
                       </AlertDialogTitle>
-                      <AlertDialogDescription className="flex w-full my-4">
-                        <div className="h-[90px] w-[90px]">
-                          <Image
-                            alt="Image of Home"
-                            src={`https://jxvqpjydezilbytxarzd.supabase.co/storage/v1/object/public/images/${data?.photos[0]}`}
-                            fill
-                            className="h-full object-cover w-full"
-                          />
-                        </div>
+                      <AlertDialogDescription className="flex items-start w-full my-4">
+                        <Image
+                          alt="Image of Home"
+                          src={`https://jxvqpjydezilbytxarzd.supabase.co/storage/v1/object/public/images/${data?.photos[0]}`}
+                          fill
+                          className="object-cover h-[90px] w-[90px]"
+                        />
+
                         <div className="flex flex-col items-start">
-                          <p className="text-md text-stone-700">{data?.title}</p>
-                          <p className="text-sm text-stone-700">{data?.guests} guests<Dot/>{data?.bedrooms} bedrooms<Dot/>{data?.bathrooms} baths</p>
+                          <p className="text-md text-stone-700">
+                            {data?.title}
+                          </p>
+                          <p className="text-sm text-stone-700">
+                            {data?.guests} guests
+                            <Dot />
+                            {data?.bedrooms} bedrooms
+                            <Dot />
+                            {data?.bathrooms} baths
+                          </p>
                         </div>
                       </AlertDialogDescription>
                     </AlertDialogHeader>
