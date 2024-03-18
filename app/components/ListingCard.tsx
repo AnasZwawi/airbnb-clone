@@ -58,7 +58,10 @@ export const ListingCard = ({
         {deleteOption && (
           <AlertDialog>
             <AlertDialogTrigger>
-              <XCircle className="z-10 absolute top-2 left-2 h-6 w-6 p-1 bg-white text-stone-900 rounded-md" />
+              <XCircle
+                fill="#48484860"
+                className="z-10 absolute top-2 left-2 h-8 w-8 text-white rounded-md"
+              />
             </AlertDialogTrigger>
             <AlertDialogContent>
               <AlertDialogHeader>
