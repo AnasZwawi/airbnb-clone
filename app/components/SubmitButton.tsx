@@ -49,7 +49,7 @@ export const AddToFavoriteButton: React.FC<AddToFavoriteButtonProps> = ({
         </button>
       ) : (
         <button className="bg-opacity-0 p-2 flex" type="submit">
-          <Heart className={classn} color="#FFF" fill="#48484895," />
+          <Heart className={classn} color="#FFF" fill="#48484895" />
           {children}
         </button>
       )}

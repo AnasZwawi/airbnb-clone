@@ -137,8 +137,7 @@ async function HomeId({ params }: { params: { id: string } }) {
                         value={("/home/" + params.id) as string}
                       />
                       <DeleteFromFavoriteButton
-                        classn="w-5 h-5 relative top-[2px] left-[4
-                        px]"
+                        classn="w-5 h-5 relative top-[2px]"
                       >
                         <p className="font-semibold text-md tracking-tighter underline decoration-1">
                           Unsave
@@ -160,7 +159,7 @@ async function HomeId({ params }: { params: { id: string } }) {
                         name="pathName"
                         value={"/home/" + params.id}
                       />
-                      <AddToFavoriteButton classn="h-5 w-5 relative top-[2px] left-[4px]">
+                      <AddToFavoriteButton classn="h-5 w-5 relative top-[2px]">
                         <p className="font-semibold text-md tracking-tighter underline decoration-1">
                           Save
                         </p>
