@@ -189,7 +189,7 @@ async function HomeId({ params }: { params: { id: string } }) {
                 (((endTime as number) - startTime) as number) /
                   (1000 * 3600 * 24)
               ) < 3 ? (
-                <div className="flex gap-x-1">
+                <div className="flex gap-x-1  ">
                   <Star fill="black" className="w-4 h-4" /> <p>New</p>
                 </div>
               ) : (
