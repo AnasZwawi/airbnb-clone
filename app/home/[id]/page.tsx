@@ -121,18 +121,18 @@ async function HomeId({ params }: { params: { id: string } }) {
 
   return (
     <div className="w-[85%] max-w-[1320px] lg:w-[75%] mx-auto mt-5">
-      <div className="flex flex-col lg:flex-row justify-between gap-y-0 lg:items-end mb-4">
+      <div className="flex flex-col lg:flex-row justify-between gap-y-0 items-end mb-4">
         <h1 className="font-semibold text-black text-[32px] tracking-tight lg:text-2xl">
           {data?.title}
         </h1>
         <div className="flex items-center relative left-[-8px] lg:left-0">
           <>
             {user && user.id && (
-              <>
+              <div className="flex gap-x-4">
                 <AlertDialog>
                   <AlertDialogTrigger>
                     <div className="flex">
-                      <Share className="h-5 w-5 text-stone-900" />
+                      <Share className="h-4 w-4 text-stone-700" />
                       <p className="font-semibold text-md tracking-tighter underline decoration-1">
                         Share
                       </p>
@@ -143,25 +143,27 @@ async function HomeId({ params }: { params: { id: string } }) {
                       <AlertDialogTitle className="text-stone-900 text-xl mt-5 mb-4">
                         Share this place
                       </AlertDialogTitle>
-                      <AlertDialogDescription className="flex items-start w-full my-4">
-                        <Image
-                          alt="Image of Home"
-                          src={`https://jxvqpjydezilbytxarzd.supabase.co/storage/v1/object/public/images/${data?.photos[0]}`}
-                          fill
-                          className="object-cover h-[90px] w-[90px]"
-                        />
+                      <AlertDialogDescription>
+                        <div className="flex items-start my-4">
+                          <Image
+                            alt="Image of Home"
+                            src={`https://jxvqpjydezilbytxarzd.supabase.co/storage/v1/object/public/images/${data?.photos[0]}`}
+                            fill
+                            className="object-cover h-[90px] w-[90px]"
+                          />
 
-                        <div className="flex flex-col items-start">
-                          <p className="text-md text-stone-700">
-                            {data?.title}
-                          </p>
-                          <p className="text-sm text-stone-700">
-                            {data?.guests} guests
-                            <Dot />
-                            {data?.bedrooms} bedrooms
-                            <Dot />
-                            {data?.bathrooms} baths
-                          </p>
+                          <div className="flex flex-col items-start">
+                            <p className="text-md text-stone-700">
+                              {data?.title}
+                            </p>
+                            <p className="text-sm text-stone-700">
+                              {data?.guests} guests
+                              <Dot />
+                              {data?.bedrooms} bedrooms
+                              <Dot />
+                              {data?.bathrooms} baths
+                            </p>
+                          </div>
                         </div>
                       </AlertDialogDescription>
                     </AlertDialogHeader>
@@ -224,7 +226,7 @@ async function HomeId({ params }: { params: { id: string } }) {
                     </form>
                   </div>
                 )}
-              </>
+              </div>
             )}
           </>
         </div>
