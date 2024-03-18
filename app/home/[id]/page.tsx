@@ -149,7 +149,7 @@ async function HomeId({ params }: { params: { id: string } }) {
                             alt="Image of Home"
                             src={`https://jxvqpjydezilbytxarzd.supabase.co/storage/v1/object/public/images/${data?.photos[0]}`}
                             fill
-                            className="object-cover h-[90px] w-[90px]"
+                            className="h-[90px] w-[90px]"
                           />
 
                           <div className="flex flex-col items-start">
