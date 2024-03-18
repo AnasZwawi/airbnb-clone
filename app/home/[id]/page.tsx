@@ -121,7 +121,7 @@ async function HomeId({ params }: { params: { id: string } }) {
 
   return (
     <div className="w-[85%] max-w-[1320px] lg:w-[75%] mx-auto mt-5">
-      <div className="flex flex-col lg:flex-row justify-between gap-y-0 items-end mb-4">
+      <div className="flex flex-col lg:flex-row justify-between gap-y-0 items-start mb-4">
         <h1 className="font-semibold text-black text-[32px] tracking-tight lg:text-2xl">
           {data?.title}
         </h1>
@@ -148,7 +148,6 @@ async function HomeId({ params }: { params: { id: string } }) {
                           <Image
                             alt="Image of Home"
                             src={`https://jxvqpjydezilbytxarzd.supabase.co/storage/v1/object/public/images/${data?.photos[0]}`}
-                            fill
                             className="w-14 h-14 object-cover rounded-lg"
                           />
 
