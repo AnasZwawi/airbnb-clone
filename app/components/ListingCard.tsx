@@ -1,11 +1,22 @@
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import { useCountries } from "../lib/getCountries";
 import { AddToFavoriteButton, DeleteFromFavoriteButton } from "./SubmitButton";
 import { addToFavorite, deleteFromFavorite, deleteListing } from "../actions";
 import { Button } from "@/components/ui/button";
 import { MessageCircleX, XCircle } from "lucide-react";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 
 interface iAppProps {
   imagePath: string;
@@ -32,9 +43,27 @@ export const ListingCard = ({
   pathName,
   deleteList: deleteOption = false,
 }: iAppProps) => {
+  const [showConfirmation, setShowConfirmation] = useState<boolean>(false);
   const { getCountryByValue } = useCountries();
   const country = getCountryByValue(location);
 
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setShowConfirmation(true);
+  };
+
+  const handleConfirmDelete = () => {
+    const formData = new FormData();
+    formData.append("userId", userId as string);
+    formData.append("pathName", pathName);
+    formData.append("homeId", homeId);
+    deleteListing(formData); // Call the deleteListing function with FormData
+    setShowConfirmation(false);
+  };
+
+  const handleCancel = () => {
+    setShowConfirmation(false);
+  };
   return (
     <div className="flex flex-col">
       <div className="relative max-h-[320px] md:h-[26vw] lg:h-[20vw] sm:h-[40vw] h-[55vw]">
@@ -45,16 +74,42 @@ export const ListingCard = ({
           className="rounded-xl h-full object-cover mb-3"
         />
         {deleteOption && (
-          <div className="z-10 absolute top-2 left-2">
-            <form action={deleteListing}>
-              <input type="hidden" name="userId" value={userId} />
-              <input type="hidden" name="pathName" value={pathName} />
-              <input type="hidden" name="homeId" value={homeId} />
-              <button type="submit">
-                <XCircle className="h-6 w-6 p-1 bg-white text-stone-900 rounded-md" />
-              </button>
-            </form>
-          </div>
+          <>
+            <div className="z-10 absolute top-4 left-4">
+              <form onSubmit={handleSubmit}>
+                <input type="hidden" name="userId" value={userId} />
+                <input type="hidden" name="pathName" value={pathName} />
+                <input type="hidden" name="homeId" value={homeId} />
+                <button type="submit">
+                  <XCircle className="h-8 w-8 p-1 bg-white text-stone-900 rounded-md" />
+                </button>
+              </form>
+            </div>
+            {showConfirmation && (
+              <AlertDialog>
+                <AlertDialogTrigger>Open</AlertDialogTrigger>
+                <AlertDialogContent>
+                  <AlertDialogHeader>
+                    <AlertDialogTitle>
+                      Are you sure you want to delete this listing?
+                    </AlertDialogTitle>
+                    <AlertDialogDescription>
+                      This action cannot be undone. This will permanently delete
+                      this listing.
+                    </AlertDialogDescription>
+                  </AlertDialogHeader>
+                  <AlertDialogFooter>
+                    <AlertDialogCancel onClick={handleCancel}>
+                      Cancel
+                    </AlertDialogCancel>
+                    <AlertDialogAction onClick={handleConfirmDelete}>
+                      Confitm Delete
+                    </AlertDialogAction>
+                  </AlertDialogFooter>
+                </AlertDialogContent>
+              </AlertDialog>
+            )}
+          </>
         )}
         {userId && (
           <div className="z-10 absolute top-2 right-2">
