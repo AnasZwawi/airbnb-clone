@@ -34,16 +34,6 @@ async function getData(userId: string) {
   return data;
 }
 
-async function deleteListing(userId: string, listingId: string) {
-  const deleteHouse = await prisma.home.delete({
-    where: {
-      userId: userId,
-      id: listingId,
-    },
-  });
-  return deleteHouse;
-}
-
 async function MyHomes() {
   const { getUser } = getKindeServerSession();
   const user = await getUser();
@@ -64,7 +54,7 @@ async function MyHomes() {
         <div className="grid lg:grid-cols-4 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-8">
           {data.map((item) => (
             <ListingCard
-              deleteList = {true}
+              deleteList={true}
               key={item.id}
               imagePath={item.photos[0] as string}
               homeId={item.id}
@@ -75,7 +65,6 @@ async function MyHomes() {
               pathName="/my-homes"
               favoriteId={item.Favorite[0]?.id}
               isInFavoriteList={item.Favorite.length > 0 ? true : false}
-              deleteListing={() => deleteListing(user.id, item.id)} // Pass listingId to deleteListing
             />
           ))}
         </div>

@@ -229,6 +229,19 @@ export async function deleteFromFavorite(formData: FormData) {
   revalidatePath(pathName);
 }
 
+export async function deleteListing(formData: FormData) {
+  const userId = formData.get("userId") as string;
+  const homeId = formData.get("homeId") as string;
+  const pathName = formData.get("pathName") as string;
+  const data = await prisma.home.delete({
+    where: {
+      id: homeId,
+      userId: userId,
+    },
+  });
+  revalidatePath(pathName);
+}
+
 export async function createReservation(formData: FormData) {
   const minRange = 2
   const userId = formData.get("userId") as string;
