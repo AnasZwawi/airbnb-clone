@@ -1,7 +1,7 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { Heart, Loader2 } from "lucide-react";
-import React, { useState } from "react";
+import React, { ReactNode, useState } from "react";
 import { useFormStatus } from "react-dom";
 
 export const SubmitButton = ({
@@ -30,34 +30,54 @@ interface P {
   classn?: string;
 }
 
-export const AddToFavoriteButton: React.FC<P> = ({ classn = "w-6 h-6" }) => {
+interface AddToFavoriteButtonProps {
+  classn?: string;
+  children?: ReactNode; // Make children optional
+}
+
+export const AddToFavoriteButton: React.FC<AddToFavoriteButtonProps> = ({
+  classn = "w-6 h-6",
+  children
+}) => {
   const { pending } = useFormStatus();
   return (
     <>
       {pending ? (
-        <button className="bg-opacity-0 p-2" disabled>
+        <button className="bg-opacity-0 p-2 flex" disabled>
           <Loader2 className="h-6 w-6 animate-spin text-primary" />
+          {children}
         </button>
       ) : (
-        <button className="bg-opacity-0 p-2" type="submit">
-          <Heart className={classn} color="#FFF" fill="#48484895" />
+        <button className="bg-opacity-0 p-2 flex" type="submit">
+          <Heart className={classn} color="#FFF" fill="#48484895," />
+          {children}
         </button>
       )}
     </>
   );
 };
 
-export const DeleteFromFavoriteButton = ({ classn = "w-6 h-6" }) => {
+interface DeleteFromFavoriteButtonProps {
+  classn?: string;
+  children?: ReactNode; // Define children prop
+}
+
+export const DeleteFromFavoriteButton: React.FC<DeleteFromFavoriteButtonProps> = ({
+  classn = "w-6 h-6",
+  children
+}) => {
   const { pending } = useFormStatus();
   return (
     <>
       {pending ? (
-        <button className="bg-opacity-0 p-2" disabled>
+        <button className="bg-opacity-0 p-2 flex" disabled>
           <Loader2 className="h-6 w-6 animate-spin text-primary" />
+          {children}
         </button>
       ) : (
-        <button type="submit" className="bg-opacity-0 p-2">
+        <button type="submit" className="bg-opacity-0 p-2 flex">
           <Heart className={classn} color="#FFF" fill="#d41c4b" />
+          {children}
         </button>
       )}
     </>

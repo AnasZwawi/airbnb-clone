@@ -119,7 +119,7 @@ async function HomeId({ params }: { params: { id: string } }) {
             {user && user.id && (
               <>
                 {(homeData?.Favorite.length as number) > 0 ? (
-                  <div className="hover:bg-muted-foreground rounded-md">
+                  <div className="hover:bg-stone-200 rounded-md flex">
                     <form action={deleteFromFavorite}>
                       <input
                         type="hidden"
@@ -136,14 +136,18 @@ async function HomeId({ params }: { params: { id: string } }) {
                         name="pathName"
                         value={("/home/" + params.id) as string}
                       />
-                      <DeleteFromFavoriteButton classn="w-5 h-5 relative top-[2px] left-[4px]" />
+                      <DeleteFromFavoriteButton
+                        classn="w-5 h-5 relative top-[2px] left-[4
+                        px]"
+                      >
+                        <p className="font-semibold text-md tracking-tighter underline decoration-1">
+                          Unsave
+                        </p>
+                      </DeleteFromFavoriteButton>
                     </form>
-                    <p className="font-semibold text-md tracking-tighter underline decoration-1">
-                      Unsave
-                    </p>
                   </div>
                 ) : (
-                  <div className="hover:bg-muted-foreground rounded-md">
+                  <div className="hover:bg-stone-200 rounded-md flex">
                     <form action={addToFavorite}>
                       <input
                         type="hidden"
@@ -156,11 +160,12 @@ async function HomeId({ params }: { params: { id: string } }) {
                         name="pathName"
                         value={"/home/" + params.id}
                       />
-                      <AddToFavoriteButton classn="h-5 w-5 relative top-[2px] left-[4px]" />
+                      <AddToFavoriteButton classn="h-5 w-5 relative top-[2px] left-[4px]">
+                        <p className="font-semibold text-md tracking-tighter underline decoration-1">
+                          Save
+                        </p>
+                      </AddToFavoriteButton>
                     </form>
-                    <p className="font-semibold text-md tracking-tighter underline decoration-1">
-                      Save
-                    </p>
                   </div>
                 )}
               </>
@@ -245,8 +250,16 @@ async function HomeId({ params }: { params: { id: string } }) {
           minRange={minRange}
         />
       </div>
-      <Separator className="mb-5 mt-10"/>
-      <HostInfo houseThumbnail = {data?.photos[0]} housePrice = {data?.price} houseTitle = {data?.title} houseCountry = {country?.label} profilePicture = {data?.User?.profileImage} hostName = {data?.User?.firstname} email = {data?.User?.email}/>
+      <Separator className="mb-5 mt-10" />
+      <HostInfo
+        houseThumbnail={data?.photos[0]}
+        housePrice={data?.price}
+        houseTitle={data?.title}
+        houseCountry={country?.label}
+        profilePicture={data?.User?.profileImage}
+        hostName={data?.User?.firstname}
+        email={data?.User?.email}
+      />
     </div>
   );
 }
