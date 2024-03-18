@@ -119,7 +119,7 @@ async function HomeId({ params }: { params: { id: string } }) {
             {user && user.id && (
               <>
                 {(homeData?.Favorite.length as number) > 0 ? (
-                  <>
+                  <div className="hover:bg-muted-foreground rounded-md">
                     <form action={deleteFromFavorite}>
                       <input
                         type="hidden"
@@ -136,14 +136,14 @@ async function HomeId({ params }: { params: { id: string } }) {
                         name="pathName"
                         value={("/home/" + params.id) as string}
                       />
-                      <DeleteFromFavoriteButton classn="w-6 h-6 relative top-[1px] left-[3px]" />
+                      <DeleteFromFavoriteButton classn="w-5 h-5 relative top-[2px] left-[4px]" />
                     </form>
-                    <p className="font-semibold text-md tracking-tighter underline">
+                    <p className="font-semibold text-md tracking-tighter underline decoration-1">
                       Unsave
                     </p>
-                  </>
+                  </div>
                 ) : (
-                  <>
+                  <div className="hover:bg-muted-foreground rounded-md">
                     <form action={addToFavorite}>
                       <input
                         type="hidden"
@@ -156,12 +156,12 @@ async function HomeId({ params }: { params: { id: string } }) {
                         name="pathName"
                         value={"/home/" + params.id}
                       />
-                      <AddToFavoriteButton classn="h-6 w-6 relative top-[1px] left-[3px]" />
+                      <AddToFavoriteButton classn="h-5 w-5 relative top-[2px] left-[4px]" />
                     </form>
-                    <p className="font-semibold text-md tracking-tighter underline">
+                    <p className="font-semibold text-md tracking-tighter underline decoration-1">
                       Save
                     </p>
-                  </>
+                  </div>
                 )}
               </>
             )}

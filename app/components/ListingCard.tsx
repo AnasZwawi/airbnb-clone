@@ -107,7 +107,9 @@ export const ListingCard = ({
       </div>
 
       <Link href={`/home/${homeId}`}>
-        <h3 className="pt-2 font-semibold flex text-[14px]">
+        <h3
+          className="pt-2 font-semibold text-[#1b1b1b] flex text-[15px]"
+        >
           {country?.label}
         </h3>
 

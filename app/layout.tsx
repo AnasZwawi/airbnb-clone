@@ -18,7 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${montserrat.className} flex flex-col min-h-screen text-stone-900`}>
+      <body className={`${montserrat.className} flex flex-col min-h-screen text-[#1b1b1b]`}>
         <Navbar />
         {children}
         <Footer/>
