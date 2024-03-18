@@ -138,7 +138,7 @@ async function HomeId({ params }: { params: { id: string } }) {
                       </p>
                     </div>
                   </AlertDialogTrigger>
-                  <AlertDialogContent className="relative">
+                  <AlertDialogContent>
                     <AlertDialogHeader>
                       <AlertDialogTitle className="text-stone-900 text-xl mt-5 mb-4">
                         Share this place
