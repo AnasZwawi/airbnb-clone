@@ -170,9 +170,9 @@ async function HomeId({ params }: { params: { id: string } }) {
                       <AlertDialogCancel className="absolute top-3 left-3 border-none bg-none hover:bg-transparent p-0">
                         <X className="hover:bg-stone-200 p-1 rounded-full" />
                       </AlertDialogCancel>
-                      <AlertDialogAction className="w-full flex gap-x-4 bg-white border-[1px] border-stone-900 rounded-xl hover:bg-stone-100 text-stone-900">
+                      <AlertDialogAction className="w-full flex items-center ml-0 gap-x-2 bg-white border-[1px] border-stone-700 rounded-xl hover:bg-stone-100 text-stone-900">
                         <Copy />
-                        Copy Link
+                        <p className="font-semibold text-stone-900">Copy Link</p>
                       </AlertDialogAction>
                     </AlertDialogFooter>
                   </AlertDialogContent>
