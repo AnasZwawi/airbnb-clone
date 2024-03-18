@@ -44,7 +44,7 @@ export const AddToFavoriteButton: React.FC<AddToFavoriteButtonProps> = ({
     <>
       {pending ? (
         <button className="bg-opacity-0 p-2 flex" disabled>
-          <Loader2 className="h-6 w-6 animate-spin text-primary" />
+          <Loader2 className={`${classn} animate-spin text-primary`} />
           {children}
         </button>
       ) : (
@@ -71,7 +71,7 @@ export const DeleteFromFavoriteButton: React.FC<DeleteFromFavoriteButtonProps> =
     <>
       {pending ? (
         <button className="bg-opacity-0 p-2 flex" disabled>
-          <Loader2 className="h-6 w-6 animate-spin text-primary" />
+          <Loader2 className={`${classn} animate-spin text-primary`} />
           {children}
         </button>
       ) : (
