@@ -40,7 +40,7 @@ export const AddToFavoriteButton: React.FC<P> = ({ classn = "w-6 h-6" }) => {
         </button>
       ) : (
         <button className="bg-opacity-0 p-2" type="submit">
-          <Heart className={classn} color="#FFF" fill="#48484870" />
+          <Heart className={classn} color="#FFF" fill="#48484885" />
         </button>
       )}
     </>
@@ -57,7 +57,7 @@ export const DeleteFromFavoriteButton = ({ classn = "w-6 h-6" }) => {
         </button>
       ) : (
         <button type="submit" className="bg-opacity-0 p-2">
-          <Heart className={classn} color="#FFF" fill="#FF5A5F" />
+          <Heart className={classn} color="#FFF" fill="#d41c4b" />
         </button>
       )}
     </>
