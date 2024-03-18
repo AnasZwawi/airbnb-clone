@@ -119,6 +119,18 @@ async function HomeId({ params }: { params: { id: string } }) {
   let endTime = new Date().getTime();
   const minRange = 2;
 
+  const handleCopy = () => {
+    const url = window.location.href;
+  
+    const tempInput = document.createElement('input');
+    tempInput.value = url;
+    document.body.appendChild(tempInput);
+    tempInput.select();
+    document.execCommand('copy');
+    document.body.removeChild(tempInput);
+  
+    alert('Link copied to clipboard!');
+  };
   return (
     <div className="w-[85%] max-w-[1320px] lg:w-[75%] mx-auto mt-5">
       <div className="flex flex-col lg:flex-row justify-between gap-y-0 items-start mb-4">
@@ -170,7 +182,7 @@ async function HomeId({ params }: { params: { id: string } }) {
                       <AlertDialogCancel className="absolute top-3 left-3 border-none bg-none hover:bg-transparent p-0">
                         <X className="hover:bg-stone-200 p-1 rounded-full" />
                       </AlertDialogCancel>
-                      <AlertDialogAction className="w-full flex items-center ml-0 gap-x-2 bg-white border-[1px] border-stone-700 rounded-xl hover:bg-stone-100 text-stone-900">
+                      <AlertDialogAction onClick={handleCopy} className="w-full flex items-center ml-0 gap-x-2 bg-white border-[1px] border-stone-700 rounded-xl hover:bg-stone-100 text-stone-900">
                         <Copy />
                         <p className="font-semibold text-stone-900">Copy Link</p>
                       </AlertDialogAction>
