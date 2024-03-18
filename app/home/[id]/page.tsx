@@ -20,7 +20,7 @@ import {
   ReservationSubmit,
 } from "@/app/components/SubmitButton";
 import { unstable_noStore as noStore } from "next/cache";
-import { Copy, Dot, Images, Share, Star } from "lucide-react";
+import { Copy, Dot, Images, Share, Star, X } from "lucide-react";
 import { redirect } from "next/navigation";
 import { ShowGallery } from "@/app/components/ShowGallery";
 import { SideCalendar } from "./components/SideCalendar";
@@ -138,18 +138,31 @@ async function HomeId({ params }: { params: { id: string } }) {
                       </p>
                     </div>
                   </AlertDialogTrigger>
-                  <AlertDialogContent>
+                  <AlertDialogContent className="relative">
                     <AlertDialogHeader>
-                      <AlertDialogTitle>
-                        Are you absolutely sure?
+                      <AlertDialogTitle className="text-stone-900 text-xl mt-5 mb-4">
+                        Share this place
                       </AlertDialogTitle>
-                      <AlertDialogDescription>
-                        This action cannot be undone. This will permanently
-                        delete your listing.
+                      <AlertDialogDescription className="flex w-full my-4">
+                        <div className="h-[90px] w-[90px]">
+                          <Image
+                            alt="Image of Home"
+                            src={`https://jxvqpjydezilbytxarzd.supabase.co/storage/v1/object/public/images/${data?.photos[0]}`}
+                            fill
+                            className="h-full object-cover w-full"
+                          />
+                        </div>
+                        <div className="flex flex-col items-start">
+                          <p className="text-md text-stone-700">{data?.title}</p>
+                          <p className="text-sm text-stone-700">{data?.guests} guests<Dot/>{data?.bedrooms} bedrooms<Dot/>{data?.bathrooms} baths</p>
+                        </div>
                       </AlertDialogDescription>
                     </AlertDialogHeader>
                     <AlertDialogFooter>
-                      <AlertDialogAction className="w-full flex gap-x-4 bg-white border border-stone-900 rounded-2xl hover:bg-stone-100">
+                      <AlertDialogCancel className="absolute top-3 left-3">
+                        <X className="hover:bg-stone-200 rounded-full" />
+                      </AlertDialogCancel>
+                      <AlertDialogAction className="w-full flex gap-x-4 bg-white border-[1px] border-stone-900 rounded-xl hover:bg-stone-100 text-stone-900">
                         <Copy />
                         Copy Link
                       </AlertDialogAction>
