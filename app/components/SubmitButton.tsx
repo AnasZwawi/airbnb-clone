@@ -57,7 +57,7 @@ export const DeleteFromFavoriteButton = ({ classn = "w-6 h-6" }) => {
         </button>
       ) : (
         <button type="submit" className="bg-opacity-0 p-2">
-          <Heart className={classn} color="#FFF" fill="#dc2626" />
+          <Heart className={classn} color="#FFF" fill="#FF5A5F" />
         </button>
       )}
     </>
