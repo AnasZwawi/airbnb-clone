@@ -140,7 +140,7 @@ async function HomeId({ params }: { params: { id: string } }) {
                   </AlertDialogTrigger>
                   <AlertDialogContent>
                     <AlertDialogHeader>
-                      <AlertDialogTitle className="text-stone-900 text-2xl mt-5 mb-4">
+                      <AlertDialogTitle className="text-stone-900 text-2xl mt-6 mb-1">
                         Share this place
                       </AlertDialogTitle>
                       <AlertDialogDescription>
@@ -167,7 +167,7 @@ async function HomeId({ params }: { params: { id: string } }) {
                       </AlertDialogDescription>
                     </AlertDialogHeader>
                     <AlertDialogFooter>
-                      <AlertDialogCancel className="absolute top-3 left-3 border-none bg-none hover:bg-none">
+                      <AlertDialogCancel className="absolute top-3 left-3 border-none bg-none hover:bg-transparent p-0">
                         <X className="hover:bg-stone-200 p-1 rounded-full" />
                       </AlertDialogCancel>
                       <AlertDialogAction className="w-full flex gap-x-4 bg-white border-[1px] border-stone-900 rounded-xl hover:bg-stone-100 text-stone-900">
