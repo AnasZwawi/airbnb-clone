@@ -35,10 +35,10 @@ export const CopyCard = ({
   const copylink = (e: any) => {
     navigator.clipboard.writeText(window.location.toString());
     toast("Event has been created", {
-      description: "Sunday, December 03, 2023 at 9:00 AM",
-      action: {
-        label: "Undo",
-        onClick: () => console.log("Undo"),
+      unstyled: true,
+      classNames: {
+        toast: "bg-stone-900",
+        title: "text-stone-100 text-lg"
       },
     });
   };
