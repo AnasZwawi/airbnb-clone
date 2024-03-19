@@ -246,7 +246,7 @@ export async function deleteListing(formData: FormData) {
   const { data: deletionData, error } = await supabase
     .storage
     .from('images')
-    .remove(imagePaths.map(imagePath => `https://jxvqpjydezilbytxarzd.supabase.co/storage/v1/object/public/images/${imagePath}`));
+    .remove(imagePaths.map(imagePath => `${imagePath}`));
 
   // Handle any errors if deletion fails
   if (error) {
