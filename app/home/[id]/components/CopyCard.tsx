@@ -81,8 +81,8 @@ export const CopyCard = ({
           <AlertDialogCancel className="absolute top-3 left-4 border-none bg-none hover:bg-transparent p-0">
             <X className="hover:bg-stone-200 p-1 rounded-full" />
           </AlertDialogCancel>
-          <AlertDialogAction className="w-full flex items-center ml-0 gap-x-2 bg-white border-[1px] border-stone-700 rounded-xl hover:bg-stone-100 text-stone-900">
-            <div onClick={handleCopy}>
+          <AlertDialogAction className="w-full flex items-center ml-0 m-0 gap-x-2 bg-white border-[1px] border-stone-700 rounded-xl hover:bg-stone-100 text-stone-900">
+            <div className="flex items-center" onClick={handleCopy}>
               <Copy />
               <p className="font-semibold text-stone-900">Copy Link</p>
             </div>
