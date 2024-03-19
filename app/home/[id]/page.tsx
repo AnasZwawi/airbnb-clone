@@ -25,17 +25,8 @@ import { redirect } from "next/navigation";
 import { ShowGallery } from "@/app/components/ShowGallery";
 import { SideCalendar } from "./components/SideCalendar";
 import { HostInfo } from "./components/HostInfo";
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
+import { CopyCard } from "./components/CopyCard";
+
 
 async function getHome(userId: string, homeId: string) {
   noStore();
@@ -119,18 +110,7 @@ async function HomeId({ params }: { params: { id: string } }) {
   let endTime = new Date().getTime();
   const minRange = 2;
 
-  const handleCopy = () => {
-    const url = window.location.href;
   
-    const tempInput = document.createElement('input');
-    tempInput.value = url;
-    document.body.appendChild(tempInput);
-    tempInput.select();
-    document.execCommand('copy');
-    document.body.removeChild(tempInput);
-  
-    alert('Link copied to clipboard!');
-  };
   return (
     <div className="w-[85%] max-w-[1320px] lg:w-[75%] mx-auto mt-5">
       <div className="flex flex-col lg:flex-row justify-between gap-y-0 items-start mb-4">
@@ -141,54 +121,7 @@ async function HomeId({ params }: { params: { id: string } }) {
           <>
             {user && user.id && (
               <div className="flex gap-x-4">
-                <AlertDialog>
-                  <AlertDialogTrigger>
-                    <div className="flex items-center gap-x-[2px]">
-                      <Share className="h-4 w-4 text-stone-700" />
-                      <p className="font-semibold text-md tracking-tighter underline decoration-1">
-                        Share
-                      </p>
-                    </div>
-                  </AlertDialogTrigger>
-                  <AlertDialogContent>
-                    <AlertDialogHeader>
-                      <AlertDialogTitle className="text-stone-900 text-2xl mt-6 mb-1">
-                        Share this place
-                      </AlertDialogTitle>
-                      <AlertDialogDescription>
-                        <div className="flex gap-x-7 items-start my-4">
-                          <Image
-                            alt="Image of Home"
-                            src={`https://jxvqpjydezilbytxarzd.supabase.co/storage/v1/object/public/images/${data?.photos[0]}`}
-                            className="w-[90px] h-[90px] object-cover rounded-xl"
-                          />
-
-                          <div className="flex flex-col items-start">
-                            <p className="text-lg text-stone-900 tracking-tight">
-                              {data?.title}
-                            </p>
-                            <p className="text-sm text-stone-700 flex">
-                              {data?.guests} guests
-                              <Dot />
-                              {data?.bedrooms} bedrooms
-                              <Dot />
-                              {data?.bathrooms} baths
-                            </p>
-                          </div>
-                        </div>
-                      </AlertDialogDescription>
-                    </AlertDialogHeader>
-                    <AlertDialogFooter>
-                      <AlertDialogCancel className="absolute top-3 left-3 border-none bg-none hover:bg-transparent p-0">
-                        <X className="hover:bg-stone-200 p-1 rounded-full" />
-                      </AlertDialogCancel>
-                      <AlertDialogAction onClick={handleCopy} className="w-full flex items-center ml-0 gap-x-2 bg-white border-[1px] border-stone-700 rounded-xl hover:bg-stone-100 text-stone-900">
-                        <Copy />
-                        <p className="font-semibold text-stone-900">Copy Link</p>
-                      </AlertDialogAction>
-                    </AlertDialogFooter>
-                  </AlertDialogContent>
-                </AlertDialog>
+                <CopyCard photo={data?.photos[0]} bedrooms={data?.bedrooms} bathrooms={data?.bathrooms} guests={data?.guests} title={data?.title}/>
 
                 {(homeData?.Favorite.length as number) > 0 ? (
                   <div className="hover:bg-stone-200 rounded-md flex transition-all duration-200">
