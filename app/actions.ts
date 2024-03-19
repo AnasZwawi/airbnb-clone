@@ -233,10 +233,10 @@ export async function deleteListing(formData: FormData) {
   const userId = formData.get("userId") as string;
   const homeId = formData.get("homeId") as string;
   const pathName = formData.get("pathName") as string;
-  const imagePathsString = formData.get("imagePaths") as string[] | null;
-  /*   const imagePaths = imagePathsString ? imagePathsString.split(',') : [];
-   */ 
-  console.log(imagePathsString);
+  const imagePathsString = formData.get("imagePaths") as string;
+  const imagePaths = imagePathsString ? imagePathsString.split(',') : [];
+  console.log('imagePaths :'+imagePaths.map(imagePath => `${imagePath}`))
+  console.log(imagePathsString)
   const dataa = await prisma.home.delete({
     where: {
       id: homeId,
@@ -244,25 +244,20 @@ export async function deleteListing(formData: FormData) {
     },
   });
   // Delete images from Supabase storage
-  if (imagePathsString !== null) {
-    const { data: deletionData, error } = await supabase.storage
-      .from("images")
-      .remove(imagePathsString.map((imagePath) => `${[imagePath]}`));
+  const { data: deletionData, error } = await supabase.storage.from('images').remove(imagePaths.map(imagePath => `${[imagePath]}`));
 
-    // Handle any errors if deletion fails
-    if (error) {
-      console.error("Error deleting images from Supabase:", error.message);
-      // Handle error as per your application's requirement
-    } else {
-      console.log("Images deleted successfully:", deletionData);
-    }
+  // Handle any errors if deletion fails
+  if (error) {
+    console.error('Error deleting images from Supabase:', error.message);
+    // Handle error as per your application's requirement
+  } else {
+    console.log('Images deleted successfully:', deletionData);
   }
-
   revalidatePath(pathName);
 }
 
 export async function createReservation(formData: FormData) {
-  const minRange = 2;
+  const minRange = 2
   const userId = formData.get("userId") as string;
   const homeId = formData.get("homeId") as string;
   const startDate = formData.get("startDate") as string;
