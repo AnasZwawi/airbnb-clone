@@ -38,7 +38,7 @@ export const CopyCard = ({
       unstyled: true,
       icon: <CheckCircle className="w-6 h-6 text-green-500"/>,
       classNames: {
-        toast: "bg-black p-3 text-white rounded-lg",
+        toast: "bg-black p-3 text-white rounded-lg flex items center",
         title: "text-white text-md"
       },
     });
