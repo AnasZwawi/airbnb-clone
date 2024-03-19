@@ -80,7 +80,7 @@ export const ListingCard = ({
                     <input type="hidden" name="userId" value={userId} />
                     <input type="hidden" name="pathName" value={pathName} />
                     <input type="hidden" name="homeId" value={homeId} />
-                    <input type="hidden" name="imagePaths" value={imagePaths} />
+                    <input type="hidden" name="imagePaths" value={imagePaths as string[]} />
                     <button type="submit">Delete</button>
                   </form>
                 </AlertDialogAction>
