@@ -13,6 +13,8 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Copy, Dot, Share, X } from "lucide-react";
 import Image from "next/image";
+import { useRouter } from "next/router";
+import { useState } from "react";
 
 interface CopyCardProps {
   photo?: string | null;
@@ -29,17 +31,12 @@ export const CopyCard = ({
   guests,
   title,
 }: CopyCardProps) => {
-  const handleCopy = () => {
-    const url = window.location.href;
+  const share = useRouter();
+  const base = "tuniloge.vercel.app";
 
-    const tempInput = document.createElement("input");
-    tempInput.value = url;
-    document.body.appendChild(tempInput);
-    tempInput.select();
-    document.execCommand("copy");
-    document.body.removeChild(tempInput);
-
-    alert("Link copied to clipboard!");
+  const links = base + share.asPath;
+  const copylink = (e: any) => {
+    navigator.clipboard.writeText(links);
   };
   return (
     <AlertDialog>
@@ -82,7 +79,7 @@ export const CopyCard = ({
             <X className="hover:bg-stone-200 p-1 rounded-full" />
           </AlertDialogCancel>
           <AlertDialogAction className="w-full flex items-center ml-0 m-0 gap-x-2 bg-white border-[1px] border-stone-700 rounded-xl hover:bg-stone-100 text-stone-900">
-            <div className="flex items-center" onClick={handleCopy}>
+            <div className="flex items-center" onClick={copylink}>
               <Copy />
               <p className="font-semibold text-stone-900">Copy Link</p>
             </div>
