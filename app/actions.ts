@@ -237,17 +237,14 @@ export async function deleteListing(formData: FormData) {
   const imagePaths = imagePathsString ? imagePathsString.split(',') : [];
   console.log(imagePaths)
   console.log(imagePathsString)
-  const data = await prisma.home.delete({
+  const dataa = await prisma.home.delete({
     where: {
       id: homeId,
       userId: userId,
     },
   });
   // Delete images from Supabase storage
-  const { data: deletionData, error } = await supabase
-    .storage
-    .from('images')
-    .remove(imagePaths.map(imagePath => `${imagePath}`));
+  const { data: deletionData, error } = await supabase.storage.from('images').remove(imagePaths.map(imagePath => `${[imagePath]}`));
 
   // Handle any errors if deletion fails
   if (error) {
