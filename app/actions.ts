@@ -241,10 +241,7 @@ export async function deleteListing(formData: FormData) {
     },
   });
   // Delete images from Supabase storage
-  const { data: deletionData, error } = await supabase
-    .storage
-    .from('images')
-    .remove(imagePaths.map(imagePath => `${imagePath}`));
+  const { data: deletionData, error } = await supabase.storage.from('images').remove(imagePaths.map(imagePath => `${imagePath}`));
 
   // Handle any errors if deletion fails
   if (error) {
