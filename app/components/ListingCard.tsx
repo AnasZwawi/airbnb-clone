@@ -29,7 +29,7 @@ interface iAppProps {
   homeId: string;
   pathName: string;
   deleteList?: boolean;
-  imagePaths: string[]
+  imagePaths?: string[]
 }
 
 export const ListingCard = ({
