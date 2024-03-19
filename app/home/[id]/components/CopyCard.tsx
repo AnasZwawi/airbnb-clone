@@ -31,12 +31,9 @@ export const CopyCard = ({
   guests,
   title,
 }: CopyCardProps) => {
-  const share = useRouter();
-  const base = "tuniloge.vercel.app";
 
-  const links = base + share.asPath;
   const copylink = (e: any) => {
-    navigator.clipboard.writeText(links);
+    navigator.clipboard.writeText(window.location.toString());
   };
   return (
     <AlertDialog>
