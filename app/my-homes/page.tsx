@@ -56,6 +56,7 @@ async function MyHomes() {
             <ListingCard
               deleteList={true}
               key={item.id}
+              imagePaths={item.photos as string[]}
               imagePath={item.photos[0] as string}
               homeId={item.id}
               price={item.price as number}

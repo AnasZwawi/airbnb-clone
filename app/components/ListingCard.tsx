@@ -29,9 +29,11 @@ interface iAppProps {
   homeId: string;
   pathName: string;
   deleteList?: boolean;
+  imagePaths?: string[]
 }
 
 export const ListingCard = ({
+  imagePaths,
   imagePath,
   description,
   location,
@@ -78,6 +80,7 @@ export const ListingCard = ({
                     <input type="hidden" name="userId" value={userId} />
                     <input type="hidden" name="pathName" value={pathName} />
                     <input type="hidden" name="homeId" value={homeId} />
+                    <input type="hidden" name="imagePaths" value={imagePaths} />
                     <button type="submit">Delete</button>
                   </form>
                 </AlertDialogAction>
