@@ -37,8 +37,8 @@ export const CopyCard = ({
     toast("Event has been created", {
       unstyled: true,
       classNames: {
-        toast: "bg-stone-900",
-        title: "text-stone-100 text-lg"
+        toast: "bg-black p-6 text-white rounded-lg",
+        title: "text-white text-lg"
       },
     });
   };
