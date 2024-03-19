@@ -43,12 +43,12 @@ export const AddToFavoriteButton: React.FC<AddToFavoriteButtonProps> = ({
   return (
     <>
       {pending ? (
-        <button className="bg-opacity-0 flex" disabled>
+        <button className="bg-opacity-0 flex hover:bg-stone-100 py-1 px-2" disabled>
           <Loader2 className={`${classn} animate-spin text-primary`} />
           {children}
         </button>
       ) : (
-        <button className="bg-opacity-0 flex" type="submit">
+        <button className="bg-opacity-0 flex hover:bg-stone-100 py-1 px-2" type="submit">
           <Heart className={classn} color="#FFF" fill="#48484895" />
           {children}
         </button>
@@ -70,12 +70,12 @@ export const DeleteFromFavoriteButton: React.FC<DeleteFromFavoriteButtonProps> =
   return (
     <>
       {pending ? (
-        <button className="bg-opacity-0 flex" disabled>
+        <button className="bg-opacity-0 flex hover:bg-stone-100 py-1 px-2" disabled>
           <Loader2 className={`${classn} animate-spin text-primary`} />
           {children}
         </button>
       ) : (
-        <button type="submit" className="bg-opacity-0 flex">
+        <button type="submit" className="bg-opacity-0 flex hover:bg-stone-100 py-1 px-2">
           <Heart className={classn} color="#FFF" fill="#d41c4b" />
           {children}
         </button>

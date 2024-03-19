@@ -38,9 +38,9 @@ export const CopyCard = ({
   return (
     <AlertDialog>
       <AlertDialogTrigger>
-        <div className="flex items-center gap-x-[4px]">
+        <div className="flex items-center gap-x-[4px] hover:bg-stone-100 py-1 px-2">
           <Share className="h-4 w-4 text-stone-700" />
-          <p className="font-semibold hover:bg-stone-100 py-0 px-1 text-sm tracking-tighter underline decoration-1">
+          <p className="font-semibold text-sm tracking-tighter underline decoration-1">
             Share
           </p>
         </div>
