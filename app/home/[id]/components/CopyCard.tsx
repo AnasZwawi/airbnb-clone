@@ -34,6 +34,13 @@ export const CopyCard = ({
 }: CopyCardProps) => {
   const copylink = (e: any) => {
     navigator.clipboard.writeText(window.location.toString());
+      toast("Event has been created", {
+        description: "Sunday, December 03, 2023 at 9:00 AM",
+        action: {
+          label: "Undo",
+          onClick: () => console.log("Undo"),
+        },
+      })
   };
   return (
     <AlertDialog>
@@ -76,17 +83,7 @@ export const CopyCard = ({
             <X className="hover:bg-stone-200 p-1 rounded-full w-8 h-8" />
           </AlertDialogCancel>
           <AlertDialogAction
-            className="w-full flex items-center ml-0 m-0 gap-x-2 bg-white border-[1px] border-stone-700 rounded-xl hover:bg-stone-100 text-stone-900 relative right-2"
-            onClick={() =>
-              toast("Event has been created", {
-                description: "Sunday, December 03, 2023 at 9:00 AM",
-                action: {
-                  label: "Undo",
-                  onClick: () => console.log("Undo"),
-                },
-              })
-            }
-          >
+            className="w-full flex items-center ml-0 m-0 gap-x-2 bg-white border-[1px] border-stone-700 rounded-xl hover:bg-stone-100 text-stone-900 relative right-2">
             <div className="flex items-center gap-x-2" onClick={copylink}>
               <Copy className="w-4 h-4" />
               <p className="font-semibold text-[16px] text-stone-900">
