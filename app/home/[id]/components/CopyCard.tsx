@@ -11,7 +11,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { Copy, Dot, Share, X } from "lucide-react";
+import { CheckCircle, Copy, Dot, Share, X } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useState } from "react";
@@ -36,9 +36,10 @@ export const CopyCard = ({
     navigator.clipboard.writeText(window.location.toString());
     toast("Event has been created", {
       unstyled: true,
+      icon: <CheckCircle className="w-6 h-6 text-green-500"/>,
       classNames: {
-        toast: "bg-black p-6 text-white rounded-lg",
-        title: "text-white text-lg"
+        toast: "bg-black p-3 text-white rounded-lg",
+        title: "text-white text-md"
       },
     });
   };
