@@ -34,7 +34,7 @@ export const CopyCard = ({
 }: CopyCardProps) => {
   const copylink = (e: any) => {
     navigator.clipboard.writeText(window.location.toString());
-    toast("Event has been created", {
+    toast("URL Coppied.", {
       unstyled: true,
       icon: <CheckCircle className="w-6 h-6 text-green-500"/>,
       classNames: {
