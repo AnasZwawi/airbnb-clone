@@ -124,7 +124,7 @@ async function HomeId({ params }: { params: { id: string } }) {
                 <CopyCard photo={data?.photos[0]} bedrooms={data?.bedrooms} bathrooms={data?.bathrooms} guests={data?.guests} title={data?.title}/>
 
                 {(homeData?.Favorite.length as number) > 0 ? (
-                  <div className="hover:bg-stone-100 py-0 px-1 text-sm rounded-md flex transition-all duration-200">
+                  <div className="hover:bg-stone-100 py-[2px] px-2 text-sm rounded-md flex transition-all duration-200">
                     <form action={deleteFromFavorite}>
                       <input
                         type="hidden"
@@ -149,7 +149,7 @@ async function HomeId({ params }: { params: { id: string } }) {
                     </form>
                   </div>
                 ) : (
-                  <div className="hover:bg-stone-200 rounded-md flex transition-all duration-200">
+                  <div className="hover:bg-stone-100 py-[2px] px-2 text-sm rounded-md flex transition-all duration-200">
                     <form action={addToFavorite}>
                       <input
                         type="hidden"
@@ -162,7 +162,7 @@ async function HomeId({ params }: { params: { id: string } }) {
                         name="pathName"
                         value={"/home/" + params.id}
                       />
-                      <AddToFavoriteButton classn="h-5 w-5 relative top-[2px]">
+                      <AddToFavoriteButton classn="h-5 w-5">
                         <p className="font-semibold text-md tracking-tighter underline decoration-1">
                           Save
                         </p>
