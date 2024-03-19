@@ -43,13 +43,13 @@ export const AddToFavoriteButton: React.FC<AddToFavoriteButtonProps> = ({
   return (
     <>
       {pending ? (
-        <button className="bg-opacity-0 flex hover:bg-stone-100 py-1 px-2" disabled>
-          <Loader2 className={`${classn} animate-spin text-primary`} />
+        <button className="bg-opacity-0 flex hover:bg-stone-100 py-1 px-2 rounded-md" disabled>
+          <Loader2 className={`h-4 w-4 animate-spin text-primary relative top-[2px]`} />
           {children}
         </button>
       ) : (
-        <button className="bg-opacity-0 flex hover:bg-stone-100 py-1 px-2" type="submit">
-          <Heart className={classn} color="#FFF" fill="#48484895" />
+        <button className="bg-opacity-0 flex hover:bg-stone-100 py-1 px-2 rounded-md  relative top-[1px]" type="submit">
+          <Heart className={`${classn}  relative top-[2px]`} color="#FFF" fill="#48484895" />
           {children}
         </button>
       )}
@@ -70,13 +70,13 @@ export const DeleteFromFavoriteButton: React.FC<DeleteFromFavoriteButtonProps> =
   return (
     <>
       {pending ? (
-        <button className="bg-opacity-0 flex hover:bg-stone-100 py-1 px-2" disabled>
-          <Loader2 className={`${classn} animate-spin text-primary`} />
+        <button className="bg-opacity-0 flex hover:bg-stone-100 py-1 px-2 rounded-md" disabled>
+          <Loader2 className={`h-4 w-4 animate-spin text-primary relative top-[1px]`} />
           {children}
         </button>
       ) : (
-        <button type="submit" className="bg-opacity-0 flex hover:bg-stone-100 py-1 px-2">
-          <Heart className={classn} color="#FFF" fill="#d41c4b" />
+        <button type="submit" className="bg-opacity-0 flex hover:bg-stone-100 py-1 px-2 rounded-md">
+          <Heart className={`${classn}  relative top-[2px]`} color="#FFF" fill="#d41c4b" />
           {children}
         </button>
       )}
