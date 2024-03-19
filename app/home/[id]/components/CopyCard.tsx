@@ -47,7 +47,7 @@ export const CopyCard = ({
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle className="text-stone-900 text-2xl mt-7 mb-1">
+          <AlertDialogTitle className="text-stone-900 text-2xl mt-8 mb-1">
             Share this place
           </AlertDialogTitle>
           <AlertDialogDescription>
@@ -75,7 +75,7 @@ export const CopyCard = ({
           <AlertDialogCancel className="absolute top-3 left-4 border-none bg-none hover:bg-transparent p-0">
             <X className="hover:bg-stone-200 p-1 rounded-full w-8 h-8" />
           </AlertDialogCancel>
-          <AlertDialogAction className="w-full flex items-center ml-0 m-0 gap-x-2 bg-white border-[1px] border-stone-700 rounded-xl hover:bg-stone-100 text-stone-900">
+          <AlertDialogAction className="w-full flex items-center ml-0 m-0 gap-x-2 bg-white border-[1px] border-stone-700 rounded-xl hover:bg-stone-100 text-stone-900 relative right-2">
             <div className="flex items-center gap-x-2" onClick={copylink}>
               <Copy className="w-4 h-4"/>
               <p className="font-semibold text-[16px] text-stone-900">Copy Link</p>
