@@ -235,7 +235,8 @@ export async function deleteListing(formData: FormData) {
   const pathName = formData.get("pathName") as string;
   const imagePathsString = formData.get("imagePaths") as string;
   const imagePaths = imagePathsString ? imagePathsString.split(',') : [];
-
+  console.log(imagePaths)
+  console.log(imagePathsString)
   const data = await prisma.home.delete({
     where: {
       id: homeId,
