@@ -78,7 +78,13 @@ export const CopyCard = ({
           <AlertDialogAction
             className="w-full flex items-center ml-0 m-0 gap-x-2 bg-white border-[1px] border-stone-700 rounded-xl hover:bg-stone-100 text-stone-900 relative right-2"
             onClick={() =>
-              toast("URL Copied")
+              toast("Event has been created", {
+                description: "Sunday, December 03, 2023 at 9:00 AM",
+                action: {
+                  label: "Undo",
+                  onClick: () => console.log("Undo"),
+                },
+              })
             }
           >
             <div className="flex items-center gap-x-2" onClick={copylink}>
